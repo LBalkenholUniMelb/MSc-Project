@@ -55,13 +55,25 @@ else:
 factor = sqrt((df/2)*cl2d)
 realpart = factor * normal(size = (pixelnumber, pixelnumber))
 imagpart = factor * normal(size = (pixelnumber, pixelnumber))
+cmbnoisefreqspace = (realpart + 1j*imagpart)
+
+psvfreq = real(sum(cmbnoisefreqspace*conjugate(cmbnoisefreqspace)))
+print("Frequency Space: " + str(psvfreq))
 
 # Transform into map
-cmbnoisemap = real(fft.ifft2((realpart + 1j*imagpart)))[0:int(pixelnumber/2), 0:int(pixelnumber/2)] + 2.725
-#imshow(cmbnoisemap)
-#title("CMB Signal and White Noise")
-#colorbar()
-#show()
+cmbnoisemap = fft.ifft2(cmbnoisefreqspace)#[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+
+psvreal = real(sum(cmbnoisemap*conjugate(cmbnoisemap)))*pixelnumber**2
+print("Real Space: " + str(psvreal))
+
+djieso398
+
+# Check Parseval's Theorem
+#mapparams = [512, 512, 2, 2]
+psvreal = sum(cmbnoisemap*cmbnoisemap)
+#kfull, clfull = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap, col = "b")
+psvps = sum(cmbnoisefreqspace*conjugate(cmbnoisefreqspace))
+
 
 # Feed into Srinis code for powerspectrum
 # cosm = Cosmologist()
