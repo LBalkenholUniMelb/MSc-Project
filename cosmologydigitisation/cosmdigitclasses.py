@@ -3,6 +3,7 @@
 # NECESSARY IMPORTS
 ########################################
 ########################################
+
 from numpy.random import normal
 from matplotlib.pyplot import *
 from numpy import arange, mean, any, zeros, add, nan_to_num, digitize, argwhere, isnan, ones, array_equal, shape, inf, median, std, conj, real, linspace, amax, amin
@@ -618,7 +619,7 @@ class Cosmologist:
             title("Crosspowerspectrum")
         #xlabel('Multipole k');
         #ylabel('Power')
-        return k[1:], cl[1:]
+        return k[1:], p_k[1:]
         #legend(fancybox = 1)
         #show()
 

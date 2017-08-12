@@ -5,6 +5,7 @@ from scipy.stats import binned_statistic
 from numpy.fft import ifft2
 from cosmdigitclasses import *
 from numpy import *
+rc('text', usetex=True)
 
 cosm = Cosmologist()
 
@@ -57,214 +58,65 @@ realpart = factor * normal(size = (pixelnumber, pixelnumber))
 imagpart = factor * normal(size = (pixelnumber, pixelnumber))
 cmbnoisefreqspace = (realpart + 1j*imagpart)
 
-psvfreq = real(sum(cmbnoisefreqspace*conjugate(cmbnoisefreqspace)))
-print("Frequency Space: " + str(psvfreq))
-
 # Transform into map
-cmbnoisemap = fft.ifft2(cmbnoisefreqspace)#[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+cmbnoisemap = real(fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)])
+psvmap = sum(cmbnoisemap*cmbnoisemap)*(512**2)
 
-psvreal = real(sum(cmbnoisemap*conjugate(cmbnoisemap)))*pixelnumber**2
-print("Real Space: " + str(psvreal))
-
-djieso398
-
-# Check Parseval's Theorem
-#mapparams = [512, 512, 2, 2]
-psvreal = sum(cmbnoisemap*cmbnoisemap)
-#kfull, clfull = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap, col = "b")
-psvps = sum(cmbnoisefreqspace*conjugate(cmbnoisefreqspace))
+mapparams = [512, 512, 2, 2]
+k, p_k = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
+p_k = asarray(p_k)
+psvps = sum(p_k*p_k)
+print(len(k))
+print(psvmap)
+print(psvps)
 
 
-# Feed into Srinis code for powerspectrum
-# cosm = Cosmologist()
-# cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
-# plot(l, dl, "r")
+# # Recreate Scan Strategy
+# declims = [0, 1024] #arcmins
+# ralims = [0, 1024] #arcmins
+# readoutfreq = 6 #Hz
+# raspeed = 0.1 #arcmin/s
+# nodecscans = 512
+# norablocks = 512
+# radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
+# compression = int(radatapoints/norablocks)
+# print(compression)
+# cesscans = zeros((nodecscans, radatapoints))
+#
+# for d in range(nodecscans):
+#     for ri in range(norablocks):
+#         rstart = ri*compression
+#         rstop = rstart + compression
+#         # Create relevant tod signals here
+#         # sig = normal(cmbnoisemap[d, ri], 0.0006, compression)
+#         cesscans[d, rstart:rstop] = asarray([cmbnoisemap[d, ri]] * compression)
+#     print(str(d))
+#
+# # Recompress into map
+# maprecreated = zeros((nodecscans, norablocks))
+# for d in range(shape(cesscans)[0]):
+#     for ri in range(norablocks):
+#         rstart = ri*compression
+#         rstop = rstart + compression
+#         m = mean(cesscans[d, rstart:rstop])
+#         maprecreated[d, ri] = m
+#     print(str(d))
+#
+# # Substract maps and compare, check power spectrum of residual to confirm it's random
+# mapdiff = (cmbnoisemap-maprecreated)/cmbnoisemap
+# mapparams = [512, 512, 2, 2]
+# k, p_k = cosm.sriniPowerSpectrum(mapparams, mapdiff)
+
+# # Compare powerspectra
+# mapparams = [512, 512, 2, 2]
+# kfull, clfull = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap, col = "b")
+# kcomp, clcomp = cosm.sriniPowerSpectrum(mapparams, maprecreated, col = "None", mark="o")
+# plot(kfull, clfull, "b", label="Orgininal")
+# plot(kcomp, clcomp, "r", label="Recreated")
 # xlabel("l")
 # ylabel("cl")
-# yscale("log")
 # xscale("log")
-# title("Powerspectrum of CMB and Noise")
+# yscale("log")
+# title("Powerspectrum of CMB and Noise Map, original and recreated")
+# legend()
 # show()
-
-
-# Recreate Scan Strategy
-declims = [0, 1024] #arcmins
-ralims = [0, 1024] #arcmins
-readoutfreq = 500 #Hz
-raspeed = 0.1 #arcmin/s
-nodecscans = 512
-norablocks = 512
-#decstep = declims[1]/nodecscans
-#rastep = raspeed/readoutfreq
-radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
-compression = int(radatapoints/norablocks)
-cesscans = zeros((nodecscans, radatapoints))
-
-for d in range(nodecscans):
-    for ri in range(norablocks):
-        rstart = ri*compression
-        rstop = rstart + compression
-        # Create relevant tod signals here
-        sig = normal(cmbnoisemap[d, ri], 0.0006, compression)
-        cesscans[d, rstart:rstop] = sig#digitise1bit(sig, meanvalue = cmbnoisemap[d, ri])
-    print(str(d))
-
-# Recompress into map
-maprecreated = zeros((nodecscans, norablocks))
-for d in range(shape(cesscans)[0]):
-    for ri in range(norablocks):
-        rstart = ri*compression
-        rstop = rstart + compression
-        m = mean(cesscans[d, rstart:rstop])
-        maprecreated[d, ri] = m
-    print(str(d))
-
-# Substract maps
-imshow(maprecreated)
-title("Recreated CMB and Noise Map")
-colorbar()
-show()
-
-# Compare powerspectra
-mapparams = [512, 512, 2, 2]
-kfull, clfull = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap, col = "b")
-kcomp, clcomp = cosm.sriniPowerSpectrum(mapparams, maprecreated, col = "None", mark="o")
-plot(kfull, clfull, "b", label="Orgininal")
-plot(kcomp, clcomp, "r", label="Recreated")
-xlabel("l")
-ylabel("cl")
-xscale("log")
-yscale("log")
-title("Powerspectrum of CMB and Noise Map, original and recreated")
-legend()
-show()
-
-
-# nra=1024
-# ndec=1024
-# pix_arcmin = 2.0
-# pix_size = np.pi/180/60*pix_arcmin
-# kx = 2*np.pi*np.fft.fftfreq(ndec,d=pix_size)
-# kx2d=np.tile(kx,nra)
-# ky = 2*np.pi*np.fft.fftfreq(nra,d=pix_size)
-# ky2d=(np.tile(ky,ndec)).T
-# k = np.round(np.sqrt(kx2d*kx23+ky2d*ky2d))
-# cl2d = cl[k]
-#
-# factor = np.sqrt(blah *cl2d)
-#
-# realbit=factor*np.random.normal(size=(nra,ndec))
-# imagbit=factor*np.random.normal(size=(nra,ndec))
-#
-# fft_realization=complex(realbit,imagbit)
-# out_map = np.float(np.fft.ifft2(fft_realization))
-#
-# return out_map[0:ndec/2,0:nra/2]
-#
-
-
-
-
-#
-# # Turn into 2D power spectrum with noise
-# # read in noise
-# rabins = 100
-# decbins = 100
-# df = 1
-# gwnfftfile = open("gwnfield/gwn2dfft.txt")
-# gwnfft = zeros((rabins, decbins))
-# gwncmbfft = zeros((rabins, decbins))
-# i = 0
-# for row in gwnfftfile:
-#     gwnfft[i] = row.split()
-#     i += 1
-#
-# # Plot GWN map fft
-# imshow(gwnfft)
-# title("GWN Map FFT")
-# colorbar()
-# show()
-#
-# # adjust cmb to correct length
-# cladjstat = binned_statistic(l, cl, "mean", int(((decbins**2)+(rabins**2))**(0.5)))
-# cladj = cladjstat[0]
-# ladj = cladjstat[1]
-# ladjstep = ladj[1]-ladj[0]
-# ladj = [ladj[i]+ladjstep/2 for i in range(len(ladj)-1)]
-#
-# # Plot compressed cmb power spectrum
-# plot(ladj, cladj)
-# title("Compressed CMB Powerspectrum")
-# xlabel("Multipole moment l")
-# ylabel("Cl")
-# show()
-#
-# nra=1024
-# ndec=1024
-# pix_arcmin = 2.0
-# pix_size = np.pi/180/60*pix_arcmin
-# kx = 2*np.pi*np.fft.fftfreq(ndec,d=pix_size)
-# kx2d=np.tile(kx,nra)
-# ky = 2*np.pi*np.fft.fftfreq(nra,d=pix_size)
-# ky2d=(np.tile(ky,ndec)).T
-# k = np.round(np.sqrt(kx2d*kx23+ky2d*ky2d))
-# cl2d = cl[k]
-#
-# factor = np.sqrt(blah *cl2d)
-#
-# realbit=factor*np.random.normal(size=(nra,ndec))
-# imagbit=factor*np.random.normal(size=(nra,ndec))
-#
-# fft_realization=complex(realbit,imagbit)
-# out_map = np.float(np.fft.ifft2(fft_realization))
-#
-# return out_map[0:ndec/2,0:nra/2]
-#
-# # create signal+noise 2d power spectrum
-# centre = [int(rabins/2), int(decbins/2)]
-# for i
-# for y in arange(-int(decbins/2), int((decbins/2)), 1):
-#     for x in arange(-int(rabins/2), int((rabins/2)), 1):
-#         ind = int(((y**2)+(x**2))**0.5)
-#         coeff = cladj[ind]
-#         gwncmbfft[centre[0]+y, centre[1]+x] = gwnfft[centre[0]+y, centre[1]+x] * ((coeff*(df**2))/2)**0.5
-#
-# # plot gwn map and power spectrum
-# gwnmap = zeros((rabins, decbins))
-# i = 0
-# for row in open("gwnfield/gwn2drealspace.txt"):
-#     gwnmap[i] = row.split()
-#     i += 1
-#
-# imshow(gwnmap)
-# title("GWN Map")
-# colorbar()
-# show()
-#
-# cosm.sriniPowerSpectrum([100, 100, 2, 2], gwnmap)
-# show()
-#
-# # Plot CMB*Noise FFT
-# imshow(gwncmbfft)
-# title("CMB and Noise FFT")
-# colorbar()
-# show()
-#
-# # Transform back into real space
-# gwncmb = real(ifft2(gwncmbfft))
-# # cut out corners
-# padding = 5
-# gwncmb = gwncmb[5:(shape(gwncmb)[0]-padding), 5:(shape(gwncmb)[1]-padding)]
-# imshow(gwncmb)
-# colorbar()
-# show()
-#
-# # Feed into Srinis code to get 1D powerspectrum
-# mapparams = [90, 90, 1.8, 1.8]
-# cosm.sriniPowerSpectrum(mapparams, gwncmb)
-# show()
-#
-# # Compare powerspectra
-# # plot(l, cl)
-# # xscale("log")
-# # show()
