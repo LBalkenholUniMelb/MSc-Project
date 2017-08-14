@@ -18,7 +18,7 @@ def fn_radial_profile(Z, XY, noofbins = 100, bin_size = None, minbin = 0., maxbi
 	else:
 		binarr=np.arange(minbin,maxbin,bin_size)
 
-	radprf=np.zeros((len(binarr),3))
+	radprf=np.zeros((len(binarr),4))
 
 	hit_count=[]
 
@@ -36,6 +36,7 @@ def fn_radial_profile(Z, XY, noofbins = 100, bin_size = None, minbin = 0., maxbi
 	std_mean=np.sum(radprf[:,2]*hit_count)/np.sum(hit_count)
 	errval=std_mean/(hit_count)**0.5
 	radprf[:,2]=errval
+	radprf[:,3]=hit_count
 
 	return radprf
 
@@ -77,7 +78,9 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 	#if np.max(lx)>1e5: binsize *= 2 #just increasing binsize
 
 	if MAP2 == None: #compute auto power spectra
-		MAP_PSD = abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
+		MAP_F = np.fft.fft2(MAP1)
+		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(nx * ny) #abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
+
 	else: #compute cross power spectra between 2 maps
 		#subplot(121);imshow(MAP1);colorbar();subplot(122);imshow(MAP2);colorbar();show();sys.exit()
 		MAP_PSD = np.fft.fft2(MAP1) * dx_rad * np.conj( np.fft.fft2(MAP2) ) * dx_rad / (nx * ny)
@@ -85,7 +88,7 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 	#subplot(121);imshow(np.fft.fftshift(MAP_PSD.real));title("2D transform");colorbar();show();
 	pow_spec_1d = fn_radial_profile(MAP_PSD, (lx,ly), bin_size = binsize, minbin = np.min(abs(lx)), maxbin = np.max(lx))
 
-	return pow_spec_1d #contains k, p_k, p_k_err
+	return pow_spec_1d #contains k, p_k, p_k_err, hitcount
 
 
 ################################################################################
@@ -96,6 +99,6 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 ################################################################################
 import numpy as np, pickle, gzip
 from matplotlib.pyplot import *
-from numpy import savetxt
+from numpy import savetxt, sum, conjugate
 
 arcmins2radians = np.radians(1./60.)

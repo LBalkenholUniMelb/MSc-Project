@@ -537,7 +537,7 @@ class Cosmologist:
             noofsims = 1
 
         for n in range(noofsims):
-            print('Sim = %s' % (n + 1))
+            #print('Sim = %s' % (n + 1))
             if not use_white_noise:
                 # read the CMB map
                 # IMAGE = np.loadtxt('CMB_sim_0.txt') #CMB
@@ -574,7 +574,7 @@ class Cosmologist:
 
                     # clf();imshow(IMAGE);colorbar();show();sys.exit()
 
-            IMAGE -= np.mean(IMAGE)  # data has zero mean like CMB
+            #IMAGE -= np.mean(IMAGE)  # data has zero mean like CMB
             #clf();imshow(IMAGE, cmap = cm.jet,interpolation='None');colorbar();show();sys.exit();#savefig('CMB.png', bbox_inches='tight', pad_inches=0.);sys.exit()
 
             mapparams = [nx, ny, dx, dy]
@@ -583,7 +583,7 @@ class Cosmologist:
                 powspec = fn_plot_pow_spec(mapparams, IMAGE)  # auto power spectrum of the image
             else:
                 powspec = fn_plot_pow_spec(mapparams, IMAGE, IMAGE_CROSS)  # cross power spectrum of the images
-            k, p_k, p_k_err = zip(*powspec)
+            k, p_k, p_k_err, hitcount = zip(*powspec)
 
             # powspec = fn_plot_pow_spec(mapparams, MAP1 = IMAGE, MAP2 = tSZ) #crosspower between CMB_UNLEN_with_tSZ and tSZ
             # k, p_k, p_k_err = zip(*powspec); p_k = np.abs(p_k)
@@ -619,7 +619,7 @@ class Cosmologist:
             title("Crosspowerspectrum")
         #xlabel('Multipole k');
         #ylabel('Power')
-        return k[1:], p_k[1:]
+        return k, p_k, p_k_err, hitcount
         #legend(fancybox = 1)
         #show()
 

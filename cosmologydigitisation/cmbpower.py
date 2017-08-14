@@ -2,7 +2,7 @@
 from matplotlib.pyplot import *
 from numpy import zeros, arange, real, shape, round
 from scipy.stats import binned_statistic
-from numpy.fft import ifft2
+from numpy.fft import ifft2, fft2
 from cosmdigitclasses import *
 from numpy import *
 rc('text', usetex=True)
@@ -54,21 +54,40 @@ else:
 
 # Combine noise and cmb element-wise
 factor = sqrt((df/2)*cl2d)
-realpart = factor * normal(size = (pixelnumber, pixelnumber))
-imagpart = factor * normal(size = (pixelnumber, pixelnumber))
-cmbnoisefreqspace = (realpart + 1j*imagpart)
 
-# Transform into map
-cmbnoisemap = real(fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)])
-psvmap = sum(cmbnoisemap*cmbnoisemap)*(512**2)
+psvindex = range(100)
+dpsv = []
 
-mapparams = [512, 512, 2, 2]
-k, p_k = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
-p_k = asarray(p_k)
-psvps = sum(p_k*p_k)
-print(len(k))
-print(psvmap)
-print(psvps)
+for i in psvindex:
+
+    realpart = factor * normal(size = (pixelnumber, pixelnumber))
+    imagpart = factor * normal(size = (pixelnumber, pixelnumber))
+    cmbnoisefreqspace = (realpart + 1j*imagpart)
+
+    # Transform into map
+    cmbnoisemap = real(fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)])
+    psvmap = sum(cmbnoisemap*cmbnoisemap)
+
+    k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
+    p_k = asarray(p_k)
+    hitcount = asarray(hitcount)
+    psvrad = sum(p_k*hitcount)
+
+    dpsv.append((psvmap-psvrad)/psvmap)
+    print(i)
+
+m = mean(dpsv)
+s = std(dpsv)
+plot(psvindex, dpsv)
+xscale("linear")
+yscale("linear")
+title(r"$\Delta P$ for 100 Realisations")
+xlabel(r"Iteration number")
+ylabel(r"$\Delta P$")
+plot(psvindex, [m for i in psvindex], "0.0")
+plot(psvindex, [m+s for i in psvindex], "0.5")
+plot(psvindex, [m-s for i in psvindex], "0.5")
+show()
 
 
 # # Recreate Scan Strategy
