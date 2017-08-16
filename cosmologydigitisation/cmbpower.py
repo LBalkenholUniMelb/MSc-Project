@@ -55,76 +55,76 @@ else:
 # Combine noise and cmb element-wise
 factor = sqrt((df/2)*cl2d)
 
-psvindex = range(100)
-dpsv = []
+realpart = factor * normal(size = (pixelnumber, pixelnumber))
+imagpart = factor * normal(size = (pixelnumber, pixelnumber))
+cmbnoisefreqspace = (realpart + 1j*imagpart)
 
-for i in psvindex:
+# Transform into map
+cmbnoisemap = fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+cmbnoisemap = real(cmbnoisemap)
+psvmap = sum(cmbnoisemap*cmbnoisemap)
 
-    realpart = factor * normal(size = (pixelnumber, pixelnumber))
-    imagpart = factor * normal(size = (pixelnumber, pixelnumber))
-    cmbnoisefreqspace = (realpart + 1j*imagpart)
+# k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
+# p_k = asarray(p_k)
+# hitcount = asarray(hitcount)
+# psvrad = sum(p_k*hitcount)
 
-    # Transform into map
-    cmbnoisemap = real(fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)])
-    psvmap = sum(cmbnoisemap*cmbnoisemap)
+# m = mean(dpsv)
+# s = std(dpsv)
+# plot(psvindex, dpsv)
+# xscale("linear")
+# yscale("linear")
+# title(r"$\Delta P$ for 100 Realisations")
+# xlabel(r"Iteration number")
+# ylabel(r"$\Delta P$")
+# plot(psvindex, [m for i in psvindex], "0.0")
+# plot(psvindex, [m+s for i in psvindex], "0.5")
+# plot(psvindex, [m-s for i in psvindex], "0.5")
+# show()
 
-    k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
-    p_k = asarray(p_k)
-    hitcount = asarray(hitcount)
-    psvrad = sum(p_k*hitcount)
+# Recreate Scan Strategy
+declims = [0, 1024] #arcmins
+ralims = [0, 1024] #arcmins
+readoutfreq = 6 #Hz
+raspeed = 0.1 #arcmin/s
+nodecscans = 512
+norablocks = 512
+radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
+compression = int(radatapoints/norablocks)
+cesscans = zeros((nodecscans, radatapoints))
 
-    dpsv.append((psvmap-psvrad)/psvmap)
-    print(i)
+for d in range(nodecscans):
+    for ri in range(norablocks):
+        rstart = ri*compression
+        rstop = rstart + compression
+        # Create relevant tod signals here
+        # sig = cmbnoisemap[d, ri]*normal(2.7251, 0.0006, compression)
+        cesscans[d, rstart:rstop] = asarray([cmbnoisemap[d, ri]] * compression)
 
-m = mean(dpsv)
-s = std(dpsv)
-plot(psvindex, dpsv)
-xscale("linear")
+# Recompress into map
+maprecreated = zeros((nodecscans, norablocks))
+for d in range(shape(cesscans)[0]):
+    for ri in range(norablocks):
+        rstart = ri*compression
+        rstop = rstart + compression
+        m = mean(cesscans[d, rstart:rstop])
+        maprecreated[d, ri] = m
+
+# Get power spectrum
+k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], maprecreated)
+k0, p_k0, p_kerr0, hitcount0 = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
+p_k = asarray(p_k)
+k = asarray(k)
+c_l = (k*k*p_k + k*p_k)/(2*pi)
+p_k0 = asarray(p_k0)
+k0 = asarray(k0)
+c_l0 = (k0*k0*p_k0 + k0*p_k0)/(2*pi)
+hitcount = asarray(hitcount)
+plot(k, c_l-c_l0, "r")
+#plot(k0, c_l0, "b")
+xscale("log")
 yscale("linear")
-title(r"$\Delta P$ for 100 Realisations")
-xlabel(r"Iteration number")
-ylabel(r"$\Delta P$")
-plot(psvindex, [m for i in psvindex], "0.0")
-plot(psvindex, [m+s for i in psvindex], "0.5")
-plot(psvindex, [m-s for i in psvindex], "0.5")
 show()
-
-
-# # Recreate Scan Strategy
-# declims = [0, 1024] #arcmins
-# ralims = [0, 1024] #arcmins
-# readoutfreq = 6 #Hz
-# raspeed = 0.1 #arcmin/s
-# nodecscans = 512
-# norablocks = 512
-# radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
-# compression = int(radatapoints/norablocks)
-# print(compression)
-# cesscans = zeros((nodecscans, radatapoints))
-#
-# for d in range(nodecscans):
-#     for ri in range(norablocks):
-#         rstart = ri*compression
-#         rstop = rstart + compression
-#         # Create relevant tod signals here
-#         # sig = normal(cmbnoisemap[d, ri], 0.0006, compression)
-#         cesscans[d, rstart:rstop] = asarray([cmbnoisemap[d, ri]] * compression)
-#     print(str(d))
-#
-# # Recompress into map
-# maprecreated = zeros((nodecscans, norablocks))
-# for d in range(shape(cesscans)[0]):
-#     for ri in range(norablocks):
-#         rstart = ri*compression
-#         rstop = rstart + compression
-#         m = mean(cesscans[d, rstart:rstop])
-#         maprecreated[d, ri] = m
-#     print(str(d))
-#
-# # Substract maps and compare, check power spectrum of residual to confirm it's random
-# mapdiff = (cmbnoisemap-maprecreated)/cmbnoisemap
-# mapparams = [512, 512, 2, 2]
-# k, p_k = cosm.sriniPowerSpectrum(mapparams, mapdiff)
 
 # # Compare powerspectra
 # mapparams = [512, 512, 2, 2]
