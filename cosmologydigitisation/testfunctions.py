@@ -1,6 +1,7 @@
 from numpy.fft import *
 from matplotlib.pyplot import *
 from numpy import *
+#from cosmdigitclasses import *
 
-a = ones((3, 3))
-print(sum(a))
+A = zeros((64, 64))
+print(2*asarray(shape(A)))
