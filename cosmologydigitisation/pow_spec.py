@@ -13,6 +13,9 @@ def fn_radial_profile(Z, XY, noofbins = 100, bin_size = None, minbin = 0., maxbi
 
 	RADIUS = (X**2. + Y**2.) ** 0.5
 
+	# Overwriting Maxbin Here!
+	maxbin = amax(RADIUS)
+
 	if bin_size == None:
 		binarr=np.linspace(minbin,maxbin,noofbins)
 	else:
@@ -99,6 +102,6 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 ################################################################################
 import numpy as np, pickle, gzip
 from matplotlib.pyplot import *
-from numpy import savetxt, sum, conjugate
+from numpy import savetxt, sum, conjugate, shape, amax
 
 arcmins2radians = np.radians(1./60.)

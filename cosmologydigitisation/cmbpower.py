@@ -2,7 +2,7 @@
 from matplotlib.pyplot import *
 from numpy import zeros, arange, real, shape, round
 from scipy.stats import binned_statistic
-from numpy.fft import ifft2, fft2
+from numpy.fft import ifft2, fft2, ifft, fftshift, fftfreq
 from cosmdigitclasses import *
 from numpy import *
 rc('text', usetex=True)
@@ -40,9 +40,9 @@ if readincld2:
         y += 1
 else:
     pixelspacingrad = (pixelsizearcmin/60)*(pi/180)
-    kx = 2*pi*fftfreq(pixelnumber, pixelspacingrad)
+    kx = 2*pi*fftshift(fftfreq(pixelnumber, pixelspacingrad))
     kx2d = tile(kx, (pixelnumber, pixelnumber))
-    ky = 2*pi*fftfreq(pixelnumber, pixelspacingrad)
+    ky = 2*pi*fftshift(fftfreq(pixelnumber, pixelspacingrad))
     ky2d = transpose(tile(ky, (pixelnumber, pixelnumber)))
     cl2d = zeros((pixelnumber, pixelnumber))
 
@@ -55,16 +55,19 @@ else:
 # Combine noise and cmb element-wise
 factor = sqrt((df/2)*cl2d)
 
-realpart = factor * normal(size = (pixelnumber, pixelnumber))
-imagpart = factor * normal(size = (pixelnumber, pixelnumber))
-cmbnoisefreqspace = (realpart + 1j*imagpart)
+realpart = factor# * normal(size = (pixelnumber, pixelnumber))
+imagpart = factor# * normal(size = (pixelnumber, pixelnumber))
+cmbfreqspace = (realpart + 1j*imagpart)
 
 # Transform into map
-cmbnoisemap = fft.ifft2(cmbnoisefreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
-cmbnoisemap = real(cmbnoisemap)
-psvmap = sum(cmbnoisemap*cmbnoisemap)
+cmbmap = fft.ifft2(cmbfreqspace)[int(pixelnumber/4):int(3*pixelnumber/4), int(pixelnumber/4):int(3*pixelnumber/4)]
+cmbmap = real(cmbmap)
 
-# k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
+k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
+k = asarray(k)
+p_k = asarray(p_k)
+hitcount = asarray(hitcount)
+
 # p_k = asarray(p_k)
 # hitcount = asarray(hitcount)
 # psvrad = sum(p_k*hitcount)
@@ -97,33 +100,42 @@ for d in range(nodecscans):
     for ri in range(norablocks):
         rstart = ri*compression
         rstop = rstart + compression
-        # Create relevant tod signals here
-        # sig = cmbnoisemap[d, ri]*normal(2.7251, 0.0006, compression)
-        cesscans[d, rstart:rstop] = asarray([cmbnoisemap[d, ri]] * compression)
+        # Create noise
+        noisereal = normal(size = compression, scale = 0.0006)
+        noiseimag = normal(size = compression, scale = 0.0006)
+        noisefreqspace = noisereal + 1j*noiseimag
+        noise = real(ifft(noisefreqspace))
+        # Add noise and signal as time stream
+        tod = cmbmap[d, ri] + noise
+        cesscans[d, rstart:rstop] = tod
+
+print("Added noise")
 
 # Recompress into map
-maprecreated = zeros((nodecscans, norablocks))
+cmbnoisemap = zeros((nodecscans, norablocks))
 for d in range(shape(cesscans)[0]):
     for ri in range(norablocks):
         rstart = ri*compression
         rstop = rstart + compression
-        m = mean(cesscans[d, rstart:rstop])
-        maprecreated[d, ri] = m
+        cmbnoisemap[d, ri] = mean(cesscans[d, rstart:rstop])
 
-# Get power spectrum
-k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], maprecreated)
-k0, p_k0, p_kerr0, hitcount0 = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbnoisemap)
-p_k = asarray(p_k)
-k = asarray(k)
-c_l = (k*k*p_k + k*p_k)/(2*pi)
-p_k0 = asarray(p_k0)
-k0 = asarray(k0)
-c_l0 = (k0*k0*p_k0 + k0*p_k0)/(2*pi)
-hitcount = asarray(hitcount)
-plot(k, c_l-c_l0, "r")
-#plot(k0, c_l0, "b")
+print("Recompressed")
+imshow(cmbnoisemap)
+show()
+
+mapparams = [512, 512, 2, 2]
+k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
+k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
+plot(k, p, "r")
+plot(k0, p0, "b")
+diff = asarray(k)-asarray(k0)
+xlabel("l")
+ylabel("cl")
 xscale("log")
-yscale("linear")
+yscale("log")
+show()
+
+plot(k, diff)
 show()
 
 # # Compare powerspectra
