@@ -6,7 +6,7 @@
 
 from numpy.random import normal
 from matplotlib.pyplot import *
-from numpy import arange, mean, any, zeros, add, nan_to_num, digitize, argwhere, isnan, ones, array_equal, shape, inf, median, std, conj, real, linspace, amax, amin
+from numpy import append, transpose, tile, asarray, arange, cos, pi, mean, any, zeros, add, nan_to_num, digitize, argwhere, isnan, ones, array_equal, shape, inf, median, std, conj, real, linspace, amax, amin
 from scipy.stats import binned_statistic_2d
 from copy import deepcopy
 from numpy.linalg import norm
@@ -710,3 +710,27 @@ def digitise2bitoptimal(signal, meanvalue = None, var = None):
     indices = digitize(signal, [x1, x2, x3, x4, x5])
     for i in range(len(signal)):
         signal[i] = outlevels[indices[i] - 1] + meanvalue
+
+# Mask and 0 Pad Map
+
+def cosmask(dimensions):
+    # get cos array for y
+    p_y = asarray(range(int(dimensions[0]/2)))
+    cosy = cos(pi*p_y/dimensions[0])
+    cosy = append(cosy[::-1], cosy)
+    cosy = transpose(tile(cosy, (dimensions[1], 1)))
+    # get cos array for x
+    p_x = asarray(range(int(dimensions[1]/2)))
+    cosx = cos(pi*p_x/dimensions[1])
+    cosx = append(cosx[::-1], cosx)
+    cosx = tile(cosx, (dimensions[0], 1))
+    # return mask
+    mask = cosy*cosx
+    return mask
+
+
+def zeropad(M):
+    dim = shape(M)
+    M_pad = zeros((2*asarray(dim)))
+    M_pad[0:dim[0], 0:dim[1]] = M
+    return M_pad
