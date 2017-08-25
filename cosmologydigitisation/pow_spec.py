@@ -82,7 +82,12 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 
 	if MAP2 == None: #compute auto power spectra
 		MAP_F = np.fft.fft2(MAP1)
-		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(nx * ny) #abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
+		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(nx * ny)
+		cosm = cosmask([nx, ny])
+		MAP_PSD = MAP_PSD * cosm
+		MAP_PSD = zeropad(MAP_PSD)
+		#abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
+		# Do zero padding and apply mask here
 
 	else: #compute cross power spectra between 2 maps
 		#subplot(121);imshow(MAP1);colorbar();subplot(122);imshow(MAP2);colorbar();show();sys.exit()
@@ -102,6 +107,28 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 ################################################################################
 import numpy as np, pickle, gzip
 from matplotlib.pyplot import *
-from numpy import savetxt, sum, conjugate, shape, amax
+from numpy import savetxt, sum, conjugate, shape, amax, asarray, cos, pi, append, tile, transpose, zeros, real
 
 arcmins2radians = np.radians(1./60.)
+
+def cosmask(dimensions):
+    # get cos array for y
+    p_y = asarray(range(int(dimensions[0]/2)))
+    cosy = cos(pi*p_y/dimensions[0])
+    cosy = append(cosy[::-1], cosy)
+    cosy = transpose(tile(cosy, (dimensions[1], 1)))
+    # get cos array for x
+    p_x = asarray(range(int(dimensions[1]/2)))
+    cosx = cos(pi*p_x/dimensions[1])
+    cosx = append(cosx[::-1], cosx)
+    cosx = tile(cosx, (dimensions[0], 1))
+    # return mask
+    mask = cosy*cosx
+    return mask
+
+
+def zeropad(M):
+    dim = shape(M)
+    M_pad = zeros((2*asarray(dim)))
+    M_pad[0:dim[0], 0:dim[1]] = M
+    return M_pad

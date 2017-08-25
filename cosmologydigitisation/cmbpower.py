@@ -5,6 +5,7 @@ from scipy.stats import binned_statistic
 from numpy.fft import ifft2, fft2, ifft, fftshift, fftfreq
 from cosmdigitclasses import *
 from numpy import *
+from scipy.signal import convolve2d
 rc('text', usetex=True)
 
 cosm = Cosmologist()
@@ -54,19 +55,41 @@ else:
 
 # Combine noise and cmb element-wise
 factor = sqrt((df/2)*cl2d)
-
-realpart = factor# * normal(size = (pixelnumber, pixelnumber))
-imagpart = factor# * normal(size = (pixelnumber, pixelnumber))
+realpart = factor * normal(size = (pixelnumber, pixelnumber))
+imagpart = factor * normal(size = (pixelnumber, pixelnumber))
 cmbfreqspace = (realpart + 1j*imagpart)
 
 # Transform into map
-cmbmap = fft.ifft2(cmbfreqspace)[int(pixelnumber/4):int(3*pixelnumber/4), int(pixelnumber/4):int(3*pixelnumber/4)]
+cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
 cmbmap = real(cmbmap)
 
 k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
 k = asarray(k)
 p_k = asarray(p_k)
+c_l = p_k*k*k + p_k*k
 hitcount = asarray(hitcount)
+plot(k, c_l)
+title("Powerspectrum")
+xlabel("Multipole moment k")
+ylabel("p_k*k(k+1)")
+show()
+
+dasd321
+
+
+
+cmbnoisemap = convolve2d(cmbmap, normal(size = shape(cmbmap)))[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+imshow(cmbnoisemap)
+title("CMB and Noise by convolution")
+colorbar()
+show()
+
+
+k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
+k = asarray(k)
+hitcount = asarray(hitcount)
+plot(k, p_k)
+show()
 
 # p_k = asarray(p_k)
 # hitcount = asarray(hitcount)
