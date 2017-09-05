@@ -81,11 +81,11 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 	#if np.max(lx)>1e5: binsize *= 2 #just increasing binsize
 
 	if MAP2 == None: #compute auto power spectra
-		MAP_F = np.fft.fft2(MAP1)
-		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(nx * ny)
 		cosm = cosmask([nx, ny])
-		MAP_PSD = MAP_PSD * cosm
-		MAP_PSD = zeropad(MAP_PSD)
+		MAP_F = np.fft.fft2(zeropad(MAP1*cosm))
+		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(nx * ny)
+
+
 		#abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
 		# Do zero padding and apply mask here
 

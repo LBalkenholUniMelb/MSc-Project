@@ -63,50 +63,8 @@ cmbfreqspace = (realpart + 1j*imagpart)
 cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
 cmbmap = real(cmbmap)
 
-k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
-k = asarray(k)
-p_k = asarray(p_k)
-c_l = p_k*k*k + p_k*k
-hitcount = asarray(hitcount)
-plot(k, c_l)
-title("Powerspectrum")
-xlabel("Multipole moment k")
-ylabel("p_k*k(k+1)")
-show()
-
-dasd321
-
-
-
-cmbnoisemap = convolve2d(cmbmap, normal(size = shape(cmbmap)))[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
-imshow(cmbnoisemap)
-title("CMB and Noise by convolution")
-colorbar()
-show()
-
-
-k, p_k, p_kerr, hitcount = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
-k = asarray(k)
-hitcount = asarray(hitcount)
-plot(k, p_k)
-show()
-
-# p_k = asarray(p_k)
-# hitcount = asarray(hitcount)
-# psvrad = sum(p_k*hitcount)
-
-# m = mean(dpsv)
-# s = std(dpsv)
-# plot(psvindex, dpsv)
-# xscale("linear")
-# yscale("linear")
-# title(r"$\Delta P$ for 100 Realisations")
-# xlabel(r"Iteration number")
-# ylabel(r"$\Delta P$")
-# plot(psvindex, [m for i in psvindex], "0.0")
-# plot(psvindex, [m+s for i in psvindex], "0.5")
-# plot(psvindex, [m-s for i in psvindex], "0.5")
-# show()
+var = std(cmbmap)
+avg = 0
 
 # Recreate Scan Strategy
 declims = [0, 1024] #arcmins
@@ -117,60 +75,56 @@ nodecscans = 512
 norablocks = 512
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
-cesscans = zeros((nodecscans, radatapoints))
+
+observationno = range(1)
+observations = [zeros((nodecscans, norablocks)) for i in observationno]
+cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
+
+# Decompose into bolometer signals
 
 for d in range(nodecscans):
     for ri in range(norablocks):
         rstart = ri*compression
         rstop = rstart + compression
-        # Create noise
-        noisereal = normal(size = compression, scale = 0.0006)
-        noiseimag = normal(size = compression, scale = 0.0006)
-        noisefreqspace = noisereal + 1j*noiseimag
-        noise = real(ifft(noisefreqspace))
-        # Add noise and signal as time stream
-        tod = cmbmap[d, ri] + noise
-        cesscans[d, rstart:rstop] = tod
+        # Create and noise
+        noise = normal(avg, var, size = (len(observationno), compression))
+        for obs in observationno:
+            tod = cmbmap[d, ri] + noise[obs] # digitise here
+            cesscans[obs][d, rstart:rstop] = tod
 
-print("Added noise")
+    print(d)
 
 # Recompress into map
-cmbnoisemap = zeros((nodecscans, norablocks))
-for d in range(shape(cesscans)[0]):
+
+print("Decomposition completed")
+
+
+for d in range(shape(cesscans[0])[0]):
     for ri in range(norablocks):
         rstart = ri*compression
         rstop = rstart + compression
-        cmbnoisemap[d, ri] = mean(cesscans[d, rstart:rstop])
+        for obs in observationno:
+            observations[obs][d, ri] = mean(cesscans[obs][d, rstart:rstop])
 
-print("Recompressed")
-imshow(cmbnoisemap)
-show()
+    print(d)
 
-mapparams = [512, 512, 2, 2]
-k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
-k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
-plot(k, p, "r")
-plot(k0, p0, "b")
-diff = asarray(k)-asarray(k0)
-xlabel("l")
-ylabel("cl")
-xscale("log")
-yscale("log")
-show()
+print("Beginning PS extraction")
 
-plot(k, diff)
-show()
+cmbnoisemap = zeros((nodecscans, norablocks))
+for obs in observations:
+    cmbnoisemap = cmbnoisemap + obs
+cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
-# # Compare powerspectra
+
+# # Plot powerspectrum
 # mapparams = [512, 512, 2, 2]
-# kfull, clfull = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap, col = "b")
-# kcomp, clcomp = cosm.sriniPowerSpectrum(mapparams, maprecreated, col = "None", mark="o")
-# plot(kfull, clfull, "b", label="Orgininal")
-# plot(kcomp, clcomp, "r", label="Recreated")
-# xlabel("l")
-# ylabel("cl")
+# k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
+# k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
+# plot(k, p, "r", label = "CMB+N Average")
+# plot(k0, p0, "b", label = "CMB")
+# xlabel("k")
+# ylabel("pk")
 # xscale("log")
 # yscale("log")
-# title("Powerspectrum of CMB and Noise Map, original and recreated")
 # legend()
 # show()
