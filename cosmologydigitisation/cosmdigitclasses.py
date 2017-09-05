@@ -651,7 +651,8 @@ def cutOff(r, p):
         return 0
 
 # Digitissation schemes, change the input signal
-def digitise1bit(signal, lvl):
+def digitise1bit(signalin, lvl):
+    signal = deepcopy(signalin)
     for i in range(len(signal)):
         if signal[i] >= 0:
             signal[i] = lvl

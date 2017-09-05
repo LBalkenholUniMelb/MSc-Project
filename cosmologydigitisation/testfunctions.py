@@ -5,7 +5,12 @@ from cosmdigitclasses import *
 from matplotlib.image import *
 
 A = normal(size = 100)
+powa = sum(A*A)
+print("A: " + str(powa))
 
-plot(range(100), A)
-plot(range(100), digitise1bit(A, 1))
-show()
+B = digitise1bit(A, 5)
+powb = sum(B*B)
+print("B: " + str(powb))
+B = (powa/powb)**0.5 * B
+powb = sum(B*B)
+print("B: " + str(powb))

@@ -76,7 +76,7 @@ norablocks = 512
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
-observationno = range(1)
+observationno = range(10)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
@@ -89,8 +89,13 @@ for d in range(nodecscans):
         # Create and noise
         noise = normal(avg, var, size = (len(observationno), compression))
         for obs in observationno:
-            tod = cmbmap[d, ri] + noise[obs] # digitise here
-            tod = digitise1bit(tod, var)
+            tod = cmbmap[d, ri] + noise[obs]
+            # digitise here
+            todpow = sum(asarray(tod)*asarray(tod))
+            tod = digitise1bit(tod, 1)
+            toddigitpow = sum(asarray(tod)*asarray(tod))
+            norm = (todpow/toddigitpow)**0.5
+            tod = norm*asarray(tod)
             cesscans[obs][d, rstart:rstop] = tod
 
     print(d)

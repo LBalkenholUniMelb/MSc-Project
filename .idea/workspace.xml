@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="Implemented zero passing">
+    <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MSc-Project.iml" afterPath="$PROJECT_DIR$/.idea/MSc-Project.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" afterPath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" afterPath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +20,8 @@
       <file leaf-file-name="cmbpower.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+            <state relative-caret-position="127">
+              <caret line="70" column="22" lean-forward="false" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="22" />
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
                 <element signature="e#852#1019#0" expanded="false" />
@@ -36,8 +34,8 @@
       <file leaf-file-name="cosmdigitclasses.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7725">
-              <caret line="522" column="34" lean-forward="false" selection-start-line="522" selection-start-column="34" selection-end-line="522" selection-end-column="34" />
+            <state relative-caret-position="217">
+              <caret line="654" column="30" lean-forward="false" selection-start-line="654" selection-start-column="30" selection-end-line="654" selection-end-column="30" />
               <folding>
                 <element signature="e#185#216#0" expanded="true" />
               </folding>
@@ -48,7 +46,7 @@
       <file leaf-file-name="pow_spec.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
+            <state relative-caret-position="380">
               <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
@@ -59,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+              <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -77,8 +75,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
       </list>
@@ -105,8 +103,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -118,6 +116,19 @@
               <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
               <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
+              <item name="Plots" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
+              <item name="Plots" type="462c0819:PsiDirectoryNode" />
+              <item name="05092017" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
@@ -261,23 +272,29 @@
       <option name="project" value="LOCAL" />
       <updated>1502843399919</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Populated Research Diary after meeting. Made inital modifications to code.">
+      <created>1504583085494</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1504583085494</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="14" y="43" width="1400" height="745" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32095096" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -300,7 +317,8 @@
     <MESSAGE value="More Checking on PSV theorem" />
     <MESSAGE value="Updated Research Diary" />
     <MESSAGE value="Setting version the same on laptop and uni computer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting version the same on laptop and uni computer" />
+    <MESSAGE value="Populated Research Diary after meeting. Made inital modifications to code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Populated Research Diary after meeting. Made inital modifications to code." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -774,38 +792,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="380">
+          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7725">
-          <caret line="522" column="34" lean-forward="false" selection-start-line="522" selection-start-column="34" selection-end-line="522" selection-end-column="34" />
+        <state relative-caret-position="217">
+          <caret line="654" column="30" lean-forward="false" selection-start-line="654" selection-start-column="30" selection-end-line="654" selection-end-column="30" />
           <folding>
             <element signature="e#185#216#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="195">
+          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+        <state relative-caret-position="127">
+          <caret line="70" column="22" lean-forward="false" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="22" />
           <folding>
             <element signature="e#25#56#0" expanded="true" />
             <element signature="e#852#1019#0" expanded="false" />
