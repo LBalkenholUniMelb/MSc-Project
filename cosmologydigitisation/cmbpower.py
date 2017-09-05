@@ -63,7 +63,7 @@ cmbfreqspace = (realpart + 1j*imagpart)
 cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
 cmbmap = real(cmbmap)
 
-var = std(cmbmap)
+var = 6*10**(-6)#std(cmbmap)
 avg = 0
 
 # Recreate Scan Strategy
@@ -90,6 +90,7 @@ for d in range(nodecscans):
         noise = normal(avg, var, size = (len(observationno), compression))
         for obs in observationno:
             tod = cmbmap[d, ri] + noise[obs] # digitise here
+            tod = digitise1bit(tod, var)
             cesscans[obs][d, rstart:rstop] = tod
 
     print(d)
@@ -115,16 +116,25 @@ for obs in observations:
     cmbnoisemap = cmbnoisemap + obs
 cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
-
-# # Plot powerspectrum
-# mapparams = [512, 512, 2, 2]
-# k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
-# k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
-# plot(k, p, "r", label = "CMB+N Average")
-# plot(k0, p0, "b", label = "CMB")
-# xlabel("k")
-# ylabel("pk")
-# xscale("log")
-# yscale("log")
-# legend()
-# show()
+# Plot powerspectrum
+mapparams = [512, 512, 2, 2]
+k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
+k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
+subplot(1, 2, 1)
+plot(k, p, "r", label = "CMB+N")
+plot(k0, p0, "b", label = "CMB")
+title(r"Powerspectrum")
+xlabel(r"Wavevector $k$")
+ylabel(r"Power $P_k$")
+xscale("log")
+yscale("log")
+legend()
+subplot(1, 2, 2)
+plot(k0, asarray(p0)-asarray(p))
+title(r"Powerspectrum difference")
+xlabel(r"Wavevector $k$")
+ylabel(r"Difference in $P_k$")
+xscale("log")
+print(mean(asarray(p0)-asarray(p)))
+print(std(asarray(p0)-asarray(p)))
+show()

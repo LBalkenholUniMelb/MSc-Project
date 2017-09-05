@@ -651,14 +651,12 @@ def cutOff(r, p):
         return 0
 
 # Digitissation schemes, change the input signal
-def digitise1bit(signal, meanvalue = None):
-    if meanvalue == None:
-        meanvalue = mean(signal)
-    for i in signal:
-        if i >= meanvalue:
-            i = meanvalue+1
+def digitise1bit(signal, lvl):
+    for i in range(len(signal)):
+        if signal[i] >= 0:
+            signal[i] = lvl
         else:
-            i = meanvalue-1
+            signal[i] = -1*lvl
     return signal
 
 def digitise2bithalfmax(signal, meanvalue = None):

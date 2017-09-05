@@ -4,17 +4,8 @@ from numpy import *
 from cosmdigitclasses import *
 from matplotlib.image import *
 
-A = ones((64, 64))
-B = zeros((64, 64))
+A = normal(size = 100)
 
-fig = figure()
-a = fig.add_subplot(1,2,1)
-imgplot = imshow(A)
-a.set_title('Before')
-colorbar(orientation ='horizontal')
-a = fig.add_subplot(1,2,2)
-imgplot = imshow(B)
-imgplot.set_clim(0.0,0.7)
-a.set_title('After')
-colorbar(orientation='horizontal')
+plot(range(100), A)
+plot(range(100), digitise1bit(A, 1))
 show()
