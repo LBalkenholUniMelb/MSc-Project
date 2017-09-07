@@ -7,6 +7,10 @@ from cosmdigitclasses import *
 from numpy import *
 from scipy.signal import convolve2d
 rc('text', usetex=True)
+import cProfile, pstats, io
+
+pr = cProfile.Profile()
+pr.enable()
 
 cosm = Cosmologist()
 
@@ -76,7 +80,7 @@ norablocks = 512
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
-observationno = range(10)
+observationno = range(1)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
@@ -91,11 +95,11 @@ for d in range(nodecscans):
         for obs in observationno:
             tod = cmbmap[d, ri] + noise[obs]
             # digitise here
-            todpow = sum(asarray(tod)*asarray(tod))
-            tod = digitise1bit(tod, 1)
-            toddigitpow = sum(asarray(tod)*asarray(tod))
-            norm = (todpow/toddigitpow)**0.5
-            tod = norm*asarray(tod)
+            #todpow = sum(asarray(tod)*asarray(tod))
+            #tod = digitise1bit(tod, 1)
+            #toddigitpow = sum(asarray(tod)*asarray(tod))
+            #norm = (todpow/toddigitpow)**0.5
+            #tod = norm*asarray(tod)
             cesscans[obs][d, rstart:rstop] = tod
 
     print(d)
@@ -120,6 +124,13 @@ cmbnoisemap = zeros((nodecscans, norablocks))
 for obs in observations:
     cmbnoisemap = cmbnoisemap + obs
 cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
+
+ps.disable()
+s = io.StringIO()
+sortby = 'cumulative'
+ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+ps.print_stats()
+print(s.getvalue())
 
 # Plot powerspectrum
 mapparams = [512, 512, 2, 2]
