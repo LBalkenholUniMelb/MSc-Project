@@ -4,13 +4,10 @@ from numpy import *
 from cosmdigitclasses import *
 from matplotlib.image import *
 
-A = normal(size = 100)
-powa = sum(A*A)
-print("A: " + str(powa))
 
-B = digitise1bit(A, 5)
-powb = sum(B*B)
-print("B: " + str(powb))
-B = (powa/powb)**0.5 * B
-powb = sum(B*B)
-print("B: " + str(powb))
+A = normal(size = 10)
+
+A = digitise2bithalfmax(A, 0)
+
+plot(range(10), A)
+show()
