@@ -7,10 +7,6 @@ from cosmdigitclasses import *
 from numpy import *
 from scipy.signal import convolve2d
 rc('text', usetex=True)
-import cProfile, pstats, io
-
-pr = cProfile.Profile()
-pr.enable()
 
 cosm = Cosmologist()
 
@@ -80,29 +76,35 @@ norablocks = 512
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
-observationno = range(1)
+
+observationno = range(5)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
+
+import cProfile, pstats, io
+pr = cProfile.Profile()
+pr.enable()
+
+
 # Decompose into bolometer signals
+noise = normal(avg, var, size = (len(observationno), nodecscans, norablocks*compression))
 
 for d in range(nodecscans):
     for ri in range(norablocks):
         rstart = ri*compression
         rstop = rstart + compression
         # Create and noise
-        noise = normal(avg, var, size = (len(observationno), compression))
         for obs in observationno:
-            tod = cmbmap[d, ri] + noise[obs]
+            tod = cmbmap[d, ri] + noise[obs][d][rstart:rstop]
             # digitise here
-            #todpow = sum(asarray(tod)*asarray(tod))
-            #tod = digitise1bit(tod, 1)
-            #toddigitpow = sum(asarray(tod)*asarray(tod))
-            #norm = (todpow/toddigitpow)**0.5
-            #tod = norm*asarray(tod)
+            todpow = sum(asarray(tod)*asarray(tod))
+            tod = digitise2bithalfmax(tod, avg)
+            toddigitpow = sum(asarray(tod)*asarray(tod))
+            tod = ((todpow/toddigitpow)**0.5)*tod
             cesscans[obs][d, rstart:rstop] = tod
 
-    print(d)
+    print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
 
 # Recompress into map
 
@@ -116,7 +118,7 @@ for d in range(shape(cesscans[0])[0]):
         for obs in observationno:
             observations[obs][d, ri] = mean(cesscans[obs][d, rstart:rstop])
 
-    print(d)
+    print("Compression: " + str(int(100*d/nodecscans)) + "%")
 
 print("Beginning PS extraction")
 
@@ -125,7 +127,7 @@ for obs in observations:
     cmbnoisemap = cmbnoisemap + obs
 cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
-ps.disable()
+pr.disable()
 s = io.StringIO()
 sortby = 'cumulative'
 ps = pstats.Stats(pr, stream=s).sort_stats(sortby)

@@ -651,14 +651,12 @@ def cutOff(r, p):
         return 0
 
 # Digitissation schemes, change the input signal
-def digitise1bit(signalin, lvl):
-    signal = deepcopy(signalin)
+def digitise1bit(signal, lvl):
     for i in range(len(signal)):
         if signal[i] >= 0:
             signal[i] = lvl
         else:
             signal[i] = -1*lvl
-    return signal
 
 def digitise2bithalfmax(signal, meanvalue = None):
     if meanvalue == None:
@@ -673,6 +671,7 @@ def digitise2bithalfmax(signal, meanvalue = None):
     indices = digitize(signal, [x1, x2, x3, x4, x5])
     for i in range(len(signal)):
         signal[i] = outlevels[indices[i] - 1] + meanvalue
+    return signal
 
 def digitise2bitequalnumbers(signal, meanvalue = None):
     if meanvalue == None:
