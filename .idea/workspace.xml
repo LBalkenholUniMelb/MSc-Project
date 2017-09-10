@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/05092017/ps2bithm5obs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/05092017/digit2bithm5obsstats.rtf" />
+    <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="Investigated 2 bit digitisation. Sped up some of the disigitsation code and moved noise creation to a more sensible position.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" afterPath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +17,8 @@
       <file leaf-file-name="cmbpower.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="106" column="43" lean-forward="true" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
+            <state relative-caret-position="353">
+              <caret line="98" column="61" lean-forward="true" selection-start-line="98" selection-start-column="61" selection-end-line="98" selection-end-column="61" />
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
                 <element signature="e#852#1019#0" expanded="false" />
@@ -35,8 +31,8 @@
       <file leaf-file-name="cosmdigitclasses.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="674" column="0" lean-forward="true" selection-start-line="674" selection-start-column="0" selection-end-line="674" selection-end-column="0" />
+            <state relative-caret-position="10005">
+              <caret line="674" column="0" lean-forward="false" selection-start-line="674" selection-start-column="0" selection-end-line="674" selection-end-column="0" />
               <folding>
                 <element signature="e#185#216#0" expanded="true" />
               </folding>
@@ -47,7 +43,7 @@
       <file leaf-file-name="pow_spec.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
+            <state relative-caret-position="1290">
               <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
@@ -57,8 +53,8 @@
       <file leaf-file-name="testfunctions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+            <state relative-caret-position="120">
+              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -109,7 +105,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -145,6 +140,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,7 +293,21 @@
       <option name="project" value="LOCAL" />
       <updated>1504590137228</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Investigated 2 bit digitisation. Sped up some of the disigitsation code and moved noise creation to a more sensible position.">
+      <created>1504767494116</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1504767494116</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Investigated 1bit digitisation, focusing on p*k*(k+1).">
+      <created>1505086878362</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1505086878362</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -307,13 +317,13 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41307577" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.038632985" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -338,7 +348,9 @@
     <MESSAGE value="Setting version the same on laptop and uni computer" />
     <MESSAGE value="Populated Research Diary after meeting. Made inital modifications to code." />
     <MESSAGE value="Added Plots" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Plots" />
+    <MESSAGE value="Investigated 2 bit digitisation. Sped up some of the disigitsation code and moved noise creation to a more sensible position." />
+    <MESSAGE value="Investigated 1bit digitisation, focusing on p*k*(k+1)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Investigated 1bit digitisation, focusing on p*k*(k+1)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -814,7 +826,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
+        <state relative-caret-position="1290">
           <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding />
         </state>
@@ -822,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        <state relative-caret-position="120">
+          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -832,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="674" column="0" lean-forward="true" selection-start-line="674" selection-start-column="0" selection-end-line="674" selection-end-column="0" />
+        <state relative-caret-position="10005">
+          <caret line="674" column="0" lean-forward="false" selection-start-line="674" selection-start-column="0" selection-end-line="674" selection-end-column="0" />
           <folding>
             <element signature="e#185#216#0" expanded="true" />
           </folding>
@@ -842,8 +854,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="106" column="43" lean-forward="true" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
+        <state relative-caret-position="353">
+          <caret line="98" column="61" lean-forward="true" selection-start-line="98" selection-start-column="61" selection-end-line="98" selection-end-column="61" />
           <folding>
             <element signature="e#25#56#0" expanded="true" />
             <element signature="e#852#1019#0" expanded="false" />
