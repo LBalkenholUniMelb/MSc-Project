@@ -77,7 +77,7 @@ radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
 
-observationno = range(5)
+observationno = range(10)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
@@ -99,7 +99,7 @@ for d in range(nodecscans):
             tod = cmbmap[d, ri] + noise[obs][d][rstart:rstop]
             # digitise here
             todpow = sum(asarray(tod)*asarray(tod))
-            tod = digitise2bithalfmax(tod, avg)
+            digitise1bit(tod, 1)
             toddigitpow = sum(asarray(tod)*asarray(tod))
             tod = ((todpow/toddigitpow)**0.5)*tod
             cesscans[obs][d, rstart:rstop] = tod
@@ -138,6 +138,12 @@ print(s.getvalue())
 mapparams = [512, 512, 2, 2]
 k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
 k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
+k = asarray(k)
+p = asarray(p)
+k0 = asarray(k0)
+p0 = asarray(p0)
+p = p*k*(k+1)
+p0 = p0*k0*(k0+1)
 subplot(1, 2, 1)
 plot(k, p, "r", label = "CMB+N")
 plot(k0, p0, "b", label = "CMB")
