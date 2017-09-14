@@ -55,15 +55,27 @@ else:
 
 # Combine noise and cmb element-wise
 factor = sqrt((df/2)*cl2d)
-realpart = factor * normal(size = (pixelnumber, pixelnumber))
-imagpart = factor * normal(size = (pixelnumber, pixelnumber))
+file = open("cmbnoiseseed.txt")
+re = zeros((pixelnumber, pixelnumber))
+im = zeros((pixelnumber, pixelnumber))
+rowindex = 0
+for row in file:
+    rowvalues = [float(i) for i in row.split()]
+    re[rowindex] = rowvalues[:pixelnumber]
+    im[rowindex] = rowvalues[pixelnumber:]
+    rowindex += 1
+realpart = factor * re
+imagpart = factor * im
 cmbfreqspace = (realpart + 1j*imagpart)
 
 # Transform into map
 cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
 cmbmap = real(cmbmap)
 
-var = 6*10**(-6)#std(cmbmap)
+savetxt("CMBMap.txt", cmbmap)
+tg4weajt98
+
+var = 6*10**(-6)
 avg = 0
 
 # Recreate Scan Strategy
@@ -80,12 +92,6 @@ compression = int(radatapoints/norablocks)
 observationno = range(10)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
-
-
-import cProfile, pstats, io
-pr = cProfile.Profile()
-pr.enable()
-
 
 # Decompose into bolometer signals
 noise = normal(avg, var, size = (len(observationno), nodecscans, norablocks*compression))
