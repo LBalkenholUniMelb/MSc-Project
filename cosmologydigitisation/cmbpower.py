@@ -72,9 +72,6 @@ cmbfreqspace = (realpart + 1j*imagpart)
 cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
 cmbmap = real(cmbmap)
 
-savetxt("CMBMap.txt", cmbmap)
-tg4weajt98
-
 var = 6*10**(-6)
 avg = 0
 
@@ -89,7 +86,7 @@ radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
 
-observationno = range(10)
+observationno = range(5)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
@@ -133,38 +130,34 @@ for obs in observations:
     cmbnoisemap = cmbnoisemap + obs
 cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
-pr.disable()
-s = io.StringIO()
-sortby = 'cumulative'
-ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-ps.print_stats()
-print(s.getvalue())
-
 # Plot powerspectrum
 mapparams = [512, 512, 2, 2]
 k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
 k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
 k = asarray(k)
 p = asarray(p)
+err = asarray(err)
+err0 = asarray(err0)
 k0 = asarray(k0)
 p0 = asarray(p0)
 p = p*k*(k+1)
 p0 = p0*k0*(k0+1)
 subplot(1, 2, 1)
-plot(k, p, "r", label = "CMB+N")
-plot(k0, p0, "b", label = "CMB")
-title(r"Powerspectrum")
+plot(k, err, "r", label = "CMB+N")
+plot(k0, err0, "b", label = "CMB")
+title(r"Powerspectrum Error")
 xlabel(r"Wavevector $k$")
-ylabel(r"Power $P_k$")
+ylabel(r"Error on Power $\Delta P_k$")
 xscale("log")
 yscale("log")
 legend()
 subplot(1, 2, 2)
-plot(k0, asarray(p0)-asarray(p))
-title(r"Powerspectrum difference")
+#plot(k0, asarray(p0)-asarray(p), label="Difference")
+plot(k0, err0/err, label="Ratio")
+title(r"Powerspectrum Error Ratio")
 xlabel(r"Wavevector $k$")
-ylabel(r"Difference in $P_k$")
+ylabel(r"Error Ratio")
 xscale("log")
-print(mean(asarray(p0)-asarray(p)))
-print(std(asarray(p0)-asarray(p)))
+print(mean(asarray(p0)/asarray(p)))
+print(mean(asarray(err0)/asarray(err)))
 show()
