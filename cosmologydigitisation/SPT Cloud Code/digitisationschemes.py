@@ -24,7 +24,6 @@ def digitise2bithalfmax(signal):
         signal[i] = outlevels[indices[i] - 1]
 
 def digitise2bitequalnumbers(signal):
-    signal = signal
     x1 = -inf
     x5 = inf
     x3 = median(signal)

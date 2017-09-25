@@ -151,12 +151,12 @@ while i < len(allnobs)-1:
     cmbnoisemap2bitopt = cmbnoisemap2bitopt * float(1/nobs)
 
     filename = "digitisedcmb1bitnobs" + str(nobs) + ".txt"
-    #savetxt(filename, cmbnoisemap1bit)
+    savetxt(filename, cmbnoisemap1bit)
     filename = "digitisedcmb2bithmnobs" + str(nobs) + ".txt"
-    #savetxt(filename, cmbnoisemap2bithm)
+    savetxt(filename, cmbnoisemap2bithm)
     filename = "digitisedcmb2biteqnnobs" + str(nobs) + ".txt"
-    #savetxt(filename, cmbnoisemap2biteqn)
+    savetxt(filename, cmbnoisemap2biteqn)
     filename = "digitisedcmb2bitnobsopt" + str(nobs) + ".txt"
-    #savetxt(filename, cmbnoisemap2bitopt)
+    savetxt(filename, cmbnoisemap2bitopt)
 
     i += 1

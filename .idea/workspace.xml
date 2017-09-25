@@ -2,46 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/avgdiffnobs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/psdiff.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/pserrratio.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/psratio.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/CMBMap.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisationschemes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs10.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs100.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs110.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs120.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs130.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs140.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs150.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs160.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs170.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs180.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs190.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs20.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs200.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs30.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs40.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs50.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs60.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs70.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs80.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/digitisedcmbnobs90.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MSc-Project.iml" afterPath="$PROJECT_DIR$/.idea/MSc-Project.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/psdigitschemes.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/psdigitschemesratioclose.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/psdigitschemesratioclosecropped.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/psdigitschemesratiozoomshaded.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/schemesmaps.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/schemesmapsdiff.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb1bitnobs20.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb2bithmnobs20.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb2bitoptnobs20.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" afterPath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" afterPath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/CMBMap.txt" afterPath="$PROJECT_DIR$/cosmologydigitisation/CMBMap.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="nobsanalysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py">
+      <file leaf-file-name="schemesanalysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="73" column="53" lean-forward="true" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
+            <state relative-caret-position="380">
+              <caret line="162" column="6" lean-forward="true" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="6" />
               <folding>
                 <element signature="e#13#32#0" expanded="true" />
               </folding>
@@ -65,23 +42,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cmbdigitisation.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py">
+      <file leaf-file-name="testfunctions.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="31" column="52" lean-forward="true" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
+            <state relative-caret-position="237">
+              <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
               <folding>
-                <element signature="e#23#90#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="digitisationschemes.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py">
+      <file leaf-file-name="cosmdigitclasses.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="53" column="45" lean-forward="false" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
+            <state relative-caret-position="1067">
+              <caret line="632" column="18" lean-forward="true" selection-start-line="632" selection-start-column="18" selection-end-line="632" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pow_spec.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="56" column="43" lean-forward="true" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cmbpower.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -99,6 +96,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>mean</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,19 +109,20 @@
         <option value="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/nobsanalysis.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="12" />
+    <option name="x" value="63" />
     <option name="y" value="23" />
     <option name="width" value="1275" />
     <option name="height" value="745" />
@@ -146,7 +145,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -170,33 +168,29 @@
               <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
               <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
               <item name="Plots" type="462c0819:PsiDirectoryNode" />
-              <item name="19092017" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
-              <item name="SPT Cloud Code" type="462c0819:PsiDirectoryNode" />
+              <item name="24092017" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/cosmologydigitisation" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots/05092017" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cosmologydigitisation" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -211,7 +205,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cmbdigitisation">
+  <component name="RunManager" selected="Python.testfunctions">
     <configuration name="cmbdigitisation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -263,6 +257,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="schemesanalysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cosmologydigitisation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MSc-Project" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="testfunctions" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -280,18 +291,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.cmbpower" />
       <item index="1" class="java.lang.String" itemvalue="Python.testfunctions" />
       <item index="2" class="java.lang.String" itemvalue="Python.cmbdigitisation" />
       <item index="3" class="java.lang.String" itemvalue="Python.nobsanalysis" />
+      <item index="4" class="java.lang.String" itemvalue="Python.schemesanalysis" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.cmbdigitisation" />
-        <item index="1" class="java.lang.String" itemvalue="Python.testfunctions" />
-        <item index="2" class="java.lang.String" itemvalue="Python.cmbpower" />
-        <item index="3" class="java.lang.String" itemvalue="Python.nobsanalysis" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.testfunctions" />
+        <item index="1" class="java.lang.String" itemvalue="Python.schemesanalysis" />
+        <item index="2" class="java.lang.String" itemvalue="Python.cmbdigitisation" />
+        <item index="3" class="java.lang.String" itemvalue="Python.cmbpower" />
+        <item index="4" class="java.lang.String" itemvalue="Python.nobsanalysis" />
       </list>
     </recent_temporary>
   </component>
@@ -407,23 +420,30 @@
       <option name="project" value="LOCAL" />
       <updated>1505362311984</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Meeting with Christian. Populated Research Diary and investigated effect of number of observations on 1bit digitisation.">
+      <created>1505801737168</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1505801737168</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="12" y="23" width="1275" height="745" extended-state="0" />
+    <frame x="63" y="23" width="1275" height="745" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27450982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42199108" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37147102" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -452,41 +472,16 @@
     <MESSAGE value="Investigated 1bit digitisation, focusing on p*k*(k+1)." />
     <MESSAGE value="Investigated 1 bit digitisation effect on p*k(k+1)" />
     <MESSAGE value="Meeting with Christian" />
-    <option name="LAST_COMMIT_MESSAGE" value="Meeting with Christian" />
+    <MESSAGE value="Meeting with Christian. Populated Research Diary and investigated effect of number of observations on 1bit digitisation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Meeting with Christian. Populated Research Diary and investigated effect of number of observations on 1bit digitisation." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7980">
-          <caret line="539" column="13" lean-forward="false" selection-start-line="539" selection-start-column="13" selection-end-line="539" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
@@ -739,18 +734,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/pserrratio.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+        <state relative-caret-position="191">
+          <caret line="138" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="161" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="82" column="14" lean-forward="true" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb2bithmnobs20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="19" lean-forward="false" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb1bitnobs20.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-242">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="79" column="51" lean-forward="false" selection-start-line="79" selection-start-column="51" selection-end-line="79" selection-end-column="51" />
+        <state relative-caret-position="176">
+          <caret line="128" column="36" lean-forward="false" selection-start-line="128" selection-start-column="36" selection-end-line="128" selection-end-column="36" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Plots/24092017/psdigitschemes.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/avgdiffnobs.png">
@@ -758,71 +798,46 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="73" column="53" lean-forward="true" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
+        <state relative-caret-position="380">
+          <caret line="162" column="6" lean-forward="true" selection-start-line="162" selection-start-column="6" selection-end-line="162" selection-end-column="6" />
           <folding>
             <element signature="e#13#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/pserrratio.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="69" lean-forward="true" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
-          <folding>
-            <element signature="e#25#56#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
+        <state relative-caret-position="1067">
           <caret line="632" column="18" lean-forward="true" selection-start-line="632" selection-start-column="18" selection-end-line="632" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="53" column="45" lean-forward="false" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
+        <state relative-caret-position="134">
+          <caret line="56" column="43" lean-forward="true" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/testfunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="237">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="31" column="52" lean-forward="true" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
-          <folding>
-            <element signature="e#23#90#0" expanded="true" />
           </folding>
         </state>
       </provider>
