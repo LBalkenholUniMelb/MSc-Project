@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/cmbseeds.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/cosmdigitclasses.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/digitisationschemes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/manyseedsanalysis.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/pow_spec.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cl2d.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbseeds.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/mpitest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" afterPath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" afterPath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/testfunctions.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -488,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506470433266</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum. Removed results from git, since they are too large and are kept on the sptcloud data anyway.">
+      <created>1506565561273</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1506565561273</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -537,7 +532,8 @@
     <MESSAGE value="Investigated Different Digitisation Schemes for 20 Obs, 1&amp;2Bit." />
     <MESSAGE value="Meeting with Christian. Preparation for running MPI code on cloud." />
     <MESSAGE value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum." />
-    <option name="LAST_COMMIT_MESSAGE" value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum." />
+    <MESSAGE value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum. Removed results from git, since they are too large and are kept on the sptcloud data anyway." />
+    <option name="LAST_COMMIT_MESSAGE" value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum. Removed results from git, since they are too large and are kept on the sptcloud data anyway." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
