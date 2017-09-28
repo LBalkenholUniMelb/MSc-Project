@@ -8,17 +8,6 @@ from matplotlib.image import *
 from digitisationschemes import *
 from csv import *
 
-pixelnumber = 512
-file = open("CMBMap.txt")
-cmbmap = zeros((pixelnumber, pixelnumber))
-rowindex = 0
-for row in file:
-    rowvalues = [float(i) for i in row.split()]
-    cmbmap[rowindex] = rowvalues[:pixelnumber]
-    rowindex += 1
+A = zeros((1, 5))
 
-
-
-wr = writer(open("CMBMapascsv.csv", 'w'))
-for row in cmbmap:
-    wr.writerow(row)
+print(A[0][2])
