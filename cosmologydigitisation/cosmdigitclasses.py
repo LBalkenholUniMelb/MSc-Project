@@ -619,6 +619,10 @@ class Cosmologist:
             title("Crosspowerspectrum")
         #xlabel('Multipole k');
         #ylabel('Power')
+        k = asarray(k)
+        p_k = asarray(p_k)
+        p_k_err = asarray(p_k_err)
+        hitcount = asarray(hitcount)
         return k, p_k, p_k_err, hitcount
         #legend(fancybox = 1)
         #show()

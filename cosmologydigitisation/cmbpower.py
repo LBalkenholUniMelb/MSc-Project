@@ -14,7 +14,7 @@ cosm = Cosmologist()
 fieldsizearcmins = 2048
 pixelsizearcmin = 2
 pixelnumber = 1024
-df = 1
+df = 1.0/(fieldsizearcmins*arcmins2radians)
 
 # Read in data
 filelocation = "for_lennart/plik_plus_r0p01_highell_lensedtotCls.dat"
@@ -27,7 +27,7 @@ for row in file:
     dl.append(rowvalues[1])
 
 # Calculate cl
-cl = [(dl[i]*2*pi)/(l[i]*(l[i]+1)) for i in range(len(l))]
+cl = [(dl[i]*2.0*pi)/(l[i]*(l[i]+1.0)) for i in range(len(l))]
 
 # Create 2dCl
 cl2d = zeros((pixelnumber, pixelnumber))
@@ -53,24 +53,55 @@ else:
             ind = argmin([abs(i-k) for i in l])
             cl2d[y, x] = cl[ind]
 
+#print("POWER IN DL:")
+#print(sum(dl*conjugate(dl)))
+
+#print("POWER IN CL2D:")
+#print(sum(cl2d*conjugate(cl2d)))
+
+
 # Combine noise and cmb element-wise
-factor = sqrt((df/2)*cl2d)
-file = open("cmbnoiseseed.txt")
-re = zeros((pixelnumber, pixelnumber))
-im = zeros((pixelnumber, pixelnumber))
-rowindex = 0
-for row in file:
-    rowvalues = [float(i) for i in row.split()]
-    re[rowindex] = rowvalues[:pixelnumber]
-    im[rowindex] = rowvalues[pixelnumber:]
-    rowindex += 1
+factor = sqrt((df/2.0)*cl2d)
+
+#print("POWER IN FACTOR")
+#print(sum(factor*conjugate(factor)))
+
+# file = open("cmbnoiseseed.txt")
+# re = zeros((pixelnumber, pixelnumber))
+# im = zeros((pixelnumber, pixelnumber))
+# rowindex = 0
+# for row in file:
+#     rowvalues = [float(i) for i in row.split()]
+#     re[rowindex] = rowvalues[:pixelnumber]
+#     im[rowindex] = rowvalues[pixelnumber:]
+#     rowindex += 1
+
+re = normal(0, 1, (pixelnumber, pixelnumber))
+im = normal(0, 1, (pixelnumber, pixelnumber))
+
 realpart = factor * re
 imagpart = factor * im
-cmbfreqspace = (realpart + 1j*imagpart)
+cmbfreqspace = (realpart + 1.0j*imagpart)
+
+#print("POWER IN CMB FREQ SPACE:")
+#print(sum(cmbfreqspace*conjugate(cmbfreqspace)))
 
 # Transform into map
 cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+#print("POWER IN CMB REAL SPACE * 4:")
+#print(sum(cmbmap*conjugate(cmbmap))*4.0)
+#print(sum(cmbmap*conjugate(cmbmap)))
 cmbmap = real(cmbmap)
+
+#print("POWER IN CMB REAL SPACE:")
+#print(sum(cmbmap*conjugate(cmbmap))*2)
+#print(sum(cmbmap*conjugate(cmbmap)))
+
+#print("POWER IN P:")
+#print(hits)
+#print(sum(p*hitsc))
+
+#plot(l, dl, "b")
 
 var = 6*10**(-6)
 avg = 0
@@ -85,8 +116,7 @@ norablocks = 512
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 
-
-observationno = range(5)
+observationno = range(1)
 observations = [zeros((nodecscans, norablocks)) for i in observationno]
 cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
@@ -100,11 +130,15 @@ for d in range(nodecscans):
         # Create and noise
         for obs in observationno:
             tod = cmbmap[d, ri] + noise[obs][d][rstart:rstop]
+            #print(std(tod))
+            # adding noise to cmb map
+            #cmbmap[d, ri] = mean(tod)
             # digitise here
             todpow = sum(asarray(tod)*asarray(tod))
-            digitise1bit(tod, 1)
-            toddigitpow = sum(asarray(tod)*asarray(tod))
-            tod = ((todpow/toddigitpow)**0.5)*tod
+            digitise1bit(tod, 0.0001)
+            #toddigitpow = sum(asarray(tod)*asarray(tod))
+            #print(((todpow/toddigitpow)**0.5))
+            #tod = ((todpow/toddigitpow)**0.5)*tod
             cesscans[obs][d, rstart:rstop] = tod
 
     print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
@@ -125,10 +159,28 @@ for d in range(shape(cesscans[0])[0]):
 
 print("Beginning PS extraction")
 
+powcmbtrue = sum(cmbmap*cmbmap)
 cmbnoisemap = zeros((nodecscans, norablocks))
 for obs in observations:
+    powcmbobs = sum(obs * obs)
+    obs = obs * (powcmbtrue/powcmbobs)**0.5
     cmbnoisemap = cmbnoisemap + obs
 cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
+
+print(sum(cmbmap*cmbmap))
+print(sum(cmbnoisemap*cmbnoisemap))
+
+subplot(1, 2, 1)
+imshow(cmbmap)
+title("CMB TRUE")
+colorbar()
+
+subplot(1, 2, 2)
+imshow(cmbnoisemap)
+title("CMB 1BIT OBS")
+colorbar()
+
+show()
 
 # Plot powerspectrum
 mapparams = [512, 512, 2, 2]
@@ -143,21 +195,19 @@ p0 = asarray(p0)
 p = p*k*(k+1)
 p0 = p0*k0*(k0+1)
 subplot(1, 2, 1)
-plot(k, err, "r", label = "CMB+N")
-plot(k0, err0, "b", label = "CMB")
-title(r"Powerspectrum Error")
+plot(k, p, "r", label = "CMB 1Bit")
+plot(k0, p0, "b", label = "CMB")
+title(r"Powerspectrum")
 xlabel(r"Wavevector $k$")
-ylabel(r"Error on Power $\Delta P_k$")
+ylabel(r"Power")
 xscale("log")
 yscale("log")
 legend()
 subplot(1, 2, 2)
 #plot(k0, asarray(p0)-asarray(p), label="Difference")
-plot(k0, err0/err, label="Ratio")
-title(r"Powerspectrum Error Ratio")
+plot(k0, p/p0, label="Ratio")
+title(r"Powerspectrum Ratio")
 xlabel(r"Wavevector $k$")
-ylabel(r"Error Ratio")
-xscale("log")
-print(mean(asarray(p0)/asarray(p)))
-print(mean(asarray(err0)/asarray(err)))
+ylabel(r"Ratio")
+xscale("linear")
 show()

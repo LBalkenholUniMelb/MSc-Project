@@ -3,6 +3,7 @@ from numpy import inf, digitize, mean, std, median
 #--- 1 Bit
 
 def digitise1bit(signal):
+    print("HIT")
     i = 0
     while i < len(signal):
         if signal[i] > 0:
@@ -22,6 +23,7 @@ def digitise2bithalfmax(signal):
     indices = digitize(signal, [x1, x2, x3, x4, x5])
     for i in range(len(signal)):
         signal[i] = outlevels[indices[i] - 1]
+    #return x4
 
 def digitise2bitequalnumbers(signal):
     signal = signal
@@ -37,7 +39,7 @@ def digitise2bitequalnumbers(signal):
             lowerdata.append(i)
     x4 = median(upperdata)
     x2 = median(lowerdata)
-    outlevels = [-3, -1, 1, 3]
+    outlevels = [-2, -1, 1, 2]
     indices = digitize(signal, [x1, x2, x3, x4, x5])
     for i in range(len(signal)):
         signal[i] = outlevels[indices[i] - 1]

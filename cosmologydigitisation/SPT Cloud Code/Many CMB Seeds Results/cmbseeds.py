@@ -156,13 +156,13 @@ for cmbseedindex in range(10):
         cmbnoisemap2bithm = cmbnoisemap2bithm * 1.0/float(nobs)
         cmbnoisemap2bitopt = cmbnoisemap2bitopt * 1.0/float(nobs)
 
-        filename = "cmb" + "rank" + str(processorrank) + "seed" + str(cmbseedindex) + ".txt"
+        filename = "cmb" + "rank" + str(processorrank+12) + "seed" + str(cmbseedindex) + ".txt"
         savetxt(filename, cmbmap)
-        filename = "digitisedcmb1bitnobs" + str(nobs) + "rank" + str(processorrank) + "seed" + str(cmbseedindex) + ".txt"
+        filename = "digitisedcmb1bitnobs" + str(nobs) + "rank" + str(processorrank+12) + "seed" + str(cmbseedindex) + ".txt"
         savetxt(filename, cmbnoisemap1bit)
-        filename = "digitisedcmb2bithmnobs" + str(nobs) + "rank" + str(processorrank) + "seed" + str(cmbseedindex) + ".txt"
+        filename = "digitisedcmb2bithmnobs" + str(nobs) + "rank" + str(processorrank+12) + "seed" + str(cmbseedindex) + ".txt"
         savetxt(filename, cmbnoisemap2bithm)
-        filename = "digitisedcmb2bitnobsopt" + str(nobs) + "rank" + str(processorrank) + "seed" + str(cmbseedindex) + ".txt"
+        filename = "digitisedcmb2bitnobsopt" + str(nobs) + "rank" + str(processorrank+12) + "seed" + str(cmbseedindex) + ".txt"
         savetxt(filename, cmbnoisemap2bitopt)
 
         i += 1
