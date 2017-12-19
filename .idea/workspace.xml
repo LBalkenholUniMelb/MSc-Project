@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/digitisationplots.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/nonwhitenoisegen.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" afterPath="$PROJECT_DIR$/Research Diary/.ipynb_checkpoints/Year 1 Semester 2-checkpoint.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" afterPath="$PROJECT_DIR$/Research Diary/Year 1 Semester 2.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/cmbseeds.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/cmbseeds.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/manyseedsanalysis.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/manyseedsanalysis.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +21,8 @@
       <file leaf-file-name="pow_spec.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="1245">
+              <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -47,14 +41,11 @@
       <file leaf-file-name="cmbpower.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="127" column="31" lean-forward="false" selection-start-line="127" selection-start-column="31" selection-end-line="127" selection-end-column="31" />
+            <state relative-caret-position="320">
+              <caret line="262" column="32" lean-forward="true" selection-start-line="262" selection-start-column="32" selection-end-line="262" selection-end-column="32" />
               <folding>
-                <element signature="e#893#1060#0" expanded="false" />
-                <element signature="e#940#1060#0" expanded="false" />
-                <element signature="e#1071#1616#0" expanded="false" />
-                <element signature="e#1798#1823#0" expanded="false" />
-                <element signature="e#2682#2716#0" expanded="false" />
+                <element signature="e#1965#1990#0" expanded="false" />
+                <element signature="e#5204#5238#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -104,16 +95,16 @@
         <option value="$PROJECT_DIR$/cosmologydigitisation/digitisationplots.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/digitisationschemes.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results/manyseedsanalysis.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="186" />
+    <option name="x" value="81" />
     <option name="y" value="23" />
-    <option name="width" value="1639" />
+    <option name="width" value="1531" />
     <option name="height" value="965" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -146,12 +137,18 @@
               <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
               <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
+              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
+              <item name="Plots" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -434,19 +431,26 @@
       <option name="project" value="LOCAL" />
       <updated>1506565599128</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Reinvestigated Parselval's theorem and how setting the digitisation levels arbitrarily changes the resulting powerspectrum.">
+      <created>1513205629225</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1513205629225</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="186" y="23" width="1639" height="965" extended-state="0" />
+    <frame x="81" y="23" width="1531" height="965" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21354485" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22795558" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2698768" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844344" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -505,7 +509,8 @@
     <MESSAGE value="Meeting with Christian. Preparation for running MPI code on cloud." />
     <MESSAGE value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum." />
     <MESSAGE value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum. Removed results from git, since they are too large and are kept on the sptcloud data anyway." />
-    <option name="LAST_COMMIT_MESSAGE" value="Obtained Result for many CMB seeds. Began to investigate ratio and difference in powerspectrum. Removed results from git, since they are too large and are kept on the sptcloud data anyway." />
+    <MESSAGE value="Reinvestigated Parselval's theorem and how setting the digitisation levels arbitrarily changes the resulting powerspectrum." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reinvestigated Parselval's theorem and how setting the digitisation levels arbitrarily changes the resulting powerspectrum." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -521,20 +526,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8625">
-          <caret line="582" column="33" lean-forward="true" selection-start-line="582" selection-start-column="33" selection-end-line="582" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1215">
@@ -851,6 +842,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8625">
@@ -859,24 +858,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/pow_spec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2d.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2drevised.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="127" column="31" lean-forward="false" selection-start-line="127" selection-start-column="31" selection-end-line="127" selection-end-column="31" />
+        <state relative-caret-position="320">
+          <caret line="262" column="32" lean-forward="true" selection-start-line="262" selection-start-column="32" selection-end-line="262" selection-end-column="32" />
           <folding>
-            <element signature="e#893#1060#0" expanded="false" />
-            <element signature="e#940#1060#0" expanded="false" />
-            <element signature="e#1071#1616#0" expanded="false" />
-            <element signature="e#1798#1823#0" expanded="false" />
-            <element signature="e#2682#2716#0" expanded="false" />
+            <element signature="e#1965#1990#0" expanded="false" />
+            <element signature="e#5204#5238#0" expanded="false" />
           </folding>
         </state>
       </provider>
