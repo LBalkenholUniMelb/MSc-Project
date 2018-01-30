@@ -82,14 +82,16 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 
 	if MAP2 == None: #compute auto power spectra
 		cosm = cosmask([nx, ny])
-		w = (float(1.0/(nx*ny))*sum(cosm*cosm))
+		w = (float(1.0/(4*nx*ny))*sum(cosm*cosm))
 		#print("PS REAL")
 		#print(sum(MAP1*MAP1)*w)
 		#print(sum(MAP1*cosm*MAP1*cosm))
 		#print(sum(zeropad(MAP1*cosm)*zeropad(MAP1*cosm)))
 		# MAP_F = np.fft.fft2(MAP1*cosm)
-		MAP_F = np.fft.fft2(zeropad(MAP1*cosm))
-		MAP_PSD = ( MAP_F*conjugate(MAP_F) )/(4.0 * nx * ny * w)
+		MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
+		MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
+	#MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
+	#MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
 
 		#abs( np.fft.fft2(MAP1) * dx_rad)** 2 / (nx * ny)
 		# Do zero padding and apply mask here

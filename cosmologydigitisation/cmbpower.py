@@ -7,13 +7,15 @@ from cosmdigitclasses import *
 from numpy import *
 from scipy.signal import convolve2d
 rc('text', usetex=True)
+rc("xtick", labelsize = 15)
+rc("ytick", labelsize = 15)
 
 cosm = Cosmologist()
 
 # Define map parameters
-fieldsizearcmins = 2048
-pixelsizearcmin = 2
-pixelnumber = 1024
+fieldsizearcmins = 4096
+pixelsizearcmin = 4
+pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
 df = 1.0/(float(fieldsizearcmins)*arcmins2radians)
 
 # Read in data
@@ -34,10 +36,11 @@ cl = [(dl[i]*2.0*pi)/(l[i]*(l[i]+1.0)) for i in range(len(l))]
 
 # Create 2dCl
 cl2d = zeros((pixelnumber, pixelnumber))
+fname = "cl2df" + str(fieldsizearcmins) + "r" + str(pixelsizearcmin) + ".txt"
 readincld2 = True
 if readincld2:
     y = 0
-    for row in open("cl2d.txt"):
+    for row in open(fname):
         rowvalues = row.split()
         for x in range(pixelnumber):
             cl2d[y, x] = float(rowvalues[x])
@@ -56,7 +59,14 @@ else:
             ind = argmin([abs(i-k) for i in l])
             cl2d[y, x] = cl[ind]
         print(y)
-    savetxt("cl2drevised.txt", cl2d)
+    savetxt("cl2df1024r1.txt", cl2d)
+
+# imshow(cl2d)
+# colorbar()
+# show()
+
+# TEST WHITE NOISE
+#cl2d = ones((pixelnumber, pixelnumber), dtype = float)
 
 #print("POWER IN DL:")
 #print(sum(dl*conjugate(dl)))
@@ -67,9 +77,6 @@ else:
 
 # Combine noise and cmb element-wise
 factor = sqrt((df/2.0)*cl2d)
-
-print("POW IN FAC:")
-print(sum(factor*factor))
 
 #print("POWER IN FACTOR")
 #print(sum(factor*conjugate(factor)))
@@ -86,12 +93,15 @@ print(sum(factor*factor))
 
 cmbmapavg = zeros((pixelnumber/2, pixelnumber/2))
 
+facadj = 1.192356 * float(fieldsizearcmins)/2048.0
+
 i = 0
 dltot = 0
 first = True
 powdiffs = []
 powfreqs = []
-noreals = 500.0
+noreals = 10.0
+k = 0
 while i < int(noreals):
 
     re = normal(0, 1, (pixelnumber, pixelnumber))
@@ -114,22 +124,33 @@ while i < int(noreals):
 
     cmbmapavg += cmbmap*4.0*pixelnumber*pixelnumber
 
-
     #print("BECAUSE WE DISCARD IMAGINARY PART:")
     #print(sum(cmbmap*cmbmap*2.0))
     #print(sum(cmbmap*cmbmap))
 
-    k, p, perr, h = cosm.sriniPowerSpectrum([512, 512, 2, 2], cmbmap)
+    k, p, perr, h = cosm.sriniPowerSpectrum([int(pixelnumber/2), int(pixelnumber/2), pixelsizearcmin, pixelsizearcmin], cmbmap)
+
+    # xscale("linear")
+    # yscale("linear")
+    # plot(k, p*k*(k+1.0))
+    # xlabel("Multipole Moment", fontsize = 15)
+    # ylabel(r"$D_l [\mu K^2]$", fontsize = 15)
+    # xscale("linear")
+    # yscale("linear")
+    # show()
 
     #print("ULTIMATE:")
-    powps = sum(p*h)*8.0*1024.0*1024.0
-    powfac = (4.0*1024.0*1024.0)
+    powps = sum(p*h)*8.0*float(pixelnumber)*float(pixelnumber)
+
+    powfac = facadj*float(pixelnumber)*float(pixelnumber)
 
 
     powdiffs.append((powfreq-powps)/powfreq)
 
     dl = p*k*(k+1.0)/(2.0*pi)
     dl = dl*powfac
+    print("Adjusting by:")
+    print(powfac)
 
     #dl = dl*4.0e6
 
@@ -144,13 +165,15 @@ while i < int(noreals):
 means = []
 j = 0
 while j < i:
-    l = 0
+    t = 0
     m = 0
-    while l <= j:
-        m += powdiffs[l]
-        l += 1
+    while t <= j:
+        m += powdiffs[t]
+        t += 1
     means.append(m/(j+1.0))
     j += 1
+
+dltot = dltot/noreals
 
 xscale("linear")
 yscale("linear")
@@ -165,9 +188,9 @@ powfreqs = asarray(powfreqs)/2.0
 m = mean(powfreqs)
 s = std(powfreqs)
 plot(range(i), powfreqs, "k")
-plot(range(i), [m for l in range(i)], "b")
-plot(range(i), [m+s for l in range(i)], "b")
-plot(range(i), [m-s for l in range(i)], "b")
+plot(range(i), [m for q in range(i)], "b")
+plot(range(i), [m+s for q in range(i)], "b")
+plot(range(i), [m-s for q in range(i)], "b")
 plot(range(i), [sum(factor*factor) for p in range(i)], "r")
 xscale("linear")
 yscale("linear")
@@ -184,9 +207,20 @@ xscale("linear")
 yscale("linear")
 show()
 
+plot(k, dltot, "r", label = "Reconstructed")
+plot(linput, dlinput, "b", label = "Input")
+title("Powerspectrum", fontsize = 20)
+xscale("linear")
+yscale("linear")
+xlabel(r"Multipole Moment $l$", fontsize = 20)
+ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
+xlim((0, 2000))
+ylim((0, 6000))
+legend(fontsize = 15)
+show()
+
 subplot(2, 1, 1)
 title("Powerspectrum", fontsize = 25)
-dltot = dltot/noreals
 plot(k, dltot, "r", label = "Reconstructed")
 plot(linput, dlinput, "b", label= "Input")
 xlabel(r"Multipole Moment $l$", fontsize = 20)
@@ -194,7 +228,7 @@ ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
 legend(fontsize = 20)
 xscale("linear")
 yscale("linear")
-xlim((0, 2000))
+xlim((0, 2500))
 
 # find where linput and k coincide
 keq = []
@@ -202,17 +236,18 @@ psdiff = []
 for count, wavevec in enumerate(k):
     ind = argmin(abs(linput-wavevec))
     keq.append(linput[ind])
-    psdiff.append(abs(dlinput[ind]-dltot[count]))
+    psdiff.append(dlinput[ind]/dltot[count])
 
 subplot(2, 1, 2)
 plot(keq, psdiff)
-title("Powerspectrum difference", fontsize = 25)
+title("Powerspectrum Ratio", fontsize = 25)
 xlabel(r"Multipole Moment $l$", fontsize = 20)
-ylabel(r"Difference in $[\mu \mathrm{K}^2]$", fontsize = 20)
+ylabel(r"Input/Reconstructed", fontsize = 20)
 xscale("linear")
 yscale("linear")
-xlim((0, 2000))
-
+xlim((0, 2500))
+#print(mean(psdiff))
+#print(std(psdiff))
 show()
 
 

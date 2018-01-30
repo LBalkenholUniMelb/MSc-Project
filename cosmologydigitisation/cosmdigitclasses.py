@@ -516,6 +516,7 @@ class Cosmologist:
     # Srinis code to get (Cross) Powerspectrum
     ########################################
     def sriniPowerSpectrum(self, mapparams, map1, map2 = None, col = "b", mark = "None"):
+        nx, ny, dx, dy = mapparams
         use_white_noise = 0  # 0 : CMB; 1 - white noise
         clf()
         if use_white_noise:
@@ -553,7 +554,7 @@ class Cosmologist:
 
                 # these are the dimension of all CMB sims
                 nx, ny = IMAGE.shape
-                dx = dy = 2.  # arcmins
+                #dx = dy = 2.  # arcmins
             else:
                 # similar to what prof. Lopez asked. 1000 elements; 6 x 6 arcsec^2 box
                 # nx = ny = 1000;dx = dy = 0.0001 #arcminutes
