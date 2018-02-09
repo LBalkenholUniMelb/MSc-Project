@@ -661,7 +661,7 @@ def digitise1bit(signal, lvl):
         if signal[i] >= 0:
             signal[i] = lvl
         else:
-            signal[i] = -1*lvl
+            signal[i] = -1.0*lvl
 
 def digitise2bithalfmax(signal, meanvalue = None):
     if meanvalue == None:

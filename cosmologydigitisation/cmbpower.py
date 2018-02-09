@@ -13,10 +13,36 @@ rc("ytick", labelsize = 15)
 cosm = Cosmologist()
 
 # Define map parameters
-fieldsizearcmins = 4096
-pixelsizearcmin = 4
+fieldsizearcmins = 2048
+pixelsizearcmin = 2
 pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
-df = 1.0/(float(fieldsizearcmins)*arcmins2radians)
+df = 1.0
+mapfieldsize = int(fieldsizearcmins/2.0)
+mappixelnumber = int(pixelnumber/2.0)
+declims = [0, mapfieldsize] #arcmins
+ralims = [0, mapfieldsize] #arcmins
+readoutfreq = 6 #Hz
+raspeed = 0.1 #arcmin/s
+nodecscans = mappixelnumber
+norablocks = mappixelnumber
+radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
+compression = int(radatapoints/norablocks)
+observationlim = 1
+
+# noise level
+noisemap = 3.0 # muK arcmin
+noisepix = noisemap/float(pixelsizearcmin)
+fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
+noisecl = 4.0*pi*fsky*noisepix*noisepix/float(mappixelnumber*mappixelnumber)
+print("NOISE CL:")
+print(noisecl)
+eta = sqrt(float(compression)) * sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+def nonwhitenoise(l):
+    lknee = 350
+    if l == 0:
+        return 1.0
+    else:
+        return (1.0 + (abs(l) / lknee) ** (-8.0 / 3.0))
 
 # Read in data
 filelocation = "for_lennart/plik_plus_r0p01_highell_lensedtotCls.dat"
@@ -64,18 +90,19 @@ else:
 # imshow(cl2d)
 # colorbar()
 # show()
-
+#
 # TEST WHITE NOISE
 #cl2d = ones((pixelnumber, pixelnumber), dtype = float)
-
+#
 #print("POWER IN DL:")
 #print(sum(dl*conjugate(dl)))
-
+#
 #print("POWER IN CL2D:")
 #print(sum(cl2d*conjugate(cl2d)))
 
 
 # Combine noise and cmb element-wise
+
 factor = sqrt((df/2.0)*cl2d)
 
 #print("POWER IN FACTOR")
@@ -91,18 +118,18 @@ factor = sqrt((df/2.0)*cl2d)
 #     im[rowindex] = rowvalues[pixelnumber:]
 #     rowindex += 1
 
-cmbmapavg = zeros((pixelnumber/2, pixelnumber/2))
 
-facadj = 1.192356 * float(fieldsizearcmins)/2048.0
+facadj = 2.0#1.192356 * float(fieldsizearcmins)/2048.0
 
-i = 0
-dltot = 0
-first = True
-powdiffs = []
-powfreqs = []
-noreals = 10.0
+realno = 1
+realind = 0
+k0 = 0
 k = 0
-while i < int(noreals):
+dltot = 0
+dlobstot = 0
+
+
+while realind < realno:
 
     re = normal(0, 1, (pixelnumber, pixelnumber))
     im = normal(0, 1, (pixelnumber, pixelnumber))
@@ -110,9 +137,6 @@ while i < int(noreals):
     realpart = factor * re
     imagpart = factor * im
     cmbfreqspace = (realpart + 1.0j*imagpart)
-
-    powfreq = sum(cmbfreqspace*conjugate(cmbfreqspace))
-    powfreqs.append(powfreq)
 
     # Transform into map
     cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
@@ -122,134 +146,143 @@ while i < int(noreals):
 
     cmbmap = real(cmbmap)
 
-    cmbmapavg += cmbmap*4.0*pixelnumber*pixelnumber
 
-    #print("BECAUSE WE DISCARD IMAGINARY PART:")
-    #print(sum(cmbmap*cmbmap*2.0))
-    #print(sum(cmbmap*cmbmap))
-
-    k, p, perr, h = cosm.sriniPowerSpectrum([int(pixelnumber/2), int(pixelnumber/2), pixelsizearcmin, pixelsizearcmin], cmbmap)
-
+    # print("BECAUSE WE DISCARD IMAGINARY PART:")
+    # print(sum(cmbmap*cmbmap*2.0))
+    # print(sum(cmbmap*cmbmap))
+    #
+    # k, p, perr, h = cosm.sriniPowerSpectrum([int(pixelnumber/2), int(pixelnumber/2), pixelsizearcmin, pixelsizearcmin], cmbmap)
+    #
     # xscale("linear")
     # yscale("linear")
-    # plot(k, p*k*(k+1.0))
+    # plot(k, pixelnumber*pixelnumber*p*k*(k+1.0)/(pi))
     # xlabel("Multipole Moment", fontsize = 15)
     # ylabel(r"$D_l [\mu K^2]$", fontsize = 15)
     # xscale("linear")
     # yscale("linear")
     # show()
-
+    #
     #print("ULTIMATE:")
-    powps = sum(p*h)*8.0*float(pixelnumber)*float(pixelnumber)
-
-    powfac = facadj*float(pixelnumber)*float(pixelnumber)
-
-
-    powdiffs.append((powfreq-powps)/powfreq)
-
-    dl = p*k*(k+1.0)/(2.0*pi)
-    dl = dl*powfac
-    print("Adjusting by:")
-    print(powfac)
-
-    #dl = dl*4.0e6
-
-    if first:
-        dltot = dl
-        first = False
-    else:
-        dltot = dltot + dl
-    print(i)
-    i += 1
-
-means = []
-j = 0
-while j < i:
-    t = 0
-    m = 0
-    while t <= j:
-        m += powdiffs[t]
-        t += 1
-    means.append(m/(j+1.0))
-    j += 1
-
-dltot = dltot/noreals
-
-xscale("linear")
-yscale("linear")
-cmbmapavg = cmbmapavg/noreals
-imshow(cmbmapavg)
-colorbar()
-show()
-
-xscale("linear")
-yscale("linear")
-powfreqs = asarray(powfreqs)/2.0
-m = mean(powfreqs)
-s = std(powfreqs)
-plot(range(i), powfreqs, "k")
-plot(range(i), [m for q in range(i)], "b")
-plot(range(i), [m+s for q in range(i)], "b")
-plot(range(i), [m-s for q in range(i)], "b")
-plot(range(i), [sum(factor*factor) for p in range(i)], "r")
-xscale("linear")
-yscale("linear")
-show()
+    # powps = sum(p*h)*8.0*float(pixelnumber)*float(pixelnumber)
+    #
+    # powfac = facadj*float(pixelnumber)*float(pixelnumber)
+    #
+    #
+    # powdiffs.append((powfreq-powps)/powfreq)
+    #
+    # dl = p*k*(k+1.0)/(2.0*pi)
+    # dl = dl*powfac
+    # print("Adjusting by:")
+    # print(powfac)
+    #
+    # #dl = dl*4.0e6
+    #
 
 
-plot(range(i), means)
-xscale("linear")
-yscale("linear")
-show()
+# plot(k0, pixelnumber*pixelnumber*p0*k0*(k0+1.0)/(pi), "r")
+# plot(linput, dlinput, "b")
+# xscale("linear")
+# yscale("linear")
+# xlim((0, 2500))
+# xlabel(r"Mutlipole moment $l$")
+# title("Observed Power Spectrum")
+# ylabel(r"$D_l$")
+# show()
 
-plot(range(i), powdiffs)
-xscale("linear")
-yscale("linear")
-show()
+# means = []
+# j = 0
+# while j < i:
+#     t = 0
+#     m = 0
+#     while t <= j:
+#         m += powdiffs[t]
+#         t += 1
+#     means.append(m/(j+1.0))
+#     j += 1
+#
+# dltot = dltot/noreals
+#
+# plot(k, dltot)
+# xscale("linear")
+# yscale("linear")
+# title("PS")
+# show()
+#
+# xscale("linear")
+# yscale("linear")
+# cmbmapavg = cmbmapavg/noreals
+# imshow(cmbmapavg)
+# colorbar()
+# show()
+#
+# xscale("linear")
+# yscale("linear")
+# powfreqs = asarray(powfreqs)/2.0
+# m = mean(powfreqs)
+# s = std(powfreqs)
+# plot(range(i), powfreqs, "k")
+# plot(range(i), [m for q in range(i)], "b")
+# plot(range(i), [m+s for q in range(i)], "b")
+# plot(range(i), [m-s for q in range(i)], "b")
+# plot(range(i), [sum(factor*factor) for p in range(i)], "r")
+# xscale("linear")
+# yscale("linear")
+# show()
+#
+#
+# plot(range(i), means)
+# xscale("linear")
+# yscale("linear")
+# show()
+#
+# plot(range(i), powdiffs)
+# xscale("linear")
+# yscale("linear")
+# show()
 
-plot(k, dltot, "r", label = "Reconstructed")
-plot(linput, dlinput, "b", label = "Input")
-title("Powerspectrum", fontsize = 20)
-xscale("linear")
-yscale("linear")
-xlabel(r"Multipole Moment $l$", fontsize = 20)
-ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
-xlim((0, 2000))
-ylim((0, 6000))
-legend(fontsize = 15)
-show()
-
-subplot(2, 1, 1)
-title("Powerspectrum", fontsize = 25)
-plot(k, dltot, "r", label = "Reconstructed")
-plot(linput, dlinput, "b", label= "Input")
-xlabel(r"Multipole Moment $l$", fontsize = 20)
-ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
-legend(fontsize = 20)
-xscale("linear")
-yscale("linear")
-xlim((0, 2500))
-
-# find where linput and k coincide
-keq = []
-psdiff = []
-for count, wavevec in enumerate(k):
-    ind = argmin(abs(linput-wavevec))
-    keq.append(linput[ind])
-    psdiff.append(dlinput[ind]/dltot[count])
-
-subplot(2, 1, 2)
-plot(keq, psdiff)
-title("Powerspectrum Ratio", fontsize = 25)
-xlabel(r"Multipole Moment $l$", fontsize = 20)
-ylabel(r"Input/Reconstructed", fontsize = 20)
-xscale("linear")
-yscale("linear")
-xlim((0, 2500))
-#print(mean(psdiff))
-#print(std(psdiff))
-show()
-
+# plot(k, dltot, "r", label = "Reconstructed")
+# plot(linput, dlinput, "b", label = "Input")
+# title("Powerspectrum", fontsize = 20)
+# xscale("linear")
+# yscale("linear")
+# xlabel(r"Multipole Moment $l$", fontsize = 20)
+# ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
+# xlim((0, 2000))
+# ylim((0, 6000))
+# legend(fontsize = 15)
+# show()
+#
+# subplot(2, 1, 1)
+# title("Powerspectrum", fontsize = 25)
+# plot(k, dltot, "r", label = "Reconstructed")
+# plot(linput, dlinput, "b", label= "Input")
+# xlabel(r"Multipole Moment $l$", fontsize = 20)
+# ylabel(r"$l(l+1)C_l/2\pi [\mu \mathrm{K}^2]$", fontsize = 20)
+# legend(fontsize = 20)
+# xscale("linear")
+# yscale("linear")
+# xlim((0, 2500))
+#
+# # find where linput and k coincide
+# keq = []
+# psdiff = []
+# for count, wavevec in enumerate(k):
+#     ind = argmin(abs(linput-wavevec))
+#     keq.append(linput[ind])
+#     psdiff.append(dlinput[ind]/dltot[count])
+#
+# subplot(2, 1, 2)
+# plot(keq, psdiff)
+# title("Powerspectrum Ratio", fontsize = 25)
+# xlabel(r"Multipole Moment $l$", fontsize = 20)
+# ylabel(r"Input/Reconstructed", fontsize = 20)
+# xscale("linear")
+# yscale("linear")
+# xlim((0, 2500))
+# #print(mean(psdiff))
+# #print(std(psdiff))
+# show()
+#
 
 
 #print("POWER IN CMB REAL SPACE:")
@@ -263,72 +296,122 @@ show()
 #plot(l, dl, "b")
 
 # Recreate Scan Strategy
-declims = [0, 1024] #arcmins
-ralims = [0, 1024] #arcmins
-readoutfreq = 6 #Hz
-raspeed = 0.1 #arcmin/s
-nodecscans = 512
-norablocks = 512
-radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
-compression = int(radatapoints/norablocks)
-
-noisemap = 2.5 #muK
-noisepixel = noisemap/sqrt(fieldsizearcmins*fieldsizearcmins*0.5*0.5) #muK/arcmin
-noisetod = noisepixel*sqrt(float(compression))
-
-observationno = range(1)
-observations = [zeros((nodecscans, norablocks)) for i in observationno]
-cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
-
-# Decompose into bolometer signals
-noise = normal(0, noisetod, size = (len(observationno), nodecscans, norablocks*compression))
-
-for d in range(nodecscans):
-    for ri in range(norablocks):
-        rstart = ri*compression
-        rstop = rstart + compression
-        # Create and noise
-        for obs in observationno:
-            tod = cmbmap[d, ri] + noise[obs][d][rstart:rstop]
-            #print(std(tod))
-            # adding noise to cmb map
-            #cmbmap[d, ri] = mean(tod)
-            # digitise here
-            todpow = sum(asarray(tod)*asarray(tod))
-            digitise1bit(tod, 1)
-            #toddigitpow = sum(asarray(tod)*asarray(tod))
-            #print(((todpow/toddigitpow)**0.5))
-            #tod = ((todpow/toddigitpow)**0.5)*tod
-            cesscans[obs][d, rstart:rstop] = tod
-
-    print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
-
-# Recompress into map
-
-print("Decomposition completed")
 
 
-for d in range(shape(cesscans[0])[0]):
-    for ri in range(norablocks):
-        rstart = ri*compression
-        rstop = rstart + compression
-        for obs in observationno:
-            observations[obs][d, ri] = mean(cesscans[obs][d, rstart:rstop])
+    observationno = range(observationlim)
+    observations = [zeros((nodecscans, norablocks)) for i in observationno]
+    cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
 
-    print("Compression: " + str(int(100*d/nodecscans)) + "%")
+    # Create noise for all observations
+    noisel = 2.0*pi*fftfreq(norablocks*compression, arcmins2radians*(pixelsizearcmin)/float(compression))
+    noisemask = asarray([nonwhitenoise(q) for q in noisel])
 
-print("Beginning PS extraction")
+    #noisef = normal(0, 1, norablocks*compression)
 
-powcmbtrue = sum(cmbmap*cmbmap)
-cmbnoisemap = zeros((nodecscans, norablocks))
-for obs in observations:
-    powcmbobs = sum(obs * obs)
-    obs = obs * (powcmbtrue/powcmbobs)**0.5
-    cmbnoisemap = cmbnoisemap + obs
-cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
-print(sum(cmbmap*cmbmap))
-print(sum(cmbnoisemap*cmbnoisemap))
+    #noise = normal(0, eta, size = (len(observationno), nodecscans, norablocks*compression))
+
+    # Decompose into bolometer signals
+    for d in range(nodecscans):
+
+
+        # create noise for this scan
+        noisef = normal(0, eta**0.5, norablocks*compression)#noisemask*normal(0, 1, norablocks * compression)
+        noisef = noisef#*noisemask
+        noiser = ifft(noisef)
+        noiser = real(noiser)
+
+        for ri in range(norablocks):
+            rstart = ri*compression
+            rstop = rstart + compression
+            # Add noise
+            for obs in observationno:
+                tod = cmbmap[d, ri] + noiser[rstart:rstop]
+                tod = asarray([cmbmap[d, ri] for x in range(compression)])
+                todpow = sum(tod*tod)
+                # digitise here
+                digitise1bit(tod, 0.001)
+                #tod = ((todpow / sum(tod * tod)) ** 0.5) * tod
+                #tod = digitise2bithalfmax(tod, 0)
+                cesscans[obs][d, rstart:rstop] = tod
+
+        print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
+
+    # Recompress into map
+
+    print("Decomposition completed")
+
+
+    for d in range(shape(cesscans[0])[0]):
+        for ri in range(norablocks):
+            rstart = ri*compression
+            rstop = rstart + compression
+            for obs in observationno:
+                observations[obs][d, ri] = mean(cesscans[obs][d, rstart:rstop])
+
+        print("Compression: " + str(int(100*d/nodecscans)) + "%")
+
+
+    print("Beginning PS extraction")
+
+    #powcmbtrue = sum(cmbmap*cmbmap)
+    cmbnoisemap = zeros((nodecscans, norablocks))
+    for obs in observations:
+    #    powcmbobs = sum(obs * obs)
+    #    obs = obs * (powcmbtrue/powcmbobs)**0.5
+        cmbnoisemap = cmbnoisemap + obs
+    cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
+
+
+
+    k0, p0, err0, h0 = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
+    k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap)
+
+
+    # Normalise Powerspectrum
+    mmi = 0
+    truepow = 0
+    obspow = 0
+    while mmi < len(k0):
+        if k0[mmi] >= 350 and k0[mmi] <= 1000:
+            truepow += p0[mmi]**2.0
+            obspow += p[mmi]**2.0
+        mmi += 1
+
+    p = p * (truepow/obspow)**0.5
+
+    dl = float(pixelnumber) * float(pixelnumber) * p0 * k0 * (k0 + 1.0) / pi
+    dltot = dltot + dl
+    dlobs = pixelnumber * pixelnumber * p * k * (k + 1.0) / pi
+    dlobstot = dlobstot + dlobs
+
+
+    realind += 1
+
+clobstot= (dlobstot*pi)/(k*(k+1.0))
+cltot = (dltot*pi)/(k0*(k0+1.0))
+
+#subplot(1, 2, 1)
+plot(k0, dltot, "b")
+plot(k, dlobstot, "r")
+xscale("linear")
+yscale("linear")
+xlabel("Multipole Moment $l$")
+ylabel("$D_l$")
+title("Powerspectrum")
+xlim((0, 2500))
+show()
+
+subplot(1, 2, 2)
+plot(k0, dlobstot/dltot)
+xscale("linear")
+yscale("linear")
+xlim((0, 2500))
+ylim((0.9, 1.1))
+show()
+
+
+
 
 subplot(1, 2, 1)
 imshow(cmbmap)
@@ -337,27 +420,22 @@ colorbar()
 
 subplot(1, 2, 2)
 imshow(cmbnoisemap)
-title("CMB 1BIT OBS")
+title("CMB + NOISE")
 colorbar()
 
 show()
 
 # Plot powerspectrum
-mapparams = [512, 512, 2, 2]
+powfix = 2.0*float(pixelnumber)*float(pixelnumber)
+mapparams = [mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin]
 k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbnoisemap)
 k0, p0, err0, h0 = cosm.sriniPowerSpectrum(mapparams, cmbmap)
-k = asarray(k)
-p = asarray(p)
-err = asarray(err)
-err0 = asarray(err0)
-k0 = asarray(k0)
-p0 = asarray(p0)
-p = p*k*(k+1)
-p0 = p0*k0*(k0+1)
+p = powfix*p*k*(k+1.0)/(2.0*pi)
+#p0 = powfix*p0*k0*(k0+1.0)/(2.0*pi)
 
-plot(k0, p0)
-xscale("log")
-yscale("linear")
+plot(k0, pixelnumber*pixelnumber*p0*k0*(k0+1.0)/(pi))
+xscale("linear")
+yscale("log")
 xlim((0, 2500))
 xlabel(r"Mutlipole moment $l$")
 title("Observed Power Spectrum")
@@ -366,13 +444,14 @@ show()
 
 
 subplot(1, 2, 1)
-plot(k, p, "r", label = "CMB 1Bit")
+plot(k, p, "r", label = "CMB + NOISE")
 plot(k0, p0, "b", label = "CMB")
 title(r"Powerspectrum")
 xlabel(r"Wavevector $k$")
+xlim((0, 2500))
 ylabel(r"Power")
-xscale("log")
-yscale("log")
+xscale("linear")
+yscale("linear")
 legend()
 subplot(1, 2, 2)
 #plot(k0, asarray(p0)-asarray(p), label="Difference")

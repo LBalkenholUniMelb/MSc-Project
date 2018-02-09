@@ -10,7 +10,7 @@ arcmins2radians = (1.0/60.0)*(pi/180.0)
 
 # Define map parameters
 fieldsizearcmins = 4096
-pixelsizearcmin = 4
+pixelsizearcmin = 1
 pixelnumber = 1024
 df = 1.0/(float(fieldsizearcmins)*arcmins2radians)
 
@@ -41,6 +41,7 @@ ky = 2.0*pi*fftfreq(pixelnumber, pixelspacingrad)
 ky2d = transpose(tile(ky, (pixelnumber, 1)))
 cl2d = zeros((pixelnumber, pixelnumber))
 k2d = sqrt(kx2d*kx2d + ky2d*ky2d)
+
 
 for y in range(pixelnumber):
     for x in range(pixelnumber):
