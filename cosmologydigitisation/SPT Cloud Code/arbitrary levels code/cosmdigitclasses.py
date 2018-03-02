@@ -518,14 +518,17 @@ class Cosmologist:
     def sriniPowerSpectrum(self, mapparams, map1, map2 = None, col = "b", mark = "None"):
         nx, ny, dx, dy = mapparams
         use_white_noise = 0  # 0 : CMB; 1 - white noise
-        clf()
+        #clf()
         if use_white_noise:
             if map2 == None:
-                ax = subplot(111, yscale='log')  # do not use logx here
+                pass
+                #ax = subplot(111, yscale='log')  # do not use logx here
             else:
-                ax = subplot(111)
+                pass
+                #ax = subplot(111)
         else:
-            ax = subplot(111, xscale='log', yscale='log')
+            pass
+            #ax = subplot(111, xscale='log', yscale='log')
         if not use_white_noise:
             #CMB_UNLEN = pickle.load(gzip.open('CMB_lensed.pkl.gz', 'rb'))  # unlensed CMB
             #tSZ = pickle.load(gzip.open('tSZ.pkl.gz', 'rb'))  # tSZ of a 2e15 cluster with beta model
@@ -583,6 +586,7 @@ class Cosmologist:
             if map2 == None:
                 powspec = fn_plot_pow_spec(mapparams, IMAGE)  # auto power spectrum of the image
             else:
+                IMAGE_CROSS = map2
                 powspec = fn_plot_pow_spec(mapparams, IMAGE, IMAGE_CROSS)  # cross power spectrum of the images
             k, p_k, p_k_err, hitcount = zip(*powspec)
 
@@ -600,7 +604,7 @@ class Cosmologist:
                 lb = "Powerspectrum"
                 if map2 != None:
                     lb = "Crosspowerspectrum"
-                cl = [p_k[i]*k[i]*(k[i]+1)/(2*np.pi) for i in range(len(k))]
+                #cl = [p_k[i]*k[i]*(k[i]+1)/(2*np.pi) for i in range(len(k))]
                 #plot(k[1:], cl[1:], marker=mark, color=col, label=lb)  # , label = 'Sim = %s' %(n+1))
                 #av = mean(p_k)
                 #var = std(p_k)
@@ -615,9 +619,11 @@ class Cosmologist:
         #plot(k, avg_p_k, 'r.', label='Average')
         #legend(loc=1, fancybox=1)  # ;ylim(1e-5,1.)
         if map2 == None:
-            title("Powerspectrum")
+            pass
+            #title("Powerspectrum")
         else:
-            title("Crosspowerspectrum")
+            pass
+            #title("Crosspowerspectrum")
         #xlabel('Multipole k');
         #ylabel('Power')
         k = asarray(k)
@@ -656,27 +662,25 @@ def cutOff(r, p):
         return 0
 
 # Digitissation schemes, change the input signal
-def digitise1bit(signalin, lvl):
-    signal = deepcopy(signalin)
-    for i in range(len(signal)):
-        if signal[i] >= 0:
-            signal[i] = lvl
-        else:
-            signal[i] = -1.0*lvl
+
+
+def digitise1bit(signal, lvl):
+    comp = signal < 0
+    signal[:] = lvl
+    signal[comp] = -1.0*lvl
     return signal
 
-def digitise2bithalfmax(signalin):
-    signal = deepcopy(signalin)
-    x1 = -inf
-    x2 = - 0.5 * max([abs(max(signal)), abs(min(signal))])
-    x3 = 0
-    x4 = -x2
-    x5 = inf
-    outlevels = [-3, -1, 1, 3]
-    indices = digitize(signal, [x1, x2, x3, x4, x5])
-    for i in range(len(signal)):
-        signal[i] = outlevels[indices[i] - 1]
+
+def digitise2bithalfmax(signal):
+    hf = 0.5*max(abs(signal))
+    comphigh = signal > hf
+    complow = signal < -1.0*hf
+    signal[signal >= 0] = 1.0
+    signal[signal < 0] = -1.0
+    signal[comphigh] = 3.0
+    signal[complow] = -3.0
     return signal
+
 
 def digitise2bitequalnumbers(signal, meanvalue = None):
     if meanvalue == None:
@@ -699,17 +703,13 @@ def digitise2bitequalnumbers(signal, meanvalue = None):
     for i in range(len(signal)):
         signal[i] = outlevels[indices[i] - 1] + meanvalue
 
-def digitise2bitoptimal(signalin, var):
-    signal = deepcopy(signalin)
-    x1 = -inf
-    x4 = 0.9816 * var
-    x2 = -x4
-    x3 = 0
-    x5 = inf
-    outlevels = [-1.51 * var, -0.4528 * var, 0.4528 * var, 1.51 * var]
-    indices = digitize(signal, [x1, x2, x3, x4, x5])
-    for i in range(len(signal)):
-        signal[i] = outlevels[indices[i] - 1]
+def digitise2bitoptimal(signal, var):
+    comphigh = signal > 0.9816*var
+    complow = signal < -0.9816*var
+    signal[signal >= 0] = 0.4528*var
+    signal[signal < 0] = -0.4528*var
+    signal[comphigh] = 1.51*var
+    signal[complow] = -1.51*var
     return signal
 
 # Mask and 0 Pad Map

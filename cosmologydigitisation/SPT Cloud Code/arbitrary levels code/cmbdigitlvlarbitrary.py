@@ -1,4 +1,9 @@
-# Make necessary imports
+# #--- Setup MPI
+# from mpi4py import MPI
+# comm = MPI.COMM_WORLD
+# processorrank = comm.Get_rank()
+
+#--- Make necessary imports
 from matplotlib.pyplot import *
 from numpy import zeros, arange, real, shape, round
 from scipy.stats import binned_statistic
@@ -6,13 +11,25 @@ from numpy.fft import ifft2, fft2, ifft, fftshift, fftfreq
 from cosmdigitclasses import *
 from numpy import *
 from scipy.signal import convolve2d
-rc('text', usetex=True)
-rc("xtick", labelsize = 15)
-rc("ytick", labelsize = 15)
+from scipy.stats import *
 
 cosm = Cosmologist()
 
-# Define map parameters
+# Read in data
+filelocation = "../../for_lennart/plik_plus_r0p01_highell_lensedtotCls.dat"
+file = open(filelocation)
+l = []
+dl = []
+for row in file:
+    rowvalues = [float(i) for i in row.split()]
+    l.append(rowvalues[0])
+    dl.append(rowvalues[1])
+
+dlinput = asarray(dl)
+linput = asarray(l)
+
+
+#--- Define map parameters
 fieldsizearcmins = 2048
 pixelsizearcmin = 2
 pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
@@ -21,213 +38,221 @@ mapfieldsize = int(fieldsizearcmins/2.0)
 mappixelnumber = int(pixelnumber/2.0)
 declims = [0, mapfieldsize] #arcmins
 ralims = [0, mapfieldsize] #arcmins
-readoutfreq = 40 #Hz
-raspeed = 0.01 #arcmin/s
+readoutfreq = 200 #Hz
+raspeed = 0.5 #0.0005 #arcmin/s
 nodecscans = mappixelnumber
 norablocks = mappixelnumber
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
-observationlim = 30
+observationlim = 1
+
+#--- Define noise level
+
+noisedet = 500.0 # muK sqrt(s)
+noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
+print(noiseinduced)
+pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
+noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
+#fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
+#noisecl = 4.0*pi*fsky*pixelrms*pixelrms/float(mappixelnumber*mappixelnumber)
+print(readoutfreq*float(pixelsizearcmin)/raspeed)
+noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
 
 print(compression)
-fmseljfe
+print(noisecl)
+lvl =  ( (noiseinduced/sqrt(compression))**2.0 )/(pi * float(pixelnumber**2.0))
+print("XXX")
+print(lvl)
+eta0 = sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+print(noiseinduced*noiseinduced/float((compression)))
+print(pixelrms**2.0)
 
-# noise level
-noisemap = 3.0 # muK arcmin
-noisepix = noisemap/float(pixelsizearcmin)
-fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
-noisecl = 4.0*pi*fsky*noisepix*noisepix/float(mappixelnumber*mappixelnumber)
-eta = sqrt(float(compression)) * sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+noisemap = normal(0, noiseinduced/sqrt(compression), (mappixelnumber, mappixelnumber))
+k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], noisemap)
+#p = p/(pi * float(pixelnumber**2.0))
+
+plot(k, p)
+show()
 
 
-# Read in 2dCl
-cl2d = zeros((pixelnumber, pixelnumber))
-fname = "cl2df" + str(fieldsizearcmins) + "r" + str(pixelsizearcmin) + ".txt"
+
+# noisemap = 3.0 # muK arcmin
+# noisepix = noisemap/float(pixelsizearcmin)
+# fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
+# noisecl = 4.0*pi*fsky*noisepix*noisepix/float(mappixelnumber*mappixelnumber)
+# eta = sqrt(float(compression)) * sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+# eta0 = sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+
+
+#--- Read in CMP
+cmbmap = zeros((mappixelnumber, mappixelnumber))
 y = 0
-for row in open(fname):
+for row in open("cmbmaparblvltemplate.txt"):
     rowvalues = row.split()
-    for x in range(pixelnumber):
-        cl2d[y, x] = float(rowvalues[x])
+    for x in range(mappixelnumber):
+        cmbmap[y, x] = float(rowvalues[x])
     y += 1
 
-# Combine noise and cmb element-wise
+cmbmap = cmbmap*pixelnumber*pixelnumber
 
-factor = sqrt((df/2.0)*cl2d)
-facadj = 2.0
+# imshow(cmbmap)
+# title("CMB MAP")
+# colorbar()
+# show()
+#
+# k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
+# dl = p*k*(k+1.0)/(pixelnumber*pixelnumber*pi)
+# plot(k, dl)
+# xlim((0, 2500))
+# show()
 
-realno = 1
-realind = 0
-k0 = 0
-k = 0
-dltot = 0
-dlobstot = 0
-dlobstot1bit = 0
-dlobstot2bithm = 0
-dlobstot2bitopt = 0
-
-while realind < realno:
-
-    re = normal(0, 1, (pixelnumber, pixelnumber))
-    im = normal(0, 1, (pixelnumber, pixelnumber))
-
-    realpart = factor * re
-    imagpart = factor * im
-    cmbfreqspace = (realpart + 1.0j*imagpart)
-
-    # Transform into map
-    cmbmap = fft.ifft2(cmbfreqspace)[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
-    cmbmap = real(cmbmap)
-
-    # Recreate Scan Strategy
+#--- Recreate Observation
+cmbnoisemap = zeros((nodecscans, norablocks))
+cmbnoisemap1bit = zeros((nodecscans, norablocks))
+#cmbnoisemap2bithm = zeros((nodecscans, norablocks))
+#cmbnoisemap2bitopt = zeros((nodecscans, norablocks))
 
 
-    observationno = range(observationlim)
-    observations = [zeros((nodecscans, norablocks)) for i in observationno]
-    observations1bit = [zeros((nodecscans, norablocks)) for i in observationno]
-    observations2bithm = [zeros((nodecscans, norablocks)) for i in observationno]
-    observations2bitopt = [zeros((nodecscans, norablocks)) for i in observationno]
+observationind = 0
 
-    cesscans = [zeros((nodecscans, radatapoints)) for i in observationno]
-    cesscans1bit = [zeros((nodecscans, radatapoints)) for i in observationno]
-    cesscans2bithm = [zeros((nodecscans, radatapoints)) for i in observationno]
-    cesscans2bitopt = [zeros((nodecscans, radatapoints)) for i in observationno]
+while observationind < observationlim:
 
     # Decompose into bolometer signals
     for d in range(nodecscans):
 
-        # create noise for this scan
-        noiserall = [0 for pp in range(observationlim)]
-        noisevarall = [0 for uu in range(observationlim)]
-        noiseind = 0
-        while noiseind < observationlim:
-            noisef = normal(0, eta ** 0.5, norablocks * compression)
-            noisef = noisef
-            noiser = ifft(noisef)
-            noiser = real(noiser)
-            noiserall[noiseind] = noiser
-            noisevarall[noiseind] = std(noiser)
-            noiseind += 1
-
-
         for ri in range(norablocks):
-            rstart = ri*compression
-            rstop = rstart + compression
 
-            for obs in observationno:
+            # create noise
+            noiser = normal(0, noiseinduced, compression)
 
-                # add noise
-                tod = cmbmap[d, ri] + noiserall[obs][rstart:rstop]
-                tod = asarray([cmbmap[d, ri] for x in range(compression)])
-                cesscans[obs][d, rstart:rstop] = tod
+            # add noise
+            tod = cmbmap[d, ri]# + noiser
+            cmbnoisemap[d, ri] += mean(tod)
 
-                # digitise here
-                tod1bit = digitise1bit(tod, 1.0)
-                cesscans1bit[obs][d, rstart:rstop] = tod1bit
-
-                tod2bithm = digitise2bithalfmax(tod)
-                cesscans2bithm[obs][d, rstart:rstop] = tod2bithm
-
-                tod2bitopt = digitise2bitoptimal(tod, noisevarall[obs])
-                cesscans2bitopt[obs][d, rstart:rstop] = tod2bitopt
+            # digitise
+            #tod1bit = digitise1bit(tod, 1.0)
+            #cmbnoisemap1bit[d, ri] += mean(tod1bit)
 
 
-        print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
+            #tod2bitopt = deepcopy(tod)
 
-    # Recompress into map
+            #tod2bithm = digitise2bithalfmax(tod)
+            #cmbnoisemap2bithm[d, ri] += mean(tod2bithm)
 
-    print("Decomposition completed")
-
-
-    for d in range(shape(cesscans[0])[0]):
-        for ri in range(norablocks):
-            rstart = ri*compression
-            rstop = rstart + compression
-            for obs in observationno:
-                observations[obs][d, ri] = mean(cesscans[obs][d, rstart:rstop])
-                observations1bit[obs][d, ri] = mean(cesscans1bit[obs][d, rstart:rstop])
-                observations2bithm[obs][d, ri] = mean(cesscans2bithm[obs][d, rstart:rstop])
-                observations2bitopt[obs][d, ri] = mean(cesscans2bitopt[obs][d, rstart:rstop])
+            #tod2bitopt = digitise2bitoptimal(tod2bitopt, eta)
+            #cmbnoisemap2bitopt[d, ri] += mean(tod2bitopt)
 
 
-        print("Compression: " + str(int(100*d/nodecscans)) + "%")
+        print("Noise, Digitisation and Compression: " + str(int(100*d/nodecscans)) + "%")
+
+    print("--- COMPLETED OBSERVATION " + str(observationind) + " ---")
+
+    observationind += 1
+
+#--- SHOW MAPS
+
+# subplot(1, 2, 1)
+# imshow(cmbmap)
+# title("CMB MAP")
+# colorbar()
+#
+# subplot(1, 2, 2)
+# imshow(cmbnoisemap1bit)
+# title("CMB DIGIT MAP")
+# colorbar()
+# show()
+
+#--- Normalise Maps
+
+cmbnoisemap = cmbnoisemap * (1.0/float(observationlim))
+cmbnoisemap1bit = cmbnoisemap1bit * (1.0/float(observationlim))
+#cmbnoisemap2bithm = cmbnoisemap2bithm * (1.0/float(observationlim))
+#cmbnoisemap2bitopt = cmbnoisemap2bitopt * (1.0/float(observationlim))
 
 
-    print("Beginning PS extraction")
+# cmbmapadj = cmbmap*sqrt(sum(cmbnoisemap1bit**2.0)/sum(cmbmap**2.0))
+# diffmap = cmbmapadj-cmbnoisemap1bit
+#
+# theo = linspace(-4, 4, 100)
+# plot(cmbmapadj.flatten(), diffmap.flatten(), "kx")
+# plot(theo, theo-(norm.cdf(theo)-norm.cdf(-theo)), "y")
+# show()
 
-    cmbnoisemap = zeros((nodecscans, norablocks))
-    cmbnoisemap1bit = zeros((nodecscans, norablocks))
-    cmbnoisemap2bithm = zeros((nodecscans, norablocks))
-    cmbnoisemap2bitopt = zeros((nodecscans, norablocks))
-
-    for obs in range(observationlim):
-        cmbnoisemap = cmbnoisemap + observations[obs]
-        cmbnoisemap1bit = cmbnoisemap1bit + observations1bit[obs]
-        cmbnoisemap2bithm = cmbnoisemap2bithm + observations2bithm[obs]
-        cmbnoisemap2bitopt = cmbnoisemap2bitopt + observations2bitopt[obs]
+#--- Save results
 
 
-    cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
-    cmbnoisemap1bit = cmbnoisemap1bit * (1.0/len(observationno))
-    cmbnoisemap2bithm = cmbnoisemap2bithm * (1.0/len(observationno))
-    cmbnoisemap2bitopt = cmbnoisemap2bitopt * (1.0/len(observationno))
+#savetxt("cmbmap" + str(processorrank) + ".txt", cmbmap)
+#savetxt("cmbnoisemap" + str(processorrank+10) + ".txt", cmbnoisemap)
+#savetxt("cmbnoisemap1bit" + str(processorrank) + ".txt", cmbnoisemap1bit)
+#savetxt("cmbnoisemap2bithm" + str(processorrank+10) + ".txt", cmbnoisemap2bithm)
+#savetxt("cmbnoisemap2bitopt" + str(processorrank+10) + ".txt", cmbnoisemap2bitopt)
 
+#
+# k0, p0, err0, h0 = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
+k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap)
+# k1bit, p1bit, err1bit, h1bit = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap1bit)
+# k2bithm, p2bithm, err2bithm, h2bithm = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap2bithm)
+# k2bitopt, p2bitopt, err2bitopt, h2bitopt = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap2bitopt)
 
-    k0, p0, err0, h0 = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
-    k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap)
-    k1bit, p1bit, err1bit, h1bit = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap1bit)
-    k2bithm, p2bithm, err2bithm, h2bithm = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap2bithm)
-    k2bitopt, p2bitopt, err2bitopt, h2bitopt = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap2bitopt)
+p = p/(pi * float(pixelnumber * pixelnumber))
 
+p = p * k * (k + 1.0)
 
-    # Normalise Powerspectrum
-    mmi = 0
-    truepow = 0
-    obspow = 0
-    obspow1bit = 0
-    obspow2bithm = 0
-    obspow2bitopt = 0
-    while mmi < len(k0):
-        if k0[mmi] >= 350 and k0[mmi] <= 1000:
-            truepow += p0[mmi]**2.0
-            obspow += p[mmi]**2.0
-            obspow1bit += p1bit[mmi]**2.0
-            obspow2bithm += p2bithm[mmi]**2.0
-            obspow2bitopt += p2bitopt[mmi]**2.0
-        mmi += 1
-
-    p = p * (truepow/obspow)**0.5
-    p1bit = p1bit * (truepow/obspow1bit)**0.5
-    p2bithm = p2bithm * (truepow/obspow2bithm)**0.5
-    p2bitopt = p2bitopt * (truepow/obspow2bitopt)**0.5
-
-    dltot = float(pixelnumber) * float(pixelnumber) * p0 * k0 * (k0 + 1.0) / pi
-    dlobstot = float(pixelnumber) * float(pixelnumber) * p * k * (k + 1.0) / pi
-    dlobstot1bit = float(pixelnumber) * float(pixelnumber) * p1bit * k1bit * (k1bit + 1.0) / pi
-    dlobstot2bithm = float(pixelnumber) * float(pixelnumber) * p2bithm * k2bithm * (k2bithm + 1.0) / pi
-    dlobstot2bitopt = float(pixelnumber) * float(pixelnumber) * p2bitopt * k2bitopt * (k2bitopt + 1.0) / pi
-
-
-    realind += 1
+plot(linput, dlinput, "k")
+plot(k, p)
+plot(k, [noisecl for i in k], "r")
+#xscale("log")
+yscale("log")
+xlim((2500, max(k)))
+show()
 
 
 
-cltot = (dltot*pi)/(k0*(k0+1.0))
-clobstot = (dlobstot*pi)/(k*(k+1.0))
-clobstot1bit = (dlobstot1bit*pi)/(k1bit*(k1bit+1.0))
-clobstot2bithm = (dlobstot2bithm*pi)/(k2bithm*(k2bithm+1.0))
-clobstot2bitopt = (dlobstot2bitopt*pi)/(k2bitopt*(k2bitopt+1.0))
 
-print("Saving results")
-
-savetxt("k0.txt", k0)
-savetxt("cltot.txt", cltot)
-savetxt("k.txt", k)
-savetxt("clobstot.txt", clobstot)
-savetxt("k1bit.txt", k1bit)
-savetxt("clobstot1bit.txt", clobstot1bit)
-savetxt("k2bithm.txt", k2bithm)
-savetxt("clobstot2bithm.txt", clobstot2bithm)
-savetxt("k2bitopt.txt", k2bitopt)
-savetxt("clobstot2bitopt.txt", clobstot2bitopt)
-
-print("Completed Calculation")
+# # Normalise Powerspectrum
+# mmi = 0
+# truepow = 0
+# obspow = 0
+# obspow1bit = 0
+# obspow2bithm = 0
+# obspow2bitopt = 0
+# while mmi < len(k0):
+#     if k0[mmi] >= 350 and k0[mmi] <= 1000:
+#         truepow += p0[mmi]**2.0
+#         obspow += p[mmi]**2.0
+#         obspow1bit += p1bit[mmi]**2.0
+#         obspow2bithm += p2bithm[mmi]**2.0
+#         obspow2bitopt += p2bitopt[mmi]**2.0
+#     mmi += 1
+#
+# p = p * (truepow/obspow)**0.5
+# p1bit = p1bit * (truepow/obspow1bit)**0.5
+# p2bithm = p2bithm * (truepow/obspow2bithm)**0.5
+# p2bitopt = p2bitopt * (truepow/obspow2bitopt)**0.5
+#
+# dltot = float(pixelnumber) * float(pixelnumber) * p0 * k0 * (k0 + 1.0) / pi
+# dlobstot = float(pixelnumber) * float(pixelnumber) * p * k * (k + 1.0) / pi
+# dlobstot1bit = float(pixelnumber) * float(pixelnumber) * p1bit * k1bit * (k1bit + 1.0) / pi
+# dlobstot2bithm = float(pixelnumber) * float(pixelnumber) * p2bithm * k2bithm * (k2bithm + 1.0) / pi
+# dlobstot2bitopt = float(pixelnumber) * float(pixelnumber) * p2bitopt * k2bitopt * (k2bitopt + 1.0) / pi
+#
+# cltot = (dltot*pi)/(k0*(k0+1.0))
+# clobstot = (dlobstot*pi)/(k*(k+1.0))
+# clobstot1bit = (dlobstot1bit*pi)/(k1bit*(k1bit+1.0))
+# clobstot2bithm = (dlobstot2bithm*pi)/(k2bithm*(k2bithm+1.0))
+# clobstot2bitopt = (dlobstot2bitopt*pi)/(k2bitopt*(k2bitopt+1.0))
+#
+# print("Saving results")
+#
+# savetxt("k0.txt", k0)
+# savetxt("cltot.txt", cltot)
+# savetxt("k.txt", k)
+# savetxt("clobstot.txt", clobstot)
+# savetxt("k1bit.txt", k1bit)
+# savetxt("clobstot1bit.txt", clobstot1bit)
+# savetxt("k2bithm.txt", k2bithm)
+# savetxt("clobstot2bithm.txt", clobstot2bithm)
+# savetxt("k2bitopt.txt", k2bitopt)
+# savetxt("clobstot2bitopt.txt", clobstot2bitopt)
+#
+# print("Completed Calculation")

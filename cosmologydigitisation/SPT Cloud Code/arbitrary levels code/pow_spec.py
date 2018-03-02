@@ -90,6 +90,7 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 		# MAP_F = np.fft.fft2(MAP1*cosm)
 		MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
 		MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
+		print("HIT")
 	#MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
 	#MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
 
@@ -98,7 +99,17 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 
 	else: #compute cross power spectra between 2 maps
 		#subplot(121);imshow(MAP1);colorbar();subplot(122);imshow(MAP2);colorbar();show();sys.exit()
-		MAP_PSD = np.fft.fft2(MAP1) * dx_rad * np.conj( np.fft.fft2(MAP2) ) * dx_rad / (nx * ny)
+		cosm = cosmask([nx, ny])
+		w = (float(1.0 / (4 * nx * ny)) * sum(cosm * cosm))
+		# print("PS REAL")
+		# print(sum(MAP1*MAP1)*w)
+		# print(sum(MAP1*cosm*MAP1*cosm))
+		# print(sum(zeropad(MAP1*cosm)*zeropad(MAP1*cosm)))
+		# MAP_F = np.fft.fft2(MAP1*cosm)
+		MAP1_F = np.fft.fft2(zeropad(MAP1 * cosm))
+		MAP2_F = np.fft.fft2(zeropad(MAP2 * cosm))
+		MAP_PSD = (MAP2_F * conjugate(MAP1_F)) / (4.0 * nx * ny * w)
+		#MAP_PSD = np.fft.fft2(MAP1) * dx_rad * np.conj( np.fft.fft2(MAP2) ) * dx_rad / (nx * ny)
 
 	lx, ly = fn_get_lxly([nx*2, ny*2, dx, dy])
 	if binsize == None:

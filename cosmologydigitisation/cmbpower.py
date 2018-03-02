@@ -13,16 +13,16 @@ rc("ytick", labelsize = 15)
 cosm = Cosmologist()
 
 # Define map parameters
-fieldsizearcmins = 2048
+fieldsizearcmins = 1024
 pixelsizearcmin = 2
 pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
-df = 1.0
+df = 1.0/(fieldsizearcmins*arcmins2radians)
 mapfieldsize = int(fieldsizearcmins/2.0)
 mappixelnumber = int(pixelnumber/2.0)
 declims = [0, mapfieldsize] #arcmins
 ralims = [0, mapfieldsize] #arcmins
-readoutfreq = 6 #Hz
-raspeed = 0.1 #arcmin/s
+readoutfreq = 1.0 #Hz
+raspeed = 4.0 #arcmin/s
 nodecscans = mappixelnumber
 norablocks = mappixelnumber
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
@@ -30,13 +30,16 @@ compression = int(radatapoints/norablocks)
 observationlim = 1
 
 # noise level
-noisemap = 3.0 # muK arcmin
+noisemap = 250.0#3.0 # muK arcmin
 noisepix = noisemap/float(pixelsizearcmin)
 fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
 noisecl = 4.0*pi*fsky*noisepix*noisepix/float(mappixelnumber*mappixelnumber)
-print("NOISE CL:")
+
 print(noisecl)
+
 eta = sqrt(float(compression)) * sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
+
+
 def nonwhitenoise(l):
     lknee = 350
     if l == 0:
@@ -103,6 +106,7 @@ else:
 
 # Combine noise and cmb element-wise
 
+df = 1.0/(float(fieldsizearcmins)*arcmins2radians)**2.0
 factor = sqrt((df/2.0)*cl2d)
 
 #print("POWER IN FACTOR")
@@ -145,7 +149,10 @@ while realind < realno:
     #print(sum(cmbmap*conjugate(cmbmap)))
 
     cmbmap = real(cmbmap)
-
+    cmbmap = cmbmap * pixelnumber * pixelnumber
+    imshow(cmbmap)
+    colorbar()
+    show()
 
     # print("BECAUSE WE DISCARD IMAGINARY PART:")
     # print(sum(cmbmap*cmbmap*2.0))
@@ -316,10 +323,12 @@ while realind < realno:
 
 
         # create noise for this scan
-        noisef = normal(0, eta**0.5, norablocks*compression)#noisemask*normal(0, 1, norablocks * compression)
-        noisef = noisef#*noisemask
-        noiser = ifft(noisef)
-        noiser = real(noiser)
+        #noisef = normal(0, eta**0.5, norablocks*compression)#noisemask*normal(0, 1, norablocks * compression)
+        #noisef = noisef#*noisemask
+        #noiser = ifft(noisef)
+        #noiser = real(noiser)
+
+        noiser = normal(0, eta, norablocks*compression)
 
         for ri in range(norablocks):
             rstart = ri*compression
@@ -327,12 +336,14 @@ while realind < realno:
             # Add noise
             for obs in observationno:
                 tod = cmbmap[d, ri] + noiser[rstart:rstop]
-                tod = asarray([cmbmap[d, ri] for x in range(compression)])
-                todpow = sum(tod*tod)
+
+                #todpow = sum(tod*tod)
                 # digitise here
-                digitise1bit(tod, 0.001)
+                #digitise1bit(tod, 1.0)
                 #tod = ((todpow / sum(tod * tod)) ** 0.5) * tod
                 #tod = digitise2bithalfmax(tod, 0)
+
+
                 cesscans[obs][d, rstart:rstop] = tod
 
         print("Noise & Digitisation: " + str(int(100*d/nodecscans)) + "%")
@@ -362,23 +373,39 @@ while realind < realno:
         cmbnoisemap = cmbnoisemap + obs
     cmbnoisemap = cmbnoisemap * (1.0/len(observationno))
 
+    cmbnoisemap = cmbnoisemap# + normal(0, 1, shape(cmbnoisemap))
+
+    # DIGITISE MAP
+
+    # for dind in range(mappixelnumber):
+    #     for rind in range(mappixelnumber):
+    #         if cmbnoisemap[dind, rind] >= 0:
+    #             cmbnoisemap[dind, rind] = 1.0
+    #         else:
+    #             cmbnoisemap[dind, rind] = -1.0
+    #
+    # imshow(cmbnoisemap)
+    # colorbar()
+    # show()
+
+
 
 
     k0, p0, err0, h0 = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
     k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin],cmbnoisemap)
 
 
-    # Normalise Powerspectrum
-    mmi = 0
-    truepow = 0
-    obspow = 0
-    while mmi < len(k0):
-        if k0[mmi] >= 350 and k0[mmi] <= 1000:
-            truepow += p0[mmi]**2.0
-            obspow += p[mmi]**2.0
-        mmi += 1
-
-    p = p * (truepow/obspow)**0.5
+    # # Normalise Powerspectrum
+    # mmi = 0
+    # truepow = 0
+    # obspow = 0
+    # while mmi < len(k0):
+    #     if k0[mmi] >= 350 and k0[mmi] <= 1000:
+    #         truepow += p0[mmi]**2.0
+    #         obspow += p[mmi]**2.0
+    #     mmi += 1
+    #
+    # p = p * (truepow/obspow)**0.5
 
     dl = float(pixelnumber) * float(pixelnumber) * p0 * k0 * (k0 + 1.0) / pi
     dltot = dltot + dl
@@ -388,18 +415,34 @@ while realind < realno:
 
     realind += 1
 
+
+
+
+#
+# subplot(1, 2, 1)
+# imshow(cmbmap)
+# title("CMB TRUE")
+# colorbar()
+#
+# subplot(1, 2, 2)
+# imshow(cmbnoisemap)
+# title("CMB DIGITISED")
+# colorbar()
+#
+# show()
+
 clobstot= (dlobstot*pi)/(k*(k+1.0))
 cltot = (dltot*pi)/(k0*(k0+1.0))
 
 #subplot(1, 2, 1)
-plot(k0, dltot, "b")
-plot(k, dlobstot, "r")
-xscale("linear")
-yscale("linear")
+#plot(k0, cltot, "b")
+plot(k, clobstot, "r")
+xscale("log")
+yscale("log")
 xlabel("Multipole Moment $l$")
-ylabel("$D_l$")
+ylabel("$C_l$")
 title("Powerspectrum")
-xlim((0, 2500))
+xlim((0, 3500))
 show()
 
 subplot(1, 2, 2)
@@ -412,18 +455,6 @@ show()
 
 
 
-
-subplot(1, 2, 1)
-imshow(cmbmap)
-title("CMB TRUE")
-colorbar()
-
-subplot(1, 2, 2)
-imshow(cmbnoisemap)
-title("CMB + NOISE")
-colorbar()
-
-show()
 
 # Plot powerspectrum
 powfix = 2.0*float(pixelnumber)*float(pixelnumber)
