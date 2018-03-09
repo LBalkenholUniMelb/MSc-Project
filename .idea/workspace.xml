@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryanalysis.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/crossspectraanalysis1bit.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/crossspectraanalysis2bit.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/noisebreakingpoint.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryfixeddetnoise.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitrary.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitrary.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cosmdigitclasses.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cosmdigitclasses.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cmbdigitlvlarbitrary.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cmbdigitlvlarbitrary.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitrary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="115" column="18" lean-forward="false" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+            <state relative-caret-position="365">
+              <caret line="182" column="0" lean-forward="true" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
               <folding>
                 <element signature="e#129#160#0" expanded="true" />
               </folding>
@@ -35,16 +30,48 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="cmbdigitlvlarbitraryfixeddetnoise.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryfixeddetnoise.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+              <folding>
+                <element signature="e#282#313#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cosmdigitclasses.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cosmdigitclasses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="673" column="32" lean-forward="true" selection-start-line="673" selection-start-column="32" selection-end-line="673" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pow_spec.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="cmbpower.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="60" column="19" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="60" selection-end-column="19" />
+            <state relative-caret-position="453">
+              <caret line="87" column="67" lean-forward="true" selection-start-line="87" selection-start-column="67" selection-end-line="87" selection-end-column="67" />
               <folding>
                 <element signature="e#25#56#0" expanded="true" />
-                <element signature="e#2787#2801#0" expanded="false" />
-                <element signature="e#3143#3168#0" expanded="false" />
-                <element signature="e#3974#4018#0" expanded="false" />
+                <element signature="e#2796#2810#0" expanded="false" />
+                <element signature="e#3152#3177#0" expanded="false" />
+                <element signature="e#3983#4027#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,8 +92,8 @@
       <file leaf-file-name="cl2dcreation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cl2dcreation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="14" column="50" lean-forward="false" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+            <state relative-caret-position="519">
+              <caret line="49" column="28" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="49" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -75,8 +102,8 @@
       <file leaf-file-name="probth.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="467">
+              <caret line="39" column="7" lean-forward="true" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -157,15 +184,16 @@
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryanalysis.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/crossspectraanalysis2bit.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/noisebreakingpoint.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/pow_spec.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitrary.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryfixeddetnoise.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="108" />
     <option name="y" value="23" />
     <option name="width" value="1472" />
@@ -189,7 +217,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -226,25 +253,26 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots/24092017" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/Plots/19092017" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -259,7 +287,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cmbdigitlvlarbitrary">
+  <component name="RunManager" selected="Python.cmbdigitlvlarbitraryfixeddetnoise">
     <configuration name="cmbdigitlvlarbitrary" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -277,6 +305,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="cmbdigitlvlarbitraryfixeddetnoise" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MSc-Project" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryfixeddetnoise.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="cmbpower" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -290,23 +335,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MSc-Project" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/cmbpower.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="crossspectraanalysis2bit" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MSc-Project" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/crossspectraanalysis2bit.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -347,18 +375,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.cmbdigitlvlarbitrary" />
-      <item index="1" class="java.lang.String" itemvalue="Python.crossspectraanalysis2bit" />
-      <item index="2" class="java.lang.String" itemvalue="Python.noisebreakingpoint" />
-      <item index="3" class="java.lang.String" itemvalue="Python.probth" />
-      <item index="4" class="java.lang.String" itemvalue="Python.cmbpower" />
+      <item index="1" class="java.lang.String" itemvalue="Python.noisebreakingpoint" />
+      <item index="2" class="java.lang.String" itemvalue="Python.probth" />
+      <item index="3" class="java.lang.String" itemvalue="Python.cmbpower" />
+      <item index="4" class="java.lang.String" itemvalue="Python.cmbdigitlvlarbitraryfixeddetnoise" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.cmbdigitlvlarbitrary" />
-        <item index="1" class="java.lang.String" itemvalue="Python.cmbpower" />
+        <item index="0" class="java.lang.String" itemvalue="Python.cmbdigitlvlarbitraryfixeddetnoise" />
+        <item index="1" class="java.lang.String" itemvalue="Python.cmbdigitlvlarbitrary" />
         <item index="2" class="java.lang.String" itemvalue="Python.probth" />
-        <item index="3" class="java.lang.String" itemvalue="Python.noisebreakingpoint" />
-        <item index="4" class="java.lang.String" itemvalue="Python.crossspectraanalysis2bit" />
+        <item index="3" class="java.lang.String" itemvalue="Python.cmbpower" />
+        <item index="4" class="java.lang.String" itemvalue="Python.noisebreakingpoint" />
       </list>
     </recent_temporary>
   </component>
@@ -537,16 +565,23 @@
       <option name="project" value="LOCAL" />
       <updated>1518146531044</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fixed digitisation of map. now investigating correct noise level.">
+      <created>1519966138682</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1519966138682</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="785" extended-state="6" />
+    <frame x="108" y="23" width="1472" height="1013" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19930555" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20244566" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2646121" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" x="0" y="389" width="1440" height="162" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36663124" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" x="0" y="389" width="1440" height="162" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -611,7 +646,8 @@
     <MESSAGE value="Continued investigation on following the Power through from CL2D to the final observation. Produced plots showing that there is still some power missing, but that it is most likely in the formulation of CL2D (can this be?)." />
     <MESSAGE value="Fixed CL2D creation code. Investigated power for different field sizes and resolution combinations." />
     <MESSAGE value="Fixed power issues. Set noise level appropriately. Chagned code to set digitisation levels arbitrarily. Found that a very high level of noise is being induced." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed power issues. Set noise level appropriately. Chagned code to set digitisation levels arbitrarily. Found that a very high level of noise is being induced." />
+    <MESSAGE value="Fixed digitisation of map. now investigating correct noise level." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed digitisation of map. now investigating correct noise level." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -627,7 +663,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Plots/19092017/pserrratio.png" />
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Schemes Results/digitisedcmb2bithmnobs20.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -855,13 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbmaparblvltemplate.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/crossspectraanalysis2bit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -873,20 +901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="636">
           <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cosmdigitclasses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8685">
-          <caret line="586" column="94" lean-forward="false" selection-start-line="586" selection-start-column="94" selection-end-line="586" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryanalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1830">
-          <caret line="128" column="59" lean-forward="false" selection-start-line="128" selection-start-column="59" selection-end-line="128" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -904,47 +918,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cl2dcreation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="50" lean-forward="false" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/noisebreakingpoint.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-          <folding>
-            <element signature="e#129#160#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="19" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="60" selection-end-column="19" />
-          <folding>
-            <element signature="e#25#56#0" expanded="true" />
-            <element signature="e#2787#2801#0" expanded="false" />
-            <element signature="e#3143#3168#0" expanded="false" />
-            <element signature="e#3974#4018#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
@@ -959,19 +932,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/noisebreakingpoint.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="84" column="12" lean-forward="false" selection-start-line="84" selection-start-column="12" selection-end-line="84" selection-end-column="12" />
+        <state relative-caret-position="450">
+          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <folding>
+            <element signature="e#129#160#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cmbpower.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="87" column="67" lean-forward="true" selection-start-line="87" selection-start-column="67" selection-end-line="87" selection-end-column="67" />
+          <folding>
+            <element signature="e#25#56#0" expanded="true" />
+            <element signature="e#2796#2810#0" expanded="false" />
+            <element signature="e#3152#3177#0" expanded="false" />
+            <element signature="e#3983#4027#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cl2dcreation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="49" column="28" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="49" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/probth.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="39" column="7" lean-forward="true" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitrary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="115" column="18" lean-forward="false" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+        <state relative-caret-position="365">
+          <caret line="182" column="0" lean-forward="true" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
           <folding>
             <element signature="e#129#160#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryanalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1669">
+          <caret line="128" column="59" lean-forward="false" selection-start-line="128" selection-start-column="59" selection-end-line="128" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbmaparblvltemplate.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/pow_spec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cosmdigitclasses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="673" column="32" lean-forward="true" selection-start-line="673" selection-start-column="32" selection-end-line="673" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/cmbdigitlvlarbitraryfixeddetnoise.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <folding>
+            <element signature="e#282#313#0" expanded="true" />
           </folding>
         </state>
       </provider>

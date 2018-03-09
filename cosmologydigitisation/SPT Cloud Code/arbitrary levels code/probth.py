@@ -9,8 +9,8 @@ rc("xtick", labelsize = 15)
 rc("ytick", labelsize = 15)
 
 
-hpps = logspace(1, 10, 100)
-succlvl = -0.0001
+hpps = linspace(1, 10, 1)
+succlvl = -400
 sigmanot = 8.52211548825e-07
 successrates = asarray([0.0 for i in hpps])
 
@@ -20,7 +20,7 @@ for real in range(realno):
 
     i = 0
     for hpp in hpps:
-        sigma = sigmanot*sqrt(hpp)
+        sigma = 7071
 
         thcontformula = 0.5 * (1.0 + erf(((succlvl) / (sqrt(2.0) * sigma))))
 
@@ -33,16 +33,16 @@ for real in range(realno):
 
 successrates = successrates/float(realno)
 
-subplot(2, 1, 1)
-plot(hpps, [succlvl/(sigmanot*sqrt(j)) for j in hpps], "r")
-ylabel("S/N")
-xscale("log")
+#subplot(2, 1, 1)
+#plot(hpps, [succlvl/(sigmanot*sqrt(j)) for j in hpps], "r")
+#ylabel("S/N")
+#xscale("log")
 #show()
 
 #thcont = norm.cdf(succlvl)
 #thcontformula = 0.5*(1.0 + erf(((succlvl)/(sqrt(2.0)*sigma))) )
 
-subplot(2, 1, 2)
+#subplot(2, 1, 2)
 plot(hpps, successrates, "b", label = "Drawn from Distribution")
 #plot(hpps, [thcontformula for i in hpps], "r", label = r"Theoretical $\pm 10\%$")
 #plot(hpps, [thcontformula+0.1*thcontformula for i in hpps], "r")
@@ -51,7 +51,7 @@ plot(hpps, successrates, "b", label = "Drawn from Distribution")
 ylabel("Success rate", fontsize = 20)
 xlabel("Hits per pixel", fontsize = 20)
 legend(fontsize = 15)
-xscale("log")
+#xscale("log")
 show()
 
 

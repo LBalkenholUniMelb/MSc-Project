@@ -25,8 +25,8 @@ for row in file:
     l.append(rowvalues[0])
     dl.append(rowvalues[1])
 
-dlinput = asarray(dl)
-linput = asarray(l)
+dl = asarray(dl)
+l = asarray(l)
 
 
 #--- Define map parameters
@@ -39,41 +39,15 @@ mappixelnumber = int(pixelnumber/2.0)
 declims = [0, mapfieldsize] #arcmins
 ralims = [0, mapfieldsize] #arcmins
 readoutfreq = 200 #Hz
-raspeed = 0.5 #0.0005 #arcmin/s
+raspeed = 0.0005 #0.0005 #arcmin/s
 nodecscans = mappixelnumber
 norablocks = mappixelnumber
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 observationlim = 1
 
-#--- Define noise level
-
-noisedet = 500.0 # muK sqrt(s)
-noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
-print(noiseinduced)
-pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
-noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
-#fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
-#noisecl = 4.0*pi*fsky*pixelrms*pixelrms/float(mappixelnumber*mappixelnumber)
-print(readoutfreq*float(pixelsizearcmin)/raspeed)
-noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
-
-print(compression)
-print(noisecl)
-lvl =  ( (noiseinduced/sqrt(compression))**2.0 )/(pi * float(pixelnumber**2.0))
-print("XXX")
-print(lvl)
-eta0 = sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
-print(noiseinduced*noiseinduced/float((compression)))
-print(pixelrms**2.0)
-
-noisemap = normal(0, noiseinduced/sqrt(compression), (mappixelnumber, mappixelnumber))
-k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], noisemap)
-#p = p/(pi * float(pixelnumber**2.0))
-
-plot(k, p)
-show()
-
+print(float(pixelsizearcmin)/raspeed)
+fgsfes
 
 
 # noisemap = 3.0 # muK arcmin
@@ -84,16 +58,106 @@ show()
 # eta0 = sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
 
 
-#--- Read in CMP
-cmbmap = zeros((mappixelnumber, mappixelnumber))
-y = 0
-for row in open("cmbmaparblvltemplate.txt"):
-    rowvalues = row.split()
-    for x in range(mappixelnumber):
-        cmbmap[y, x] = float(rowvalues[x])
-    y += 1
+# Calculate cl
+cl = (dl*2.0*pi)/(l*(l+1.0))
+# Create 2dCl
+cl2d = zeros((pixelnumber, pixelnumber))
+pixelspacingrad = float(pixelsizearcmin)*arcmins2radians
+kx = 2.0*pi*fftfreq(pixelnumber, pixelspacingrad)
+kx2d = tile(kx, (pixelnumber, 1))
+ky = 2.0*pi*fftfreq(pixelnumber, pixelspacingrad)
+ky2d = transpose(tile(ky, (pixelnumber, 1)))
+cl2d = zeros((pixelnumber, pixelnumber))
+k2d = sqrt(kx2d*kx2d + ky2d*ky2d)
+for y in range(pixelnumber):
+    for x in range(pixelnumber):
+        k = k2d[y, x]
+        ind = argmin(abs(l-k))
+        cl2d[y, x] = cl[ind]
+#
+# cl2d = zeros((pixelnumber, pixelnumber))
+# fname = "../../cl2df" + str(fieldsizearcmins) + "r" + str(pixelsizearcmin) + ".txt"
+# y = 0
+# for row in open(fname):
+#     rowvalues = row.split()
+#     for x in range(pixelnumber):
+#         cl2d[y, x] = float(rowvalues[x])
+#     y += 1
 
-cmbmap = cmbmap*pixelnumber*pixelnumber
+#---
+
+#df = 1.0/(float(fieldsizearcmins)*arcmins2radians)**2.0
+cmbfft = normal(0, 1, (pixelnumber, pixelnumber)) + 1.0j * normal(0, 1, (pixelnumber, pixelnumber))
+cmbfft = cmbfft * sqrt((df/2.0)*cl2d)
+cmbmap = real(ifft2(cmbfft))[0:int(pixelnumber/2), 0:int(pixelnumber/2)]
+cmbmap = sqrt(2.0) * cmbmap * pixelnumber / (pixelsizearcmin * arcmins2radians)# * pixelnumber
+
+#pixelrms = std(cmbmap)
+#print(pixelrms)
+#noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
+#print(noisecl)
+
+#k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbmap)
+#p = p*pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians
+
+imshow(cmbmap)
+title(r"White noise $[\mu K]$", fontsize = 20)
+colorbar()
+show()
+
+#plot(k, p, "b")
+#plot(k, [noisecl for i in k], "r")
+#title("Powerspectrum")
+#xlabel(r"Multipole Moment $l$")
+#ylabel(r"$C_l$")
+#yscale("log")
+#show()
+
+#--- Define Noise
+
+noisedet = 500.0 # muK sqrt(s)
+noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
+pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
+noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
+noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
+print(pixelrms)
+print(noisecl)
+
+
+#--- Add Noise
+
+
+
+
+# #--- Read in CMP
+# cmbmap = zeros((mappixelnumber, mappixelnumber))
+# y = 0
+# for row in open("cmbmaparblvltemplate.txt"):
+#     rowvalues = row.split()
+#     for x in range(mappixelnumber):
+#         cmbmap[y, x] = float(rowvalues[x])
+#     y += 1
+
+
+
+#--- Define noise level
+
+# noisedet = 500.0 # muK sqrt(s)
+# noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
+# pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
+# noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
+# #fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
+# #noisecl = 4.0*pi*fsky*pixelrms*pixelrms/float(mappixelnumber*mappixelnumber)
+# noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
+#
+#
+# noisemap = normal(0, 2.0, (mappixelnumber, mappixelnumber))
+#
+#
+
+
+
+
 
 # imshow(cmbmap)
 # title("CMB MAP")
@@ -108,7 +172,7 @@ cmbmap = cmbmap*pixelnumber*pixelnumber
 
 #--- Recreate Observation
 cmbnoisemap = zeros((nodecscans, norablocks))
-cmbnoisemap1bit = zeros((nodecscans, norablocks))
+#cmbnoisemap1bit = zeros((nodecscans, norablocks))
 #cmbnoisemap2bithm = zeros((nodecscans, norablocks))
 #cmbnoisemap2bitopt = zeros((nodecscans, norablocks))
 
@@ -126,7 +190,7 @@ while observationind < observationlim:
             noiser = normal(0, noiseinduced, compression)
 
             # add noise
-            tod = cmbmap[d, ri]# + noiser
+            tod = cmbmap[d, ri] + noiser
             cmbnoisemap[d, ri] += mean(tod)
 
             # digitise
@@ -165,9 +229,28 @@ while observationind < observationlim:
 #--- Normalise Maps
 
 cmbnoisemap = cmbnoisemap * (1.0/float(observationlim))
-cmbnoisemap1bit = cmbnoisemap1bit * (1.0/float(observationlim))
+#cmbnoisemap1bit = cmbnoisemap1bit * (1.0/float(observationlim))
 #cmbnoisemap2bithm = cmbnoisemap2bithm * (1.0/float(observationlim))
 #cmbnoisemap2bitopt = cmbnoisemap2bitopt * (1.0/float(observationlim))
+
+#--- PS
+
+k, p, err, h = cosm.sriniPowerSpectrum([mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin], cmbnoisemap)
+p = p * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+
+plot(k, p, "b", label = "Reconstructed")
+plot(l, dl*2.0*pi/(l*(l+1.0)), "r", label = "Input")
+plot(k, [noisecl for o in k], "k", label = "Noise level")
+xscale("log")
+yscale("log")
+title("CMB Powerspectrum", fontsize = 20)
+xlabel(r"Multipole Moment $l$", fontsize = 20)
+ylabel(r"$C_l [\mu K^2]$", fontsize = 20)
+legend(loc = "lower left", fontsize = 15)
+#xlim((0, 2500))
+show()
+
+
 
 
 # cmbmapadj = cmbmap*sqrt(sum(cmbnoisemap1bit**2.0)/sum(cmbmap**2.0))
@@ -199,7 +282,7 @@ p = p/(pi * float(pixelnumber * pixelnumber))
 p = p * k * (k + 1.0)
 
 plot(linput, dlinput, "k")
-plot(k, p)
+plot(k, p, "b")
 plot(k, [noisecl for i in k], "r")
 #xscale("log")
 yscale("log")

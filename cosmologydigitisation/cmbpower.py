@@ -13,7 +13,7 @@ rc("ytick", labelsize = 15)
 cosm = Cosmologist()
 
 # Define map parameters
-fieldsizearcmins = 1024
+fieldsizearcmins = 2048
 pixelsizearcmin = 2
 pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
 df = 1.0/(fieldsizearcmins*arcmins2radians)
@@ -21,8 +21,8 @@ mapfieldsize = int(fieldsizearcmins/2.0)
 mappixelnumber = int(pixelnumber/2.0)
 declims = [0, mapfieldsize] #arcmins
 ralims = [0, mapfieldsize] #arcmins
-readoutfreq = 1.0 #Hz
-raspeed = 4.0 #arcmin/s
+readoutfreq = 200.0 #Hz
+raspeed = 0.5 #arcmin/s
 nodecscans = mappixelnumber
 norablocks = mappixelnumber
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
@@ -30,12 +30,13 @@ compression = int(radatapoints/norablocks)
 observationlim = 1
 
 # noise level
-noisemap = 250.0#3.0 # muK arcmin
+noisemap = 500.0#3.0 # muK arcmin
 noisepix = noisemap/float(pixelsizearcmin)
 fsky = (mapfieldsize*mapfieldsize)/(4.0*pi*60.0*60.0*(180.0/pi)**2.0)
 noisecl = 4.0*pi*fsky*noisepix*noisepix/float(mappixelnumber*mappixelnumber)
 
 print(noisecl)
+gsfses
 
 eta = sqrt(float(compression)) * sqrt(float(observationlim)) * sqrt(float(noisecl) / (float(pixelnumber * pixelnumber)))
 
