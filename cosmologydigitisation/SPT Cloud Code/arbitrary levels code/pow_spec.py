@@ -90,7 +90,6 @@ def fn_plot_pow_spec(mapparams, MAP1, MAP2 = None, binsize = None):
 		# MAP_F = np.fft.fft2(MAP1*cosm)
 		MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
 		MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
-		print("HIT")
 	#MAP_F = np.fft.fft2(zeropad(MAP1 * cosm))
 	#MAP_PSD = (MAP_F * conjugate(MAP_F)) / (4.0 * nx * ny * w)
 

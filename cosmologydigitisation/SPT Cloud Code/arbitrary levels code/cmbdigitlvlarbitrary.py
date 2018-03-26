@@ -30,8 +30,8 @@ l = asarray(l)
 
 
 #--- Define map parameters
-fieldsizearcmins = 2048
-pixelsizearcmin = 2
+fieldsizearcmins = 1024
+pixelsizearcmin = 4
 pixelnumber = int(fieldsizearcmins/pixelsizearcmin)
 df = 1.0
 mapfieldsize = int(fieldsizearcmins/2.0)
@@ -46,8 +46,17 @@ radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
 compression = int(radatapoints/norablocks)
 observationlim = 1
 
-print(float(pixelsizearcmin)/raspeed)
-fgsfes
+#--- Define Noise
+
+noisedet = 500.0 # muK sqrt(s)
+noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
+pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
+noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
+noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
+print(pixelrms)
+print(noisecl)
+
+fsefdx
 
 
 # noisemap = 3.0 # muK arcmin
@@ -113,15 +122,7 @@ show()
 #yscale("log")
 #show()
 
-#--- Define Noise
 
-noisedet = 500.0 # muK sqrt(s)
-noiseinduced = noisedet/(sqrt(1.0/float(readoutfreq))) # muK
-pixelrms = noisedet/sqrt(float(pixelsizearcmin)/raspeed) # muK
-noisemap = pixelrms*float(pixelsizearcmin) # muK arcmin
-noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrms*pixelrms # muK^2
-print(pixelrms)
-print(noisecl)
 
 
 #--- Add Noise
@@ -191,7 +192,7 @@ while observationind < observationlim:
 
             # add noise
             tod = cmbmap[d, ri] + noiser
-            cmbnoisemap[d, ri] += mean(tod)
+            cmbnoisemap[d, ri] += mean(noiser)
 
             # digitise
             #tod1bit = digitise1bit(tod, 1.0)

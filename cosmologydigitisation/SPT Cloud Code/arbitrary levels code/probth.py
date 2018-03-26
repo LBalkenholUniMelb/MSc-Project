@@ -9,7 +9,7 @@ rc("xtick", labelsize = 15)
 rc("ytick", labelsize = 15)
 
 
-hpps = linspace(1, 10, 1)
+hpps = linspace(1, 10, 100)
 succlvl = -400
 sigmanot = 8.52211548825e-07
 successrates = asarray([0.0 for i in hpps])
@@ -32,6 +32,7 @@ for real in range(realno):
         i += 1
 
 successrates = successrates/float(realno)
+print(successrates)
 
 #subplot(2, 1, 1)
 #plot(hpps, [succlvl/(sigmanot*sqrt(j)) for j in hpps], "r")

@@ -1,0 +1,224 @@
+----------1----------
+SETUP COMPLETED IN:
+3.92565703392
+----------1----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------1----------
+1 ROW OBSERVATION COMPLETED IN:
+38.9658269882
+----------1----------
+----------1----------
+SAVING COMPLETED IN:
+0.074471950531
+----------1----------
+----------2----------
+SETUP COMPLETED IN:
+3.92559885979
+----------2----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------2----------
+1 ROW OBSERVATION COMPLETED IN:
+40.0589799881
+----------2----------
+----------2----------
+SAVING COMPLETED IN:
+0.030916929245
+----------2----------
+----------3----------
+SETUP COMPLETED IN:
+3.92553496361
+----------3----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------3----------
+1 ROW OBSERVATION COMPLETED IN:
+40.2459959984
+----------3----------
+----------3----------
+SAVING COMPLETED IN:
+0.0208110809326
+----------3----------
+----------4----------
+SETUP COMPLETED IN:
+3.9217247963
+----------4----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------4----------
+1 ROW OBSERVATION COMPLETED IN:
+38.8817260265
+----------4----------
+----------4----------
+SAVING COMPLETED IN:
+0.0211410522461
+----------4----------
+----------5----------
+SETUP COMPLETED IN:
+3.92489314079
+----------5----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------5----------
+1 ROW OBSERVATION COMPLETED IN:
+40.078897953
+----------5----------
+----------5----------
+SAVING COMPLETED IN:
+0.023411989212
+----------5----------
+----------6----------
+SETUP COMPLETED IN:
+3.92298007011
+----------6----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------6----------
+1 ROW OBSERVATION COMPLETED IN:
+39.5713648796
+----------6----------
+----------6----------
+SAVING COMPLETED IN:
+0.0236639976501
+----------6----------
+----------7----------
+SETUP COMPLETED IN:
+3.92488694191
+----------7----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------7----------
+1 ROW OBSERVATION COMPLETED IN:
+39.7755000591
+----------7----------
+----------7----------
+SAVING COMPLETED IN:
+0.0932488441467
+----------7----------
+----------8----------
+SETUP COMPLETED IN:
+3.92202401161
+----------8----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------8----------
+1 ROW OBSERVATION COMPLETED IN:
+39.9502551556
+----------8----------
+----------8----------
+SAVING COMPLETED IN:
+0.0217270851135
+----------8----------
+----------9----------
+SETUP COMPLETED IN:
+3.92578220367
+----------9----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------9----------
+1 ROW OBSERVATION COMPLETED IN:
+40.0139181614
+----------9----------
+----------9----------
+SAVING COMPLETED IN:
+0.0733788013458
+----------9----------
+----------10----------
+SETUP COMPLETED IN:
+3.92192602158
+----------10----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------10----------
+1 ROW OBSERVATION COMPLETED IN:
+40.0067641735
+----------10----------
+----------10----------
+SAVING COMPLETED IN:
+0.0709989070892
+----------10----------
+----------11----------
+SETUP COMPLETED IN:
+3.92530488968
+----------11----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------11----------
+1 ROW OBSERVATION COMPLETED IN:
+39.0141248703
+----------11----------
+----------11----------
+SAVING COMPLETED IN:
+0.0299439430237
+----------11----------
+----------12----------
+SETUP COMPLETED IN:
+3.92242693901
+----------12----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------12----------
+1 ROW OBSERVATION COMPLETED IN:
+40.1540689468
+----------12----------
+----------12----------
+SAVING COMPLETED IN:
+0.0220968723297
+----------12----------
+----------13----------
+SETUP COMPLETED IN:
+3.92320299149
+----------13----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------13----------
+1 ROW OBSERVATION COMPLETED IN:
+39.7571258545
+----------13----------
+----------13----------
+SAVING COMPLETED IN:
+0.110490083694
+----------13----------
+----------14----------
+SETUP COMPLETED IN:
+3.9200861454
+----------14----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------14----------
+1 ROW OBSERVATION COMPLETED IN:
+40.2915341854
+----------14----------
+----------14----------
+SAVING COMPLETED IN:
+0.0211009979248
+----------14----------
+----------15----------
+SETUP COMPLETED IN:
+3.92417407036
+----------15----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------15----------
+1 ROW OBSERVATION COMPLETED IN:
+39.9119839668
+----------15----------
+----------15----------
+SAVING COMPLETED IN:
+0.0211381912231
+----------15----------
+----------0----------
+SETUP COMPLETED IN:
+3.92392992973
+----------0----------
+Noise, Digitisation and Compression: 0%
+--- COMPLETED OBSERVATION 0 ---
+----------0----------
+1 ROW OBSERVATION COMPLETED IN:
+38.8728940487
+----------0----------
+----------0----------
+SAVING COMPLETED IN:
+0.0245850086212
+----------0----------
