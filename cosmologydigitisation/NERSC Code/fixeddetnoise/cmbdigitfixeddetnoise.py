@@ -36,7 +36,7 @@ mappixelnumber = int(pixelnumber/2.0)
 declims = [0, mapfieldsize] #arcmins
 ralims = [0, mapfieldsize] #arcmins
 readoutfreq = 200 #Hz
-raspeed = 0.0005 #arcmin/s
+raspeed = 0.005 #arcmin/s
 nodecscans = mappixelnumber
 norablocks = mappixelnumber
 radatapoints = int(((ralims[1]-ralims[0])/raspeed)*readoutfreq)
@@ -108,6 +108,6 @@ cmbnoisemap3bitopt = cmbnoisemap3bitopt * (1.0/float(observationlim))
 #--- Save results
 
 dump(cmbnoisemap, open("cmbnoisemap" + str(processorrank) + ".p", "wb"), -1)
-dump(cmbnoisemap, open("cmbnoisemap1bit" + str(processorrank) + ".p", "wb"), -1)
-dump(cmbnoisemap, open("cmbnoisemap2bitopt" + str(processorrank) + ".p", "wb"), -1)
-dump(cmbnoisemap, open("cmbnoisemap3bitopt" + str(processorrank) + ".p", "wb"), -1)
+dump(cmbnoisemap1bit, open("cmbnoisemap1bit" + str(processorrank) + ".p", "wb"), -1)
+dump(cmbnoisemap2bitopt, open("cmbnoisemap2bitopt" + str(processorrank) + ".p", "wb"), -1)
+dump(cmbnoisemap3bitopt, open("cmbnoisemap3bitopt" + str(processorrank) + ".p", "wb"), -1)

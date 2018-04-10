@@ -5,7 +5,7 @@
 #SBATCH -J cmbdigit
 #SBATCH --mail-user=lbalkenhol@student.unimelb.edu.au
 #SBATCH --mail-type=ALL
-#SBATCH -t 35:00:00
+#SBATCH -t 15:00:00
 
 #OpenMP settings:
 export OMP_NUM_THREADS=1

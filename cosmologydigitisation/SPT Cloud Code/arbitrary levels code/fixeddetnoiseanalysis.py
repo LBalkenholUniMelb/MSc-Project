@@ -6,6 +6,7 @@ from cosmdigitclasses import *
 from numpy import *
 from scipy.signal import convolve2d
 from scipy.stats import *
+from pickle import *
 
 
 rc('text', usetex=True)
@@ -33,6 +34,7 @@ observationlim = 10
 compressions = [800000, 80000, 8000, 800, 80, 8]
 raspeeds = [0.0005, 0.005, 0.05, 0.5, 5.0, 50.0]
 
+
 #--- Define Noise
 
 noisedet = 500.0 # muK sqrt(s)
@@ -45,14 +47,92 @@ noisecl = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelr
 noiseclcombined = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixelrmscombined*pixelrmscombined # muK^2
 
 
+
+# #-----------------------#
+# #--- 3 Bit interlude ---#
+# #-----------------------#
+#
+#
+# mapparams = [mappixelnumber, mappixelnumber, pixelsizearcmin, pixelsizearcmin]
+# cmbmap = zeros((mappixelnumber, mappixelnumber))
+# y = 0
+# for row in open("../../NERSC Code/fixeddetnoise/cmbtemplatemapfixeddetnoise.txt"):
+#     rowvalues = row.split()
+#     for x in range(mappixelnumber):
+#         cmbmap[y, x] = float(rowvalues[x])
+#     y += 1
+# cmbnmap = load(open("../../NERSC Code/fixeddetnoise/results/cmbnoisemapcombined.p", "rb"))
+# cmbnmap1bit = load(open("../../NERSC Code/fixeddetnoise/results/cmbnoisemap1bitcombined.p", "rb"))
+# cmbnmap2bit = load(open("../../NERSC Code/fixeddetnoise/results/cmbnoisemap2bitcombined.p", "rb"))
+# cmbnmap3bit = load(open("../../NERSC Code/fixeddetnoise/results/cmbnoisemap3bitcombined.p", "rb"))
+#
+# k, p, err, h = cosm.sriniPowerSpectrum(mapparams, cmbmap)
+# kn, pn, errn, hn = cosm.sriniPowerSpectrum(mapparams, cmbnmap)
+# kn1bit, pn1bit, errn1bit, hn1bit = cosm.sriniPowerSpectrum(mapparams, cmbnmap1bit)
+# kn2bit, pn2bit, errn2bit, hn2bit = cosm.sriniPowerSpectrum(mapparams, cmbnmap2bit)
+# kn3bit, pn3bit, errn3bit, hn3bit = cosm.sriniPowerSpectrum(mapparams, cmbnmap3bit)
+#
+# p = p * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+# pn = pn * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+# pn1bit = pn1bit * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+# pn2bit = pn2bit * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+# pn3bit = pn3bit * pixelsizearcmin * pixelsizearcmin * arcmins2radians * arcmins2radians
+#
+# mmi = 0
+# obspow = 0
+# obspow1bit = 0
+# obspow2bit = 0
+# obspow3bit = 0
+# while mmi < len(kn):
+#     if kn[mmi] >= 350 and kn[mmi] <= 1000:
+#         obspow += pn[mmi] ** 2.0
+#         obspow1bit += pn1bit[mmi] ** 2.0
+#         obspow2bit += pn2bit[mmi] ** 2.0
+#         obspow3bit += pn3bit[mmi] ** 2.0
+#     mmi += 1
+# pn1bit = pn1bit * (obspow / obspow1bit) ** 0.5
+# pn2bit = pn2bit * (obspow / obspow2bit) ** 0.5
+# pn3bit = pn3bit * (obspow / obspow3bit) ** 0.5
+#
+# indstart = argmin(abs(kn1bit - 6600))
+# indstop = argmin(abs(kn1bit - 7400))
+# cln = asarray([mean(pn1bit[indstart:indstop]), std(pn1bit[indstart:indstop])]) * 128.0
+# pxrmsequiv = sqrt(cln) / (float(pixelsizearcmin * arcmins2radians))
+# noisedetequiv3bit = pxrmsequiv * sqrt(float(pixelsizearcmin) / 0.0005)
+#
+# print(noisedetequiv3bit)
+#
+# plot(k, p, "g")
+# #plot(kn, pn, "k")
+# #plot(kn1bit, pn1bit, "r")
+# #plot(kn2bit, pn2bit, "b")
+# plot(kn3bit, [cln for j in pn3bit], "r")
+# plot(kn3bit, pn3bit, "y")
+# yscale("log")
+# xscale("log")
+# show()
+#
+#
+# #-----------------------#
+# #-----------------------#
+# #-----------------------#
+
+
+
+
+
+
+
 #--- READ IN INDUCED NOISE LEVELS
 
 digitnoises1bit = zeros(len(compressions))
 digitnoises1bitstd = zeros(len(compressions))
-digitnoises2bithm = zeros(len(compressions))
-digitnoises2bithmstd = zeros(len(compressions))
+#digitnoises2bithm = zeros(len(compressions))
+#digitnoises2bithmstd = zeros(len(compressions))
 digitnoises2bitopt = zeros(len(compressions))
 digitnoises2bitoptstd = zeros(len(compressions))
+digitnoises3bit = 0
+digitnoises3bitstd = 0
 thmapnoise = zeros(len(compressions))
 
 y = 0
@@ -66,34 +146,40 @@ for row in open("../fixed det noise results 1 bit/detnoiseequivalents.txt"):
     # convert to map noise levels here
     digitnoises1bit[y] = float(rowvalues[0])*dettomapnoise
     digitnoises1bitstd[y] = float(rowvalues[1])*dettomapnoise
-    digitnoises2bithm[y] = float(rowvalues[2])*dettomapnoise
-    digitnoises2bithmstd[y] = float(rowvalues[3])*dettomapnoise
+    #digitnoises2bithm[y] = float(rowvalues[2])*dettomapnoise
+    #digitnoises2bithmstd[y] = float(rowvalues[3])*dettomapnoise
     digitnoises2bitopt[y] = float(rowvalues[4])*dettomapnoise
     digitnoises2bitoptstd[y] = float(rowvalues[5])*dettomapnoise
+    digitnoises3bit = float(rowvalues[6]) * float(pixelsizearcmin) * (1.0 / (sqrt(float(pixelsizearcmin*128.0) / 0.0005)))
+    digitnoises3bitstd = float(rowvalues[7]) * float(pixelsizearcmin) * (1.0 / (sqrt(float(pixelsizearcmin*128.0) / 0.0005)))
 
     pixelrms = noisedet / sqrt(float(pixelsizearcmin*observationlim) / raspeeds[y])  # muK
     thmapnoise[y] = pixelrms * float(pixelsizearcmin)  # muK arcmin
+    if y < 5:
+        y += 1
+    else:
+        pass
 
-    y += 1
+print(thmapnoise)
+print(digitnoises1bit)
 
 
-
-
+thmapnoise3bit = ( noisedet / sqrt(float(pixelsizearcmin * 128.0) / 0.0005) ) * float(pixelsizearcmin)
 
 #--- PLOT INDUCED NOISE LEVELS
 combinedcompressions = observationlim*asarray(compressions)
 errorbar(combinedcompressions, digitnoises1bit-thmapnoise, yerr = digitnoises1bitstd, color = "r", marker = "o", label = "1 Bit")
-errorbar(combinedcompressions, digitnoises2bithm-thmapnoise, yerr = digitnoises2bithmstd, color = "b", marker = "o", label = "2 Bit HM")
+#errorbar(combinedcompressions, digitnoises2bithm-thmapnoise, yerr = digitnoises2bithmstd, color = "b", marker = "o", label = "2 Bit HM")
 errorbar(combinedcompressions, digitnoises2bitopt-thmapnoise, yerr = digitnoises2bitoptstd, color = "y", marker = "o", label = "2 Bit OPT")
+errorbar(128.0*800000.0, digitnoises3bit-thmapnoise3bit, yerr = digitnoises3bitstd, color = "b", marker = "o", label = "3 Bit")
 #plot(compressions, thmapnoise, color = "k", marker = "o", label = "Induced")
-
 title("Induced Map Noise Level through Digitisation", fontsize = 20)
 xlabel("Hits per pixel", fontsize = 20)
 ylabel(r"$\Delta \sigma_{\mathrm{MAP}} \; \left[ \mu K arcmin \right]$", fontsize = 20)
 xscale("log")
 yscale("log")
 #xlim((1, 1000000))
-legend(loc = "upper right", fontsize = 15)
+legend(loc = "lower left", fontsize = 15)
 show()
 
 
@@ -190,6 +276,9 @@ ci = 0
 
 raspeeds = [0.0005, 0.005, 0.05, 0.5, 5.0, 50.0]
 cols = [[193.0/255.0, 66.0/255.0, 66.0/255.0], [191.0/255.0, 191.0/255.0, 63.0/255.0], [63.0/255.0, 191.0/255.0, 63.0/255.0], [63.0/255.0, 63.0/255.0, 191.0/255.0], [191.0/255.0, 63.0/255.0, 127.0/255.0], [191.0/255.0, 170.0/255.0, 63.0/255.0]]
+
+
+
 
 while ci < len(compressions):
 

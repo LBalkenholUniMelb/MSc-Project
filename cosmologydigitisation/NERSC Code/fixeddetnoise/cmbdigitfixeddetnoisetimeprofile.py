@@ -91,7 +91,7 @@ observationind = 0
 while observationind < observationlim:
 
     # Decompose into bolometer signals
-    for d in range(1):
+    for d in range(5):
 
         for ri in range(norablocks):
 
