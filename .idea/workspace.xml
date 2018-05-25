@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae18211-bf55-4d7c-b7d9-c9b9ec2bfc38" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoisecombinemaps.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cosmdigitclasses.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivclnfit.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelspsextraction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/pow_spec.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/rebinningtest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/batchjobscript.sh" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/batchjobscript.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoise.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoise.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoisetimeprofile.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoisetimeprofile.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/screenlog.0" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py" afterPath="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,56 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="fixeddetnoiseanalysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2520">
-              <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="181" selection-end-column="41" />
-              <folding>
-                <element signature="e#28#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fixeddetnoisenerscandsptanalysis.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
-              <folding>
-                <element signature="e#28#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="equivclnfit.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivclnfit.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="70" column="11" lean-forward="false" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-              <folding>
-                <element signature="e#28#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="equivmapnoiselevelspsextraction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelspsextraction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
-              <caret line="68" column="16" lean-forward="false" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
-              <folding>
-                <element signature="e#28#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -122,8 +65,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cosmologydigitisation/nobsanalysis.py" />
-        <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Nobs Results/cmbdigitisation.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/digitisationschemes.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/cmbdigitisation.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/schemesanalysis.py" />
@@ -172,15 +113,17 @@
         <option value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/test.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelsanalysis.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/rebinningtest.py" />
         <option value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py" />
+        <option value="$PROJECT_DIR$/cosmologydigitisation/Polarisation/polmapsimulation.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="56" />
-    <option name="y" value="23" />
-    <option name="width" value="1600" />
-    <option name="height" value="1011" />
+    <option name="x" value="123" />
+    <option name="y" value="-891" />
+    <option name="width" value="1373" />
+    <option name="height" value="785" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -200,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -216,53 +160,37 @@
               <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
               <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
-              <item name="NERSC Code" type="462c0819:PsiDirectoryNode" />
+              <item name="Polarisation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
-              <item name="NERSC Code" type="462c0819:PsiDirectoryNode" />
-              <item name="fixeddetnoise" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
-              <item name="SPT Cloud Code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MSc-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MSc-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="cosmologydigitisation" type="462c0819:PsiDirectoryNode" />
-              <item name="SPT Cloud Code" type="462c0819:PsiDirectoryNode" />
-              <item name="arbitrary levels code" type="462c0819:PsiDirectoryNode" />
+              <item name="Research Diary" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/Polarisation" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/results" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/8hpp" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/80hpp" />
+      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/800hpp" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise8mhpp" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code" />
       <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/Many CMB Seeds Results" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/results" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/8hpp" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/80hpp" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/800hpp" />
-      <recent name="$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/fixed det noise results 3 bit/8000hpp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -278,23 +206,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.fixeddetnoisenerscandsptanalysis">
-    <configuration name="cmbdigitfixeddetnoise" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MSc-Project" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cmbdigitfixeddetnoise.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="equivclnfit" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -363,20 +274,37 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="rebinningtest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MSc-Project" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/rebinningtest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.equivclnfit" />
       <item index="1" class="java.lang.String" itemvalue="Python.equivmapnoiselevelsanalysis" />
-      <item index="2" class="java.lang.String" itemvalue="Python.cmbdigitfixeddetnoise" />
-      <item index="3" class="java.lang.String" itemvalue="Python.fixeddetnoisenerscandsptanalysis" />
-      <item index="4" class="java.lang.String" itemvalue="Python.fixeddetnoiseanalysis" />
+      <item index="2" class="java.lang.String" itemvalue="Python.fixeddetnoisenerscandsptanalysis" />
+      <item index="3" class="java.lang.String" itemvalue="Python.fixeddetnoiseanalysis" />
+      <item index="4" class="java.lang.String" itemvalue="Python.rebinningtest" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.fixeddetnoisenerscandsptanalysis" />
-        <item index="1" class="java.lang.String" itemvalue="Python.fixeddetnoiseanalysis" />
-        <item index="2" class="java.lang.String" itemvalue="Python.equivmapnoiselevelsanalysis" />
-        <item index="3" class="java.lang.String" itemvalue="Python.equivclnfit" />
-        <item index="4" class="java.lang.String" itemvalue="Python.cmbdigitfixeddetnoise" />
+        <item index="1" class="java.lang.String" itemvalue="Python.rebinningtest" />
+        <item index="2" class="java.lang.String" itemvalue="Python.equivclnfit" />
+        <item index="3" class="java.lang.String" itemvalue="Python.fixeddetnoiseanalysis" />
+        <item index="4" class="java.lang.String" itemvalue="Python.equivmapnoiselevelsanalysis" />
       </list>
     </recent_temporary>
   </component>
@@ -576,7 +504,28 @@
       <option name="project" value="LOCAL" />
       <updated>1522103720393</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="ran and analysed NERSC code. Found equivalent map noise levels.">
+      <created>1523404136531</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1523404136531</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added polarisation code form srini">
+      <created>1527219131906</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1527219131906</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added polarisation code form srini">
+      <created>1527219141974</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1527219141974</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -589,13 +538,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="56" y="23" width="1600" height="1011" extended-state="0" />
-    <editor active="true" />
+    <frame x="123" y="-891" width="1373" height="785" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.199375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23088129" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23857868" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32095096" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15761448" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" x="0" y="389" width="1440" height="162" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25666198" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" x="0" y="389" width="1440" height="162" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -617,8 +565,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Updated Research Diary." />
-    <MESSAGE value="Checked Parseval's theorem up until taking the powerspectrum of the map. Checked if code can accurately recreate scan strategies and recompress maps correctly. Populated research diary accordingly." />
     <MESSAGE value="Checked Parseval's Theorem for Srini's code including radial averaging. Populated Research Diary." />
     <MESSAGE value="Updated Plots directory" />
     <MESSAGE value="More Checking on PSV theorem" />
@@ -642,7 +588,9 @@
     <MESSAGE value="Fixed digitisation of map. now investigating correct noise level." />
     <MESSAGE value="Worked on normalisation of map. Wrote a script for fixed noise level to run on the cloud." />
     <MESSAGE value="Collected and analysed data for fixed detector noise level on spt cloud. prepared code for a larger scale to run on NERSC." />
-    <option name="LAST_COMMIT_MESSAGE" value="Collected and analysed data for fixed detector noise level on spt cloud. prepared code for a larger scale to run on NERSC." />
+    <MESSAGE value="ran and analysed NERSC code. Found equivalent map noise levels." />
+    <MESSAGE value="added polarisation code form srini" />
+    <option name="LAST_COMMIT_MESSAGE" value="added polarisation code form srini" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -658,27 +606,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2df2048r1.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-139493">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2df2048r1.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-52056">
-          <caret line="0" column="1551" lean-forward="true" selection-start-line="0" selection-start-column="1551" selection-end-line="0" selection-end-column="1551" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2df2048r4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/cl2df2048r4.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -926,13 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/pow_spec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/cosmdigitclasses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2283">
@@ -963,43 +883,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelsanalysis.py" />
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelsanalysis.py" />
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelspsextraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2520">
-          <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="181" selection-end-column="41" />
-          <folding>
-            <element signature="e#28#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="915">
+          <caret line="68" column="16" lean-forward="false" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivclnfit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="70" column="11" lean-forward="false" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-          <folding>
-            <element signature="e#28#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="990">
+          <caret line="74" column="33" lean-forward="false" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/equivmapnoiselevelspsextraction.py">
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/pow_spec.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="68" column="16" lean-forward="false" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
-          <folding>
-            <element signature="e#28#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="2040">
+          <caret line="138" column="15" lean-forward="false" selection-start-line="138" selection-start-column="15" selection-end-line="138" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/SPT Cloud Code/arbitrary levels code/fixeddetnoiseanalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/rebinningtest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="24" column="10" lean-forward="false" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cosmologydigitisation/NERSC Code/fixeddetnoise/fixeddetnoisenerscandsptanalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
-          <folding>
-            <element signature="e#28#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="188">
+          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Polarisation/polmapsimulation.py" />
+    <entry file="file://$PROJECT_DIR$/cosmologydigitisation/Polarisation/for_lennart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="207" column="25" lean-forward="true" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
         </state>
       </provider>
     </entry>

@@ -52,6 +52,9 @@ noiseclcombined = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radian
 pixrms = noisedet/sqrt(asarray(obslims, dtype=float) * float(pixelsizearcmin)/asarray(raspeeds)) # muK
 thnoisemap = pixrms*float(pixelsizearcmin) # muK arcmin
 
+sizeofskysqarcmin = 4.0*(pi*(180.0/pi)**2.0)*60.0*60.0
+fsky = float(mapfieldsize*mapfieldsize)/sizeofskysqarcmin
+
 #--- DEFINE FITS
 
 def clnfit(l, cln, A, alpha):
@@ -69,7 +72,11 @@ schemes = ["1bit", "2bit", "3bit"]
 k = load(open("results/k.p", "rb"))
 p0 = load(open("results/p0.p", "rb"))
 
-clnequivs = empty((2, len(schemes), len(hpp)))
+#p0 = ones(shape(k))
+#p0 = asarray([i for i in k])
+
+
+clnequivs = empty((3, len(schemes), len(hpp)))
 
 k1bitflatstart = [4000, 3500, 3000, 2500]
 k1bitflatstop = 6780
@@ -90,6 +97,47 @@ while i < len(hpp):
         scheme = schemes[j]
         pdigit = load(open("results/p" + str(scheme) + str(hpp[i]) + "hpp.p", "rb"))
         pn = load(open("results/pn" + str(scheme) + str(hpp[i]) + "hpp.p", "rb"))
+        k = load(open("results/k.p", "rb"))
+
+        # --- REBIN K
+
+        deltak = k[1] - k[0]
+        newk = linspace(amin(k) - deltak / 2.0, amax(k) + deltak / 2.0, (len(k) / 10) + 1)
+
+        newkinds = digitize(k, newk[:len(newk) - 1])
+
+        newpn = zeros(shape(newk[:len(newk) - 1]))
+        newpdigit = zeros(shape(newk[:len(newk) - 1]))
+        hits = histogram(newkinds, len(newk[:len(newk) - 1]))[0]
+
+        print(schemes[j])
+        print(hpp[i])
+        if raw_input("Display PS ratio? (y/)") == "y":
+            plot(k, pdigit/pn, "k")
+            #plot(k, pdigit, "r")
+            #yscale("log")
+            #xscale("log")
+            show()
+            close()
+
+        for counter, newind in enumerate(newkinds):
+            newpdigit[newind - 1] += pdigit[counter]
+            newpn[newind - 1] += pn[counter]
+
+
+        for counter, h in enumerate(hits):
+            newpdigit[counter] = newpdigit[counter] / float(h)
+            newpn[counter] = newpn[counter] / float(h)
+
+        pn = newpn
+        pdigit = newpdigit
+
+        k = newk[:len(newk) - 1] + ((newk[1] - newk[0]) / 2.0)
+        flatstart = 4000
+        flatstop = 6780
+        flatstartind = argmin(abs(k - flatstart))
+        flatstopind = argmin(abs(k - flatstop))
+
 
         if hpp[i] > 800000:
 
@@ -108,65 +156,29 @@ while i < len(hpp):
             pnend = pn[indpinchoff:]
             pdigitend = pdigit[indpinchoff:]
 
+            clne = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i] + mean((pdigitend-pnend))
+            deltaclne = 2.0*std((pdigitend-pnend)[:argmin(abs(kend - 7200))])/sqrt(float(len((pdigitend-pnend))))
 
-            popt, pcov, infodict, mesg, ier = leastsq(clnleastsqpenalised, x0 = [[pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i]*1.05, 2.76959427e+25, 8.68086299e+00]], args = (kend, pdigitend), maxfev=10000, full_output=True)
-            #print(pcov)
-            #print(poptp[0])
-            #print(pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i])
-            print(popt[0])
-            popt[0] = pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i] + mean((pdigitend-pnend)[:argmin(abs(kend - 7200))])
-            print(popt[0])
-            pcov[0][0] = std((pdigitend-pnend)[:argmin(abs(kend - 7200))])
+            clnequivs[0][j][i] = clne
+            clnequivs[1][j][i] = deltaclne
+            #clnequivs[2][j][i] = sqrt(2.0/((2.0*flatstart+1)*fsky*float(len((pdigitend-pnend)[:argmin(abs(kend - 7200))]))))*popt[0]
 
-
-            #plot(kend, pdigitend-pnend, "k")
-            #show()
-
-            #popt, pcov = curve_fit(clnfit, kend, pdigitend, p0=[pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i], 2.76959427e+25, 8.68086299e+00], maxfev=10000)
-            #plot(kend, pdigitend, "k")
-            #plot(kend, pnend, "b")
-            #plot(kend, [pixelsizearcmin*pixelsizearcmin*arcmins2radians*arcmins2radians*pixrms[i]*pixrms[i] for p in kend], "y", marker = "o")
-            #plot(kend, [popt[0] for o in kend], "g")
-            #plot(kend, [poptp[0] for m in kend], "m")
-            #plot(kend, [clnfit(l, poptp[0], poptp[1], poptp[2]) for l in kend], "m")
-            #plot(kend, [clnfit(l, popt[0], popt[1], popt[2]) for l in kend], "g")
-            #xscale("log")
-            #yscale("log")
-            #title(str(hpp[i]) + " // " + str(schemes[j]))
-            #ylim((0.98, 1.02))
-            #show()
-
-            if sqrt(popt[0])/arcmins2radians - thnoisemap[i] < 0:
-                print("HIT")
-                clnequivs[0][j][i] = clnfit(amax(k), popt[0], popt[1], popt[2]) #clnequivs[0][j-1][i]#-thnoisecl[i]
-            else:
-                clnequivs[0][j][i] = popt[0]#-thnoisecl[i]
-                clnequivs[1][j][i] = sqrt(pcov[0][0])
 
         else:
 
             # Determine Cln via averaging flat tail
 
-            #plot(k, pn, "k")
-            #plot(k, pdigit, "r")
-            #plot([flatstart, flatstart*1.0001], [10e-10, 10e10], "b")
-            #plot([flatstop, flatstop*1.0001], [10e-10, 10e10], "b")
-            #xscale("log")
-            #yscale("log")
-            #show()
-
-            clnequivs[0][j][i] = mean(pdigit[flatstartind:flatstopind])#-thnoisecl[i]
-            clnequivs[1][j][i] = std(pdigit[flatstartind:flatstopind])
-
+            clnequivs[0][j][i] = mean(pdigit[flatstartind:])
+            clnequivs[1][j][i] = 2.0*std(pdigit[flatstartind:])/sqrt(float(len(pdigit[flatstartind:])))
+            #clnequivs[2][j][i] = sqrt(2.0 / ((2.0 * flatstart + 1) * fsky * float(len((pdigitend - pnend)[:argmin(abs(kend - 7200))])))) * clnequivs[0][j][i]
 
         j += 1
-
 
     i += 1
 
 mapequivs = sqrt(clnequivs)/arcmins2radians
-
-
+mapequivs[1] = mapequivs[0]*0.5*(clnequivs[1]/clnequivs[0])
+mapequivs[2] = mapequivs[0]*0.5*(clnequivs[2]/clnequivs[0])
 
 #--- PLOT RESULTS
 
@@ -174,7 +186,7 @@ mapequivs = sqrt(clnequivs)/arcmins2radians
 cols = ["r", "b", "y"]
 s = 0
 while s < len(schemes):
-    plot(hpp, (mapequivs[0][s]-thnoisemap)/thnoisemap, marker = "o", color = cols[s] ,label= r"" + schemes[s])
+    errorbar(hpp, (mapequivs[0][s]-thnoisemap)/thnoisemap, yerr = ((1.0/thnoisemap)-(1.0/mapequivs[0][s]))*mapequivs[1][s], marker = "o", color = cols[s] ,label= r"" + schemes[s])
     s += 1
 
 title(r"Induced Map Noise Level through Digitisation", fontsize = 20)
@@ -183,4 +195,5 @@ ylabel(r"$\Delta \sigma_{\mathrm{MAP}} / \sigma_{\mathrm{MAP}} $", fontsize = 20
 xscale("log")
 yscale("log")
 legend(loc = "upper left", fontsize = 15)
+ylim((0.01, 1))
 show()
