@@ -176,6 +176,9 @@ class simulations():
 
 import numpy as np, os, glob, os, sys, argparse
 from pylab import *
+from cosmologydigitisation.Polarisation.cosmdigitclasses import *
+
+cosm = Cosmologist()
 sims = simulations()
 
 
@@ -184,9 +187,9 @@ sims = simulations()
 ############################################################
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('-howmanysims', dest='howmanysims', action='store', help='howmanysims', type=int, default=5)
-parser.add_argument('-boxsize_am', dest='boxsize_am', action='store', help='boxsize in arcmins', type=float, default=100.)
-parser.add_argument('-dx', dest='dx', action='store', help='dx - pixel size in arcmins', type=int, default=0.5)
+parser.add_argument('-howmanysims', dest='howmanysims', action='store', help='howmanysims', type=int, default=10) #def 5
+parser.add_argument('-boxsize_am', dest='boxsize_am', action='store', help='boxsize in arcmins', type=float, default=512.) #def 100
+parser.add_argument('-dx', dest='dx', action='store', help='dx - pixel size in arcmins', type=int, default=1.0) #def 0.5
 parser.add_argument('-Dlfile_len', dest='Dlfile_len', action='store', help='CAMB lensed Dls file', type=str, default='output_planck_r_0.0_2015_cosmo_lensedCls.dat')
 parser.add_argument('-passing_Dls', dest='passing_Dls', action='store', help='passing Dls or Cls?', type=int, default=1)
 parser.add_argument('-CMB_outputscale', dest='CMB_outputscale', action='store', help='CMB outputscale from CAMB - multiply Dls by T_cmb', type=int, default=1)
@@ -205,6 +208,8 @@ for kargs in args_keys:
 ############################################################
 ############################################################
 Dls_len = np.loadtxt(Dlfile_len,usecols=[0,1,2,3,4])
+l = np.asarray(Dls_len[:,0])
+
 nx = int( boxsize_am/dx )
 mapparams = [nx, nx, dx, dx] #square!
 
@@ -212,13 +217,45 @@ mapparams = [nx, nx, dx, dx] #square!
 sims.Dls2map(Dls_len, mapparams, passing_Dls = passing_Dls, CMB_outputscale = CMB_outputscale)
 CMB_SIMS = sims.fn_make_cmb_sims(mapparams, noofsims = howmanysims, in_uk = in_uk) #in uK
 
-#show map plots now
-titles = ['T', 'E', 'B', 'Q', 'U']
-for n in range(howmanysims):
-	CURRSIM = CMB_SIMS[n]
-	for iii in range(len(CURRSIM)):
-		ax = subplot(1,len(CURRSIM), iii + 1)
-		imshow(CURRSIM[iii]);colorbar()
-		title(titles[iii])
+
+showmaps = False
+showps = True
+
+if showmaps:
+	#show map plots now
+	titles = ['T', 'E', 'B', 'Q', 'U']
+	for n in range(howmanysims):
+		CURRSIM = CMB_SIMS[n]
+		for iii in range(len(CURRSIM)):
+			ax = subplot(1,len(CURRSIM), iii + 1)
+			imshow(CURRSIM[iii]);colorbar()
+			title(titles[iii])
+		show()
+	#sys.exit()
+
+print("plot ps")
+if showps:
+	# calculate and show ps
+	titles = ['T', 'E', 'B', 'Q', 'U']
+	cols = ["k", "r", "b", "g", "y"]
+	ps = [0.0 for m in titles]
+	for n in range(howmanysims):
+		print(n)
+		CURRSIM = CMB_SIMS[n]
+		k = 0
+		for iii in range(1):#len(CURRSIM)
+			k, p, perr, h = cosm.sriniPowerSpectrum(mapparams, CURRSIM[iii])
+			p = p * dx * dx * arcmins2radians * arcmins2radians * k * ( k + 1.0 ) / (2.0 * pi)
+			ps[iii] += p
+	ps = [ps[j]/float(howmanysims) for j in range(len(titles))]
+	for iii in range(1):
+		plot(k, ps[iii], label = titles[iii], color = "r")
+	for iii in range(1):
+		plot(l, (sims.Tcmb**2.0) * Dls_len[:, iii + 1] * 10**12, color = "k")
+
+	legend()
+	xscale("linear")
+	yscale("linear")
+	xlim((amin(k), 2500))
+	legend(loc = "lower left")
 	show()
-sys.exit()
